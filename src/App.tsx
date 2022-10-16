@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import Accordion from './components/Accordion';
+import Header from './components/Header';
 
 const App = () => {
   return (
     <div className="App">
-        <Accordion list={['HTML', 'CSS', 'React']}/>
+        <Header/>
+        <Accordion list={['HTML', 'CSS', 'React', 'Redux']}/>
     </div>
   );
 }

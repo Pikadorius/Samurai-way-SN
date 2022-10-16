@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import Technologies from './components/Technologies';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-     Hello, samurai! Let's go! Never give up!
+        <Technologies list={['HTML', 'CSS', 'React']}/>
     </div>
   );
 }

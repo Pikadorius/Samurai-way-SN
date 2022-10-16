@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Technologies from './components/Technologies';
+import Accordion from './components/Accordion';
 
 const App = () => {
   return (
     <div className="App">
-        <Technologies list={['HTML', 'CSS', 'React']}/>
+        <Accordion list={['HTML', 'CSS', 'React']}/>
     </div>
   );
 }

@@ -4,16 +4,14 @@ type TechnologiesPropsType = {
     list: Array<string>;
 }
 
-const Technologies = ({list}:TechnologiesPropsType) => {
+const Accordion = ({list}:TechnologiesPropsType) => {
     return (
         <div>
             {list.map((item, index)=>{
-                return (
-                    <li key={index}>{item}</li>
-                )
+                return <li key={index}>{item}</li>
             })}
         </div>
     );
 };
 
-export default Technologies;
+export default Accordion;

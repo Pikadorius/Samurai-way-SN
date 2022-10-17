@@ -9,25 +9,3 @@
   grid-auto-columns: 2fr 10fr;
   gap: 10px;
 }
-
-.header {
-  grid-area: header;
-  background-color: darkslategrey;
-  padding: 10px;
-}
-
-.header img {
-  max-width: 70px;
-}
-
-.sidebar {
-  grid-area: nav;
-  background-color: cornflowerblue;
-  padding: 10px;
-}
-
-.content {
-  grid-area: content;
-  background-color: aquamarine;
-  padding: 10px;
-}

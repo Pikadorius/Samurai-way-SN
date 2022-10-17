@@ -1,0 +1,9 @@
+.sidebar {
+    grid-area: nav;
+    background-color: cornflowerblue;
+    padding: 10px;
+}
+
+.item {
+    color: white;
+}

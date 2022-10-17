@@ -1,0 +1,9 @@
+.content {
+    grid-area: content;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+.item {
+    color: darkmagenta;
+}

@@ -7,3 +7,12 @@
 .item {
     color: darkmagenta;
 }
+
+.about {
+    display: flex;
+}
+
+.avatar {
+    max-width: 200px;
+    height: auto;
+}

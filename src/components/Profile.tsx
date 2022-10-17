@@ -10,12 +10,13 @@ const Profile = () => {
                     alt=""/>
                 <div>Main content</div>
             </div>
-            <div className="about">
-                <img src="https://world.edu/wp-content/uploads/2020/05/Professional-Programmer.jpg" alt=""/>
+            <div className={s.about}>
+                <img className={s.avatar} src="https://world.edu/wp-content/uploads/2020/05/Professional-Programmer.jpg"
+                     alt=""/>
                 <div>About me</div>
             </div>
-            <div className="posts">
-                Posts
+            <div className={s.posts}>
+                <h3>Posts</h3>
                 <div className={s.item}>
                     New post
                 </div>

@@ -7,3 +7,7 @@
 .item {
     color: white;
 }
+
+.underlined {
+    text-decoration: underline;
+}

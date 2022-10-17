@@ -1,13 +1,13 @@
 import React from 'react';
 
 type TechnologiesPropsType = {
-    list: Array<string>;
+    list: Array<string>
 }
 
-const Accordion = ({list}:TechnologiesPropsType) => {
+const Accordion = ({list}: TechnologiesPropsType) => {
     return (
         <div>
-            {list.map((item, index)=>{
+            {list.map((item, index) => {
                 return <li key={index}>{item}</li>
             })}
         </div>

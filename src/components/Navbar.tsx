@@ -6,7 +6,7 @@ console.log(s)
 const Navbar = () => {
     return (
         <nav className={s.sidebar}>
-            <div className={`${s.item} ${s.underlined}`}><a>Profile</a></div>
+            <div className={`${s.item} ${s.active}`}><a>Profile</a></div>
             <div className={s.item}><a>Messages</a></div>
             <div className={s.item}><a>News</a></div>
             <div className={s.item}><a>Music</a></div>

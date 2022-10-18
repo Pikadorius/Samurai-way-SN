@@ -1,6 +1,6 @@
 .App {
-  width: 1200px;
-  margin: 0 200px;
+  width: 1280px;
+  margin: 0 0;
   padding: 20px;
   display: grid;
   grid-template-areas: "header header"

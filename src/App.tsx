@@ -7,7 +7,7 @@ import Profile from './components/Profile/Profile';
 const App = () => {
     return (
         <div className="App">
-            <Header/>
+            <Header list={['Video','Music','Photos']}/>
             <Navbar/>
             <Profile/>
         </div>

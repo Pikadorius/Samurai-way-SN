@@ -2,8 +2,17 @@
     grid-area: header;
     background-color: darkslategrey;
     padding: 10px;
+    display: flex;
 }
 
 .header img {
     max-width: 70px;
+}
+
+.headerLinks {
+    margin: 0 20px;
+}
+
+a {
+    color: white;
 }

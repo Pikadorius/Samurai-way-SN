@@ -9,9 +9,5 @@
 }
 
 .active {
-    text-decoration: underline;
-}
-
-.item.active {
     font-weight: 800;
 }

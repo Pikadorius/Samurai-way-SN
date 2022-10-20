@@ -6,7 +6,7 @@ const MyPosts = () => {
     return (
         <div className={s.content}>
 
-            <div className={s.posts}>
+            <div className={s.postsBlock}>
                 <h3>Posts</h3>
                 <div>
                     <textarea placeholder={'Write something... '} cols={50} rows={10}></textarea>

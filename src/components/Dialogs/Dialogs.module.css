@@ -3,11 +3,14 @@
     gap: 10px;
     grid-template-columns: 200px 1fr;
     color: white;
+
 }
 
 .dialogItems {
     background-color: green;
     padding: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .dialog {

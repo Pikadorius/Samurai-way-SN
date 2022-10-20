@@ -3,6 +3,7 @@
     background-color: darkslategrey;
     padding: 10px;
     display: flex;
+    border-radius: 20px;
 }
 
 .header img {

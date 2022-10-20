@@ -10,3 +10,7 @@
     max-width: 200px;
     height: auto;
 }
+
+.pageImg {
+    max-width: 100%;
+}

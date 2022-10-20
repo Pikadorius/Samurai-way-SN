@@ -4,10 +4,11 @@
     padding: 10px;
 }
 
-.item {
+.item a {
     color: white;
+    text-decoration: none;
 }
 
-.active {
+.item a.activeLink {
     font-weight: 800;
 }

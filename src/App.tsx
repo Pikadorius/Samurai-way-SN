@@ -9,7 +9,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
-const App = () => {
+const App= () => {
     return (
         <BrowserRouter>
             <div className='App'>

@@ -18,6 +18,7 @@ const DialogItem = (props: DialogItemType) => {
 
 
 type MessageType = {
+    id: number
     message: string
 }
 const Message = (props: MessageType) => {
@@ -26,12 +27,30 @@ const Message = (props: MessageType) => {
     )
 }
 
+const dialogsData: DialogItemType[] = [
+    {user: 'Kate', userId: 1},
+    {user: 'Dimych', userId: 2},
+    {user: 'Petya', userId: 3},
+    {user: 'Anton', userId: 4},
+    {user: 'Sveta', userId: 5},
+    {user: 'Andrew', userId: 6},
+    {user: 'Nikita', userId: 7}
+]
+
+const messagesData: MessageType[] = [
+    {message: 'Hi!', id: 1},
+    {message: 'How are you!', id: 2},
+    {message: "I'm fine, and you?", id: 3},
+]
+
+
+
 
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                <DialogItem user={"Dimych"} userId={1}/>
+                <DialogItem user={dialogsData[0].user} userId={dialogsData[0].userId}/>
                 <DialogItem user={"Petya"} userId={2}/>
                 <DialogItem user={"Anton"} userId={3}/>
                 <DialogItem user={"Andrew"} userId={4}/>
@@ -40,10 +59,9 @@ const Dialogs = () => {
                 <DialogItem user={"Nikita"} userId={7}/>
             </div>
             <div className={s.messages}>
-                <Message message={"Hello!"} />
-                <Message message={"How are you!"} />
-                <Message message={"I'm fine, and you?"} />
-                <Message message={"Cool!"} />
+                <Message message={messagesData[0].message} id={messagesData[0].id}/>
+                <Message message={messagesData[1].message} id={messagesData[1].id}/>
+                <Message message={messagesData[2].message} id={messagesData[2].id}/>
             </div>
         </div>
     );

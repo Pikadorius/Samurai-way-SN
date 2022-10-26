@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import s from './Post.module.css';
 
 export type PostType = {
@@ -11,10 +11,10 @@ export type PostType = {
 
 const Post = (props: PostType) => {
 
-    const [likes, setLikes]=useState<number>(props.likesCount);
+    const [likes, setLikes] = useState<number>(props.likesCount);
 
-    const addLike = ()=> {
-        setLikes(likes+1);
+    const addLike = () => {
+        setLikes(likes + 1);
     }
 
 

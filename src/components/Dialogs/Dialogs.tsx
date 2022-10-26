@@ -44,8 +44,6 @@ const messagesData: MessageType[] = [
 ]
 
 
-
-
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>

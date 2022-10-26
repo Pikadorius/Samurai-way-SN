@@ -1,16 +1,22 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './Post.module.css';
 
-type PostType = {
+export type PostType = {
     name: string
     description: string
     likesCount: number
+    id: number
 }
 
 
 const Post = (props: PostType) => {
 
     const [likes, setLikes]=useState<number>(props.likesCount);
+
+    const addLike = ()=> {
+        setLikes(likes+1);
+    }
+
 
     return (
         <div className={s.item}>
@@ -19,7 +25,7 @@ const Post = (props: PostType) => {
                 <h2>{props.name}</h2>
                 <p>{props.description}</p>
             </div>
-            <button onClick={()=>setLikes(likes+1)}>Likes: {likes}</button>
+            <button onClick={addLike}>Likes: {likes}</button>
         </div>
     );
 };

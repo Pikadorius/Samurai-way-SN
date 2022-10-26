@@ -20,7 +20,7 @@ const messagesData: MessageType[] = [
     {message: 'Hi!', id: 1},
     {message: 'How are you!', id: 2},
     {message: "I'm fine, and you?", id: 3},
-    {message: "YEAH! I learned how to add new messages with map method!!!!", id: 3},
+    {message: "YEAH! I learned how to add new messages with map method!!!!", id: 4},
 ]
 
 

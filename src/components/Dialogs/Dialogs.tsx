@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import {NavLink} from 'react-router-dom';
 
 
-type DialogItemType = {
+export type DialogItemType = {
     user: string
     userId: number
 
@@ -17,7 +17,7 @@ const DialogItem = (props: DialogItemType) => {
 }
 
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
@@ -27,39 +27,23 @@ const Message = (props: MessageType) => {
     )
 }
 
-const dialogsData: DialogItemType[] = [
-    {user: 'Kate', userId: 1},
-    {user: 'Dimych', userId: 2},
-    {user: 'Petya', userId: 3},
-    {user: 'Anton', userId: 4},
-    {user: 'Sveta', userId: 5},
-    {user: 'Andrew', userId: 6},
-    {user: 'Nikita', userId: 7}
-]
+type DialogsType = {
+    dialogsData: DialogItemType[]
+    messagesData: MessageType[]
+}
 
-const messagesData: MessageType[] = [
-    {message: 'Hi!', id: 1},
-    {message: 'How are you!', id: 2},
-    {message: "I'm fine, and you?", id: 3},
-]
-
-
-const Dialogs = () => {
+const Dialogs:React.FC<DialogsType>= ({dialogsData,messagesData}) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                <DialogItem user={dialogsData[0].user} userId={dialogsData[0].userId}/>
-                <DialogItem user={"Petya"} userId={2}/>
-                <DialogItem user={"Anton"} userId={3}/>
-                <DialogItem user={"Andrew"} userId={4}/>
-                <DialogItem user={"Sveta"} userId={5}/>
-                <DialogItem user={"Kate"} userId={6}/>
-                <DialogItem user={"Nikita"} userId={7}/>
+                {
+                    dialogsData.map(i=><DialogItem user={i.user} userId={i.userId}/>)
+                }
             </div>
             <div className={s.messages}>
-                <Message message={messagesData[0].message} id={messagesData[0].id}/>
-                <Message message={messagesData[1].message} id={messagesData[1].id}/>
-                <Message message={messagesData[2].message} id={messagesData[2].id}/>
+                {
+                    messagesData.map(i=><Message message={i.message} id={i.id}/>)
+                }
             </div>
         </div>
     );

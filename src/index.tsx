@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from './components/Dialogs/Message/Message';
+import {PostType} from './components/Profile/MyPosts/Post/Post';
 
 
 
@@ -27,8 +28,14 @@ const messagesData: MessageType[] = [
     {message: "I can do it!)", id: 5},
 ]
 
+const postsData:PostType[]= [
+    {id:1,name:"My  first post", description: "I try to set props to my firts post...", likesCount: 0},
+    {id:2,name:"It works, I'm very excited!", description: "Hmmm... I really enjoy the result!", likesCount: 0},
+    {id:3,name:"Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
+]
+
 
 ReactDOM.render(
-    <App dialogsData={dialogsData} messagesData={messagesData}/>,
+    <App dialogsData={dialogsData} messagesData={messagesData} postsData={postsData}/>,
     document.getElementById('root')
 );

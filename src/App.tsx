@@ -19,13 +19,15 @@ type AppType = {
 }
 
 const App:React.FC<AppType> = ({dialogsData,messagesData, postsData}) => {
+    const ProfileWithProps = ()=><Profile postsData={postsData}/>
+
     return (
         <BrowserRouter>
             <div className='App'>
                 <Header list={['Video', 'Music', 'Photos']}/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route render={()=><Profile postsData={postsData}/>} path={'/profile'}/>
+                    <Route render={ProfileWithProps} path={'/profile'}/>
                     <Route render={()=><Dialogs dialogsData={dialogsData} messagesData={messagesData}/>} path={'/dialogs'}/>
                     <Route component={News} path={'/news'}/>
                     <Route component={Music} path={'/music'}/>

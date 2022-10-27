@@ -18,9 +18,9 @@ type AppType = {
     postsData: PostType[]
 }
 
-const App:React.FC<AppType> = ({dialogsData,messagesData, postsData}) => {
-    const ProfileWithProps = ()=><Profile postsData={postsData}/>
-
+const App: React.FC<AppType> = ({dialogsData, messagesData, postsData}) => {
+    const ProfileWithProps = () => <Profile postsData={postsData}/>
+    const DialogsWithProps = () => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>
     return (
         <BrowserRouter>
             <div className='App'>
@@ -28,7 +28,7 @@ const App:React.FC<AppType> = ({dialogsData,messagesData, postsData}) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route render={ProfileWithProps} path={'/profile'}/>
-                    <Route render={()=><Dialogs dialogsData={dialogsData} messagesData={messagesData}/>} path={'/dialogs'}/>
+                    <Route render={DialogsWithProps} path={'/dialogs'}/>
                     <Route component={News} path={'/news'}/>
                     <Route component={Music} path={'/music'}/>
                     <Route component={Settings} path={'/settings'}/>

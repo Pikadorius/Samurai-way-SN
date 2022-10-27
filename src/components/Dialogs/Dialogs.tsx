@@ -27,23 +27,26 @@ const Message = (props: MessageType) => {
     )
 }
 
+
+
 type DialogsType = {
     dialogsData: DialogItemType[]
     messagesData: MessageType[]
 }
 
-const Dialogs:React.FC<DialogsType>= ({dialogsData,messagesData}) => {
+const Dialogs: React.FC<DialogsType> = ({dialogsData, messagesData}) => {
+
+
+    const dialogsElements = dialogsData.map(d => <DialogItem user={d.user} userId={d.userId}/>)
+    const messagesElements = messagesData.map(m => <Message message={m.message} id={m.id}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                {
-                    dialogsData.map(i=><DialogItem user={i.user} userId={i.userId}/>)
-                }
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                {
-                    messagesData.map(i=><Message message={i.message} id={i.id}/>)
-                }
+                {messagesElements}
             </div>
         </div>
     );

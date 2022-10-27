@@ -28,7 +28,6 @@ const Message = (props: MessageType) => {
 }
 
 
-
 type DialogsType = {
     dialogsData: DialogItemType[]
     messagesData: MessageType[]

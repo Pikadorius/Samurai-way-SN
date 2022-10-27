@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {DialogItemType, MessageType} from './components/Dialogs/Dialogs';
+import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
+import {MessageType} from './components/Dialogs/Message/Message';
+
 
 
 const dialogsData: DialogItemType[] = [
@@ -14,6 +16,7 @@ const dialogsData: DialogItemType[] = [
     {user: 'Andrew', userId: 6},
     {user: 'Nikita', userId: 7},
     {user: 'Petr', userId: 8},
+    {user: 'Sanyok', userId: 9},
 ]
 
 const messagesData: MessageType[] = [
@@ -21,6 +24,7 @@ const messagesData: MessageType[] = [
     {message: 'How are you!', id: 2},
     {message: "I'm fine, and you?", id: 3},
     {message: "YEAH! I learned how to add new messages with map method!!!!", id: 4},
+    {message: "I can do it!)", id: 5},
 ]
 
 

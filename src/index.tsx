@@ -5,6 +5,7 @@ import App from './App';
 import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from './components/Dialogs/Message/Message';
 import {PostType} from './components/Profile/MyPosts/Post/Post';
+import state from './redux/state';
 
 
 const dialogsData: DialogItemType[] = [

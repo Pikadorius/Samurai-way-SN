@@ -10,20 +10,22 @@ import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
 import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
 import {MessageType} from './components/Dialogs/Message/Message';
+import {PostType} from './components/Profile/MyPosts/Post/Post';
 
 type AppType = {
     dialogsData: DialogItemType[]
     messagesData: MessageType[]
+    postsData: PostType[]
 }
 
-const App:React.FC<AppType> = ({dialogsData,messagesData}) => {
+const App:React.FC<AppType> = ({dialogsData,messagesData, postsData}) => {
     return (
         <BrowserRouter>
             <div className='App'>
                 <Header list={['Video', 'Music', 'Photos']}/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route render={Profile} path={'/profile'}/>
+                    <Route render={()=><Profile postsData={postsData}/>} path={'/profile'}/>
                     <Route render={()=><Dialogs dialogsData={dialogsData} messagesData={messagesData}/>} path={'/dialogs'}/>
                     <Route component={News} path={'/news'}/>
                     <Route component={Music} path={'/music'}/>

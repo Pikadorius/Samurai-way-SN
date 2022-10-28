@@ -6,12 +6,12 @@ import DialogItem from './DialogItem/DialogItem';
 
 const Dialogs: React.FC<DialogsPageType> = ({dialogs, messages}) => {
 
-    const dialogsElements = dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
+    const dialogsElements = dialogs.map(d => <DialogItem id={d.id} name={d.name} avatar={d.avatar}/>)
     const messagesElements = messages.map(m => <Message id={m.id} message={m.message}/>)
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogItems}>
+            <div className={s.dialogList}>
                 {dialogsElements}
             </div>
             <div className={s.messages}>

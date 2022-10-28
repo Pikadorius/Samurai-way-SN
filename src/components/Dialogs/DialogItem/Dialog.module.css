@@ -11,3 +11,8 @@
     border-radius: 50%;
     align-content: center;
 }
+
+.active {
+    font-weight: 800;
+    color: darkgoldenrod;
+}

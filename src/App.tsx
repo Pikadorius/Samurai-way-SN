@@ -22,7 +22,7 @@ const App:React.FC<AppType> = ({state}) => {
         <BrowserRouter>
             <div className='App'>
                 <Header list={['Video', 'Music', 'Photos']}/>
-                <Navbar/>
+                <Navbar friends={state.sidebar.friends}/>
                 <div className='app-wrapper-content'>
                     <Route render={ProfileWithProps} path={'/profile'}/>
                     <Route render={DialogsWithProps} path={'/dialogs'}/>

@@ -7,6 +7,7 @@ export type PostType = {
 export type DialogType = {
     id: number
     name: string
+    avatar: string
 }
 export type MessageType = {
     id: number
@@ -64,13 +65,13 @@ const state: StateType = {
     },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Kate'},
-            {id: 2, name: 'Anton'},
-            {id: 3, name: 'Artemiy'},
-            {id: 4, name: 'Nikita'},
-            {id: 5, name: 'Denis'},
-            {id: 6, name: 'Alexey'},
-            {id: 7, name: 'Andrew'},
+            {id: 1, name: 'Kate', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 2, name: 'Anton', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 3, name: 'Artemiy', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 4, name: 'Nikita', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 5, name: 'Denis', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 6, name: 'Alexey', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 7, name: 'Andrew', avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
         ],
         messages: [
             {id: 1, message: 'Hi!'},

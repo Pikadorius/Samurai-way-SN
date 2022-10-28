@@ -16,6 +16,11 @@ export type FactType = {
     id: number
     fact: string
 }
+export type FriendType = {
+    id: number
+    name: string
+    avatar: string
+}
 
 export type PostsType = {
     posts: PostType[]
@@ -32,7 +37,9 @@ export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
-export type SidebarType = {}
+export type SidebarType = {
+    friends: FriendType[]
+}
 
 export type StateType ={
     profilePage: ProfilePageType
@@ -50,8 +57,8 @@ const state: StateType = {
         ],
         facts: [
             {id:1,fact:'I am 30 years old'},
-            {id:2,fact:'I have son'},
-            {id:3,fact:'I am an Chief Engeneer'},
+            {id:2,fact:'I have a son'},
+            {id:3,fact:'I am a Chief Engeneer'},
 
         ]
     },
@@ -71,7 +78,13 @@ const state: StateType = {
             {id: 3, message: "I'm fine, and you?",},
         ]
     },
-    sidebar: {}
+    sidebar: {
+        friends: [
+            {id: 1, name: "Anton", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 2, name: "Nikita", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+            {id: 3, name: "Andrew", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
+        ]
+    }
 }
 
 export default state;

@@ -1,36 +1,35 @@
-type PostType = {
+export type PostType = {
     id: number
     title: string
     description: string
     likesCount: number
 }
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
 }
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
 
-type ProfilePageTypes = {
+export type ProfilePageType = {
     posts: PostType[]
 }
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
-type SidebarType = {}
+export type SidebarType = {}
 
-type RootStateType ={
-    profilePage: ProfilePageTypes
+export type StateType ={
+    profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
 
 
-
-const state: RootStateType = {
+const state: StateType = {
     profilePage: {
         posts: [
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},

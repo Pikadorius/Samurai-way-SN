@@ -8,19 +8,15 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
-import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
-import {MessageType} from './components/Dialogs/Message/Message';
-import {PostType} from './components/Profile/MyPosts/Post/Post';
+import {StateType} from './redux/state';
 
 type AppType = {
-    dialogsData: DialogItemType[]
-    messagesData: MessageType[]
-    postsData: PostType[]
+    appState: StateType
 }
 
-const App: React.FC<AppType> = ({dialogsData, messagesData, postsData}) => {
-    const ProfileWithProps = () => <Profile postsData={postsData}/>
-    const DialogsWithProps = () => <Dialogs dialogsData={dialogsData} messagesData={messagesData}/>
+const App:React.FC<AppType> = ({appState}) => {
+    const ProfileWithProps = () => <Profile posts={appState.profilePage.posts}/>
+    const DialogsWithProps = () => <Dialogs dialogs={appState.dialogsPage.dialogs} messages={appState.dialogsPage.messages}/>
     return (
         <BrowserRouter>
             <div className='App'>

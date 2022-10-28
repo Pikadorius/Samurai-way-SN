@@ -35,6 +35,6 @@ const postsData: PostType[] = [
 
 
 ReactDOM.render(
-    <App appState={state}/>,
+    <App state={state}/>,
     document.getElementById('root')
 );

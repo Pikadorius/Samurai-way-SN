@@ -77,6 +77,8 @@ const state: StateType = {
             {id: 1, message: 'Hi!'},
             {id: 2, message: 'How are you!'},
             {id: 3, message: "I'm fine, and you?",},
+            {id: 4, message: "Let's make some styles!",},
+            {id: 4, message: "Here we go!",},
         ]
     },
     sidebar: {

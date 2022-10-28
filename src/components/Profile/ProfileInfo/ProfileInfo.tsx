@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import {FactsType} from '../../../redux/state';
 
-const ProfileInfo = () => {
+const ProfileInfo: React.FC<FactsType> = ({facts}) => {
     return (
         <div>
             <div>
@@ -12,7 +13,9 @@ const ProfileInfo = () => {
             <div className={s.descriptionBlock}>
                 <img className={s.avatar} src="https://world.edu/wp-content/uploads/2020/05/Professional-Programmer.jpg"
                      alt=""/>
-                <div>About me</div>
+                <div>
+                    {facts.map(f=><li key={f.id}>{f.fact}</li>)}
+                </div>
             </div>
         </div>
     );

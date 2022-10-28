@@ -5,10 +5,10 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {ProfilePageType} from '../../redux/state';
 
 
-const Profile:React.FC<ProfilePageType> = ({posts}) => {
+const Profile:React.FC<ProfilePageType> = ({posts,facts}) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo facts={facts}/>
             <MyPosts posts={posts}/>
         </div>
     );

@@ -14,7 +14,9 @@ const ProfileInfo: React.FC<FactsType> = ({facts}) => {
                 <img className={s.avatar} src="https://world.edu/wp-content/uploads/2020/05/Professional-Programmer.jpg"
                      alt=""/>
                 <div>
-                    {facts.map(f=><li key={f.id}>{f.fact}</li>)}
+                    <ul>
+                        {facts.map(f => <li key={f.id}>{f.fact}</li>)}
+                    </ul>
                 </div>
             </div>
         </div>

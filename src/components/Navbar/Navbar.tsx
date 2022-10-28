@@ -1,10 +1,11 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
+import {SidebarType} from '../../redux/state';
 
 console.log(s)
 
-const Navbar = () => {
+const Navbar: React.FC<SidebarType> = ({friends}) => {
     return (
         <nav className={s.sidebar}>
             <div className={s.item}>
@@ -21,6 +22,20 @@ const Navbar = () => {
             </div>
             <div className={s.item}>
                 <NavLink to={'/settings'} activeClassName={s.activeLink}>Settings</NavLink>
+            </div>
+
+            <div className={s.friends}>
+                <h2>My best friends:</h2>
+                <div className={s.friendsList}>
+                    {friends.map(f => {
+                        return (
+                            <div className={s.friend}>
+                                <img src={f.avatar} alt={"Friends avatar"}/>
+                                {f.name}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </nav>
     );

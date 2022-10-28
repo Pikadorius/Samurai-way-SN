@@ -3,34 +3,24 @@
     gap: 10px;
     grid-template-columns: 200px 1fr;
     color: white;
-
 }
 
-.dialogItems {
+.dialogList {
     background-color: green;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
     padding: 10px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
 
-.dialog {
-
-}
-
-.dialogItems a {
+.dialogList a {
     text-decoration: none;
+    padding: 10px;
 }
 
 .active {
     font-weight: 800;
     color: gold;
-}
-
-
-.messages {
-
-}
-
-.message {
-
 }

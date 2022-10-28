@@ -2,12 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {DialogItemType} from './components/Dialogs/DialogItem/DialogItem';
-import {MessageType} from './components/Dialogs/Message/Message';
-import {PostType} from './components/Profile/MyPosts/Post/Post';
 import state from './redux/state';
 
 
+/*
 const dialogsData: DialogItemType[] = [
     {name: 'Kate', id: 1},
     {name: 'Dimych', id: 2},
@@ -33,9 +31,10 @@ const postsData: PostType[] = [
     {id: 2, name: "It works, I'm very excited!", description: "Hmmm... I really enjoy the result!", likesCount: 0},
     {id: 3, name: "Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
 ]
+*/
 
 
 ReactDOM.render(
-    <App dialogsData={dialogsData} messagesData={messagesData} postsData={postsData}/>,
+    <App appState={state}/>,
     document.getElementById('root')
 );

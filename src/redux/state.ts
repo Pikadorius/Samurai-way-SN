@@ -12,9 +12,21 @@ export type MessageType = {
     id: number
     message: string
 }
+export type FactType = {
+    id: number
+    fact: string
+}
+
+export type PostsType = {
+    posts: PostType[]
+}
+export type FactsType = {
+    facts: FactType[]
+}
 
 export type ProfilePageType = {
     posts: PostType[]
+    facts: FactType[]
 }
 export type DialogsPageType = {
     dialogs: DialogType[]
@@ -35,6 +47,12 @@ const state: StateType = {
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
             {id: 2, title: "It works, I'm very excited!", description: "Hmmm... I really enjoy the result!", likesCount: 0},
             {id: 3, title: "Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
+        ],
+        facts: [
+            {id:1,fact:'I am 30 years old'},
+            {id:2,fact:'I have son'},
+            {id:3,fact:'I am an Chief Engeneer'},
+
         ]
     },
     dialogsPage: {

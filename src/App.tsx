@@ -11,12 +11,13 @@ import Dialogs from './components/Dialogs/Dialogs';
 import {StateType} from './redux/state';
 
 type AppType = {
-    appState: StateType
+    state: StateType
 }
 
-const App:React.FC<AppType> = ({appState}) => {
-    const ProfileWithProps = () => <Profile posts={appState.profilePage.posts}/>
-    const DialogsWithProps = () => <Dialogs dialogs={appState.dialogsPage.dialogs} messages={appState.dialogsPage.messages}/>
+const App:React.FC<AppType> = ({state}) => {
+    debugger
+    const ProfileWithProps = () => <Profile posts={state.profilePage.posts} facts={state.profilePage.facts}/>
+    const DialogsWithProps = () => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages}/>
     return (
         <BrowserRouter>
             <div className='App'>

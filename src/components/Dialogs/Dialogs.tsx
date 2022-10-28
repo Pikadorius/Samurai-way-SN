@@ -11,7 +11,7 @@ type DialogsType = {
 
 const Dialogs: React.FC<DialogsType> = ({dialogsData, messagesData}) => {
 
-    const dialogsElements = dialogsData.map(d => <DialogItem user={d.user} userId={d.userId}/>)
+    const dialogsElements = dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>)
     const messagesElements = messagesData.map(m => <Message message={m.message} id={m.id}/>)
 
     return (

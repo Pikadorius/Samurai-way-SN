@@ -9,15 +9,15 @@ import state from './redux/state';
 
 
 const dialogsData: DialogItemType[] = [
-    {user: 'Kate', userId: 1},
-    {user: 'Dimych', userId: 2},
-    {user: 'Petya', userId: 3},
-    {user: 'Anton', userId: 4},
-    {user: 'Sveta', userId: 5},
-    {user: 'Andrew', userId: 6},
-    {user: 'Nikita', userId: 7},
-    {user: 'Petr', userId: 8},
-    {user: 'Sanyok', userId: 9},
+    {name: 'Kate', id: 1},
+    {name: 'Dimych', id: 2},
+    {name: 'Petya', id: 3},
+    {name: 'Anton', id: 4},
+    {name: 'Sveta', id: 5},
+    {name: 'Andrew', id: 6},
+    {name: 'Nikita', id: 7},
+    {name: 'Petr', id: 8},
+    {name: 'Sanyok', id: 9},
 ]
 
 const messagesData: MessageType[] = [

@@ -1,19 +1,26 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {DialogsPageType} from '../../redux/state';
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
+import {DialogType, MessageType} from '../../redux/state';
 
-const Dialogs: React.FC<DialogsPageType> = ({dialogs, messages}) => {
+type DialogsType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    addMessage: (message: string) => void
+}
+
+const Dialogs: React.FC<DialogsType> = ({dialogs, messages, addMessage}) => {
 
     const dialogsElements = dialogs.map(d => <DialogItem id={d.id} name={d.name} avatar={d.avatar}/>)
     const messagesElements = messages.map(m => <Message id={m.id} message={m.message}/>)
 
     const messageRef = React.createRef<HTMLTextAreaElement>();
 
-    const addMessage = () => {
+    const addNewMessage = () => {
+        debugger
         let newMessage = messageRef.current?.value
-        alert(newMessage)
+        newMessage && addMessage(newMessage)
     }
 
     return (
@@ -25,7 +32,7 @@ const Dialogs: React.FC<DialogsPageType> = ({dialogs, messages}) => {
                 {messagesElements}
                 <div>
                     <textarea ref={messageRef}></textarea>
-                    <button onClick={addMessage}>Add message</button>
+                    <button onClick={addNewMessage}>Add message</button>
                 </div>
             </div>
         </div>

@@ -48,7 +48,6 @@ export type StateType ={
     sidebar: SidebarType
 }
 
-
 const state: StateType = {
     profilePage: {
         posts: [
@@ -88,6 +87,12 @@ const state: StateType = {
             {id: 3, name: "Andrew", avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"},
         ]
     }
+}
+
+
+export const addPost = (post: string) => {
+    let newPost: PostType={id: state.profilePage.posts.length+1, title: `Post ${state.profilePage.posts.length+1}`, description: post, likesCount:0}
+    state.profilePage.posts.push(newPost);
 }
 
 export default state;

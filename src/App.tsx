@@ -12,11 +12,12 @@ import {StateType} from './redux/state';
 
 type AppType = {
     state: StateType
+    addPost: (post:string)=>void
 }
 
-const App:React.FC<AppType> = ({state}) => {
+const App:React.FC<AppType> = ({state,addPost}) => {
     debugger
-    const ProfileWithProps = () => <Profile posts={state.profilePage.posts} facts={state.profilePage.facts}/>
+    const ProfileWithProps = () => <Profile posts={state.profilePage.posts} facts={state.profilePage.facts} addPost={addPost}/>
     const DialogsWithProps = () => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages}/>
     return (
         <BrowserRouter>

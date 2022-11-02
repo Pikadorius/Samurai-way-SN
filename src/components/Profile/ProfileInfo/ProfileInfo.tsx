@@ -1,8 +1,12 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {FactsType} from '../../../redux/state';
+import {FactType} from '../../../redux/state';
 
-const ProfileInfo: React.FC<FactsType> = ({facts}) => {
+type ProfileInfoType = {
+    facts: FactType[]
+}
+
+const ProfileInfo: React.FC<ProfileInfoType> = ({facts}) => {
     return (
         <div>
             <div>

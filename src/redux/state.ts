@@ -23,12 +23,6 @@ export type FriendType = {
     avatar: string
 }
 
-export type PostsType = {
-    posts: PostType[]
-}
-export type FactsType = {
-    facts: FactType[]
-}
 
 export type ProfilePageType = {
     posts: PostType[]
@@ -93,6 +87,8 @@ const state: StateType = {
 export const addPost = (post: string) => {
     let newPost: PostType={id: state.profilePage.posts.length+1, title: `Post ${state.profilePage.posts.length+1}`, description: post, likesCount:0}
     state.profilePage.posts.push(newPost);
+    console.log(state.profilePage.posts.length)
+    console.log(state.profilePage.posts[state.profilePage.posts.length-1])
 }
 
 export default state;

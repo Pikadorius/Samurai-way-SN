@@ -1,9 +1,15 @@
 import React, {LegacyRef} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {PostsType} from '../../../redux/state';
+import {PostType} from '../../../redux/state';
 
-const MyPosts: React.FC<PostsType> = ({posts}) => {
+type MyPostsType = {
+    posts: PostType[]
+    addPost: (post:string)=>void
+}
+
+
+const MyPosts: React.FC<MyPostsType> = ({posts,addPost}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
@@ -13,10 +19,10 @@ const MyPosts: React.FC<PostsType> = ({posts}) => {
     const newPostElement: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
 
-    const addPost = () => {
+    const addNewPost = () => {
         debugger
         let text = newPostElement.current?.value;
-        alert(text)
+        text && addPost(text)
     }
 
     return (
@@ -25,7 +31,7 @@ const MyPosts: React.FC<PostsType> = ({posts}) => {
                 <h3>Posts</h3>
                 <div>
                     <textarea placeholder={'Write something... '} cols={30} rows={5} ref={newPostElement}></textarea>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={addNewPost}>Add post</button>
                 </div>
                 <div>
                     {allPosts}

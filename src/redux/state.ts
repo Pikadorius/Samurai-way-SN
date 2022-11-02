@@ -27,6 +27,7 @@ export type FriendType = {
 
 
 export type ProfilePageType = {
+    postValue: string,
     posts: PostType[]
     facts: FactType[]
 }
@@ -46,6 +47,7 @@ export type StateType = {
 
 const state: StateType = {
     profilePage: {
+        postValue: '',
         posts: [
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
             {
@@ -142,9 +144,14 @@ export const addPost = (post: string) => {
 }
 
 export const addMessage = (message: string) => {
-    debugger
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
     state.dialogsPage.messages.push(newMessage);
+    debugger
+    rerenderEntireTree(state)
+}
+
+export const setPostValue = (postValue: string) => {
+    state.profilePage.postValue=postValue;
     rerenderEntireTree(state)
 }
 

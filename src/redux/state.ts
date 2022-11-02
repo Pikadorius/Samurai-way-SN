@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../render';
+
 export type PostType = {
     id: number
     title: string
@@ -136,14 +138,14 @@ export const addPost = (post: string) => {
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
-    console.log(state.profilePage.posts.length);
-    console.log(state.profilePage.posts[state.profilePage.posts.length - 1]);
+    rerenderEntireTree(state)
 }
 
 export const addMessage = (message: string) => {
     debugger
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
     state.dialogsPage.messages.push(newMessage);
+    rerenderEntireTree(state)
 }
 
 export default state;

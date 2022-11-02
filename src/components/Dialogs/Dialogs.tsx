@@ -15,7 +15,7 @@ const Dialogs: React.FC<DialogsType> = ({dialogs, messages, addMessage}) => {
     const dialogsElements = dialogs.map(d => <DialogItem id={d.id} name={d.name} avatar={d.avatar}/>)
     const messagesElements = messages.map(m => <Message id={m.id} message={m.message}/>)
 
-    const messageRef = React.createRef<HTMLTextAreaElement>();
+    let messageRef = React.createRef<HTMLTextAreaElement>();
 
     const addNewMessage = () => {
         debugger

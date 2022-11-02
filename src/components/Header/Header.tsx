@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Header.module.css';
+import {v1} from 'uuid';
 
 type HeaderType = {
     list: Array<string>
@@ -11,7 +12,8 @@ const Header = ({list}: HeaderType) => {
             <img width={'200px'} src="https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png" alt="" />
             {list.map(i=>{
                 return (
-                    <div className={s.headerLinks}> <a href={"#"}>{i}</a> </div>
+                    <div key={v1()} className={s.headerLinks}> <a href={"#"}>{i}</a> </div>
+
                 )
             })}
         </header>

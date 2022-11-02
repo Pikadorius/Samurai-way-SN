@@ -8,18 +8,18 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
-import {StateType} from './redux/state';
+import {setPostValue, StateType} from './redux/state';
 
 type AppType = {
     state: StateType
     addPost: (post: string) => void
     addMessage: (message: string) => void
+    setPostValue: (postValue:string) => void
 }
 
-const App: React.FC<AppType> = ({state, addPost, addMessage}) => {
-    debugger
+const App: React.FC<AppType> = ({state, addPost, addMessage, setPostValue}) => {
     const ProfileWithProps = () => <Profile posts={state.profilePage.posts} facts={state.profilePage.facts}
-                                            addPost={addPost}/>
+                                            addPost={addPost} setPostValue={setPostValue} postValue={state.profilePage.postValue} />
     const DialogsWithProps = () => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addMessage={addMessage}/>
     return (
         <BrowserRouter>

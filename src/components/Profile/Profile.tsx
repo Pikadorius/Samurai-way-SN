@@ -2,21 +2,19 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {FactType, PostType, setPostValue} from '../../redux/state';
+import {ProfilePageType} from '../../redux/state';
 
 type ProfilePropsType = {
-    posts: PostType[]
-    facts: FactType[]
+    profileState: ProfilePageType
     addPost: (post: string) => void
     setPostValue: (postValue: string)=>void
-    postValue: string
 }
 
-const Profile: React.FC<ProfilePropsType> = ({posts, facts, addPost, setPostValue, postValue}) => {
+const Profile: React.FC<ProfilePropsType> = ({profileState,addPost, setPostValue}) => {
     return (
         <div>
-            <ProfileInfo facts={facts}/>
-            <MyPosts posts={posts} addPost={addPost} setPostValue={setPostValue} postValue={postValue}/>
+            <ProfileInfo facts={profileState.facts}/>
+            <MyPosts posts={profileState.posts} addPost={addPost} setPostValue={setPostValue} postValue={profileState.postValue}/>
         </div>
     );
 };

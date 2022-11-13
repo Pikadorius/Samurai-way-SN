@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from '../render';
-
 export type PostType = {
     id: number
     title: string
@@ -136,19 +134,19 @@ const state: StateType = {
 
 export const setNewMessageText = (newMessageText: string) => {
     state.dialogsPage.newMessageText = newMessageText;
-    rerenderEntireTree(state)
+    onChange()  // вызов функции из замыкания
 }
 export const addNewMessage = () => {
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.newMessageText}
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = '';
-    rerenderEntireTree(state)
+    onChange()  // вызов функции из замыкания
 }
 
 
 export const setNewPostText = (newPostText: string) => {
     state.profilePage.newPostText = newPostText;
-    rerenderEntireTree(state)
+    onChange()  // вызов функции из замыкания
 }
 export const addNewPost = () => {
     let newPost: PostType = {
@@ -159,13 +157,21 @@ export const addNewPost = () => {
     };
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = "";
-    rerenderEntireTree(state)
+    onChange()  // вызов функции из замыкания
 }
 
 export const addLikeForPost = (postsId: number) => {
     state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
-    console.log(state.profilePage.posts)
-    rerenderEntireTree(state)
+    onChange()  // вызов функции из замыкания
 }
+
+let onChange = () => {}  // пустая функция, которая потом будет перезаписываться (из-за этого объявлена через let)
+
+export const subscribe = (observer: () => void) => {   //"подписчик" передал "наблюдателя" за изменением стейта (в каждой логической функции стейта)
+    onChange = observer; // переопределение пустой функции на переданную
+}
+
+
+
 
 export default state;

@@ -12,15 +12,15 @@ import {StateType} from './redux/state';
 
 type AppType = {
     state: StateType
-    addPost: (post: string) => void
-    addMessage: (message: string) => void
-    setPostValue: (postValue: string) => void
+    addNewPost: () => void
+    addNewMessage: () => void
+    setNewPostText: (postValue: string) => void
     setNewMessageText: (text: string) => void
 }
 
-const App: React.FC<AppType> = ({state, addPost, addMessage, setPostValue, setNewMessageText}) => {
-    const ProfileWithProps = () => <Profile profileState={state.profilePage} addPost={addPost} setPostValue={setPostValue}/>
-    const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} addMessage={addMessage}
+const App: React.FC<AppType> = ({state, addNewPost, addNewMessage, setNewPostText, setNewMessageText}) => {
+    const ProfileWithProps = () => <Profile profileState={state.profilePage} addNewPost={addNewPost} setNewPostText={setNewPostText}/>
+    const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} addNewMessage={addNewMessage}
                                             setNewMessageText={setNewMessageText}/>
     return (
         <BrowserRouter>

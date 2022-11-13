@@ -15,12 +15,13 @@ type AppType = {
     addPost: (post: string) => void
     addMessage: (message: string) => void
     setPostValue: (postValue:string) => void
+    setNewMessageText: (text: string) => void
 }
 
-const App: React.FC<AppType> = ({state, addPost, addMessage, setPostValue}) => {
+const App: React.FC<AppType> = ({state, addPost, addMessage, setPostValue, setNewMessageText}) => {
     const ProfileWithProps = () => <Profile posts={state.profilePage.posts} facts={state.profilePage.facts}
                                             addPost={addPost} setPostValue={setPostValue} postValue={state.profilePage.postValue} />
-    const DialogsWithProps = () => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addMessage={addMessage}/>
+    const DialogsWithProps = () => <Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages} addMessage={addMessage} newMessage={state.dialogsPage.newMessage} setNewMessageText={setNewMessageText}/>
     return (
         <BrowserRouter>
             <div className='App'>

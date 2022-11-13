@@ -33,6 +33,7 @@ export type ProfilePageType = {
 }
 export type DialogsPageType = {
     dialogs: DialogType[]
+    newMessage: string
     messages: MessageType[]
 }
 export type SidebarType = {
@@ -103,12 +104,13 @@ const state: StateType = {
                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"
             },
         ],
+        newMessage: '',
         messages: [
             {id: 1, message: 'Hi!'},
             {id: 2, message: 'How are you!'},
             {id: 3, message: "I'm fine, and you?",},
             {id: 4, message: "Let's make some styles!",},
-            {id: 4, message: "Here we go!",},
+            {id: 5, message: "Here we go!",},
         ]
     },
     sidebar: {
@@ -132,6 +134,24 @@ const state: StateType = {
     }
 }
 
+export const setNewMessageText = (text: string) => {
+    state.dialogsPage.newMessage = text;
+    rerenderEntireTree(state)
+}
+
+export const addMessage = (message: string) => {
+    let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
+    state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessage = ''
+    rerenderEntireTree(state)
+}
+
+
+export const setPostValue = (postValue: string) => {
+    state.profilePage.postValue = postValue;
+    rerenderEntireTree(state)
+}
+
 export const addPost = (post: string) => {
     let newPost: PostType = {
         id: state.profilePage.posts.length + 1,
@@ -140,19 +160,7 @@ export const addPost = (post: string) => {
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
-    state.profilePage.postValue=''
-    rerenderEntireTree(state)
-}
-
-export const addMessage = (message: string) => {
-    let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
-    state.dialogsPage.messages.push(newMessage);
-    debugger
-    rerenderEntireTree(state)
-}
-
-export const setPostValue = (postValue: string) => {
-    state.profilePage.postValue = postValue;
+    state.profilePage.postValue = ''
     rerenderEntireTree(state)
 }
 

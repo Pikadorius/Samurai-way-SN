@@ -16,10 +16,11 @@ type AppType = {
     addNewMessage: () => void
     setNewPostText: (postValue: string) => void
     setNewMessageText: (text: string) => void
+    addLikeForPost: (id:number)=>void
 }
 
-const App: React.FC<AppType> = ({state, addNewPost, addNewMessage, setNewPostText, setNewMessageText}) => {
-    const ProfileWithProps = () => <Profile profileState={state.profilePage} addNewPost={addNewPost} setNewPostText={setNewPostText}/>
+const App: React.FC<AppType> = ({state, addNewPost, addNewMessage, setNewPostText, setNewMessageText,addLikeForPost}) => {
+    const ProfileWithProps = () => <Profile profileState={state.profilePage} addNewPost={addNewPost} setNewPostText={setNewPostText} addLikeForPost={addLikeForPost}/>
     const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} addNewMessage={addNewMessage}
                                             setNewMessageText={setNewMessageText}/>
     return (

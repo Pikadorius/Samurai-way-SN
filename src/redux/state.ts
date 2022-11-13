@@ -51,7 +51,12 @@ const state: StateType = {
         newPostText: '',
         posts: [
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
-            {id: 2, title: "It works, I'm very excited!", description: "Hmmm... I really enjoy the result!", likesCount: 0},
+            {
+                id: 2,
+                title: "It works, I'm very excited!",
+                description: "Hmmm... I really enjoy the result!",
+                likesCount: 0
+            },
             {id: 3, title: "Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
         ],
         facts: [
@@ -157,8 +162,10 @@ export const addNewPost = () => {
     rerenderEntireTree(state)
 }
 
-export const addLikeForPost=()=>{
-
+export const addLikeForPost = (postsId: number) => {
+    state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
+    console.log(state.profilePage.posts)
+    rerenderEntireTree(state)
 }
 
 export default state;

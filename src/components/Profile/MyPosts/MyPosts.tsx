@@ -8,16 +8,18 @@ type MyPostsType = {
     addNewPost: () => void
     setNewPostText: (postValue: string) => void
     newPostText: string
+    addLikeForPost: (id:number)=>void
 }
 
 
-const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, setNewPostText, newPostText}) => {
+const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, setNewPostText, newPostText,addLikeForPost}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
                                           likesCount={p.likesCount}
                                           id={p.id}
-                                          key={p.id}/>)
+                                          key={p.id}
+                                          addLikeForPost={addLikeForPost}/>)
 
     const setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setNewPostText(e.currentTarget.value)

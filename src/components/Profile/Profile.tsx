@@ -8,13 +8,14 @@ type ProfilePropsType = {
     profileState: ProfilePageType
     addNewPost: () => void
     setNewPostText: (postValue: string)=>void
+    addLikeForPost: (id:number)=>void
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profileState,addNewPost, setNewPostText}) => {
+const Profile: React.FC<ProfilePropsType> = ({profileState,addNewPost, setNewPostText, addLikeForPost}) => {
     return (
         <div>
             <ProfileInfo facts={profileState.facts}/>
-            <MyPosts posts={profileState.posts} addNewPost={addNewPost} setNewPostText={setNewPostText} newPostText={profileState.newPostText}/>
+            <MyPosts posts={profileState.posts} addNewPost={addNewPost} setNewPostText={setNewPostText} newPostText={profileState.newPostText} addLikeForPost={addLikeForPost}/>
         </div>
     );
 };

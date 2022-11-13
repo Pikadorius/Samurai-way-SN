@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './Post.module.css';
 
 export type PostType = {
@@ -6,15 +6,14 @@ export type PostType = {
     description: string
     likesCount: number
     id: number
+    addLikeForPost: (id:number)=>void
 }
 
 
 const Post = (props: PostType) => {
 
-    const [likes, setLikes] = useState<number>(props.likesCount);
-
     const addLike = () => {
-        setLikes(likes + 1);
+        props.addLikeForPost(props.id);
     }
 
 
@@ -25,7 +24,7 @@ const Post = (props: PostType) => {
                 <h2>{props.name}</h2>
                 <p>{props.description}</p>
             </div>
-            <button onClick={addLike}>Likes: {likes}</button>
+            <button onClick={addLike}>Likes: {props.likesCount}</button>
         </div>
     );
 };

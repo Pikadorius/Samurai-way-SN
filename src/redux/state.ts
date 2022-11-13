@@ -140,6 +140,7 @@ export const addPost = (post: string) => {
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.postValue=''
     rerenderEntireTree(state)
 }
 
@@ -151,7 +152,7 @@ export const addMessage = (message: string) => {
 }
 
 export const setPostValue = (postValue: string) => {
-    state.profilePage.postValue=postValue;
+    state.profilePage.postValue = postValue;
     rerenderEntireTree(state)
 }
 

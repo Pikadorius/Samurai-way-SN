@@ -5,7 +5,6 @@ import App from './App';
 import {addMessage, addPost, setPostValue, StateType} from './redux/state';
 
 export const rerenderEntireTree = (state: StateType) => {
-    debugger
     ReactDOM.render(
         <App state={state} addPost={addPost} addMessage={addMessage} setPostValue={setPostValue} />,
         document.getElementById('root')

@@ -8,7 +8,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
-import {setPostValue, StateType} from './redux/state';
+import {StateType} from './redux/state';
 
 type AppType = {
     state: StateType

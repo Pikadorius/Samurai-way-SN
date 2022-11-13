@@ -25,7 +25,7 @@ const MyPosts: React.FC<MyPostsType> = ({posts, addPost, setPostValue, postValue
 
     const addNewPost = () => {
         addPost(postValue)
-        postValue=""
+        setPostValue('')
     }
 
     return (

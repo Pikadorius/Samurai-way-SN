@@ -7,20 +7,19 @@ import {DialogsPageType} from '../../redux/state';
 type DialogsType = {
     dialogsState: DialogsPageType
     setNewMessageText: (text: string)=> void
-    addMessage: (message: string) => void
+    addNewMessage: () => void
 }
 
-const Dialogs: React.FC<DialogsType> = ({dialogsState,setNewMessageText, addMessage}) => {
+const Dialogs: React.FC<DialogsType> = ({dialogsState,setNewMessageText, addNewMessage}) => {
 
     const dialogsElements = dialogsState.dialogs.map(d => <DialogItem  key={d.id} id={d.id} name={d.name} avatar={d.avatar}/>)
     const messagesElements = dialogsState.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)
 
     let messageRef = React.createRef<HTMLTextAreaElement>();
 
-    const addNewMessage = () => {
-        debugger
+    const addNewMessageCallback = () => {
         let newMessage = messageRef.current?.value
-        newMessage && addMessage(newMessage)
+        newMessage && addNewMessage()
     }
 
     let messageOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -36,7 +35,7 @@ const Dialogs: React.FC<DialogsType> = ({dialogsState,setNewMessageText, addMess
                 {messagesElements}
                 <div>
                     <textarea ref={messageRef} value={dialogsState.newMessageText} onChange={messageOnChange}/>
-                    <button onClick={addNewMessage}>Add message</button>
+                    <button onClick={addNewMessageCallback}>Add message</button>
                 </div>
             </div>
         </div>

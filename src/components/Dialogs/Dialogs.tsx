@@ -35,7 +35,7 @@ const Dialogs: React.FC<DialogsType> = ({dialogsState,setNewMessageText, addMess
             <div className={s.messages}>
                 {messagesElements}
                 <div>
-                    <textarea ref={messageRef} value={dialogsState.newMessage} onChange={messageOnChange}/>
+                    <textarea ref={messageRef} value={dialogsState.newMessageText} onChange={messageOnChange}/>
                     <button onClick={addNewMessage}>Add message</button>
                 </div>
             </div>

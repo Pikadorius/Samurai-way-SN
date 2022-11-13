@@ -27,13 +27,13 @@ export type FriendType = {
 
 
 export type ProfilePageType = {
-    postValue: string,
+    newPostText: string,
     posts: PostType[]
     facts: FactType[]
 }
 export type DialogsPageType = {
     dialogs: DialogType[]
-    newMessage: string
+    newMessageText: string
     messages: MessageType[]
 }
 export type SidebarType = {
@@ -48,7 +48,7 @@ export type StateType = {
 
 const state: StateType = {
     profilePage: {
-        postValue: '',
+        newPostText: '',
         posts: [
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
             {
@@ -104,7 +104,7 @@ const state: StateType = {
                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"
             },
         ],
-        newMessage: '',
+        newMessageText: '',
         messages: [
             {id: 1, message: 'Hi!'},
             {id: 2, message: 'How are you!'},
@@ -135,24 +135,22 @@ const state: StateType = {
 }
 
 export const setNewMessageText = (text: string) => {
-    state.dialogsPage.newMessage = text;
+    state.dialogsPage.newMessageText = text;
     rerenderEntireTree(state)
 }
-
-export const addMessage = (message: string) => {
+export const addNewMessage = (message: string) => {
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
     state.dialogsPage.messages.push(newMessage);
-    state.dialogsPage.newMessage = ''
+    state.dialogsPage.newMessageText = ''
     rerenderEntireTree(state)
 }
 
 
-export const setPostValue = (postValue: string) => {
-    state.profilePage.postValue = postValue;
+export const setNewPostText = (postValue: string) => {
+    state.profilePage.newPostText = postValue;
     rerenderEntireTree(state)
 }
-
-export const addPost = (post: string) => {
+export const addNewPost = (post: string) => {
     let newPost: PostType = {
         id: state.profilePage.posts.length + 1,
         title: `Post ${state.profilePage.posts.length + 1}`,
@@ -160,7 +158,7 @@ export const addPost = (post: string) => {
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
-    state.profilePage.postValue = ''
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
 

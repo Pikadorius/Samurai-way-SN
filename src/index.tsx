@@ -8,10 +8,10 @@ import state, {
     addNewPost,
     setNewMessageText,
     setNewPostText,
-    StateType,
     subscribe
 } from './redux/state';
 
+// объявление функции рисующей JSX
 const rerenderEntireTree = () => {
     ReactDOM.render(
         <App state={state} addNewPost={addNewPost} addNewMessage={addNewMessage} setNewPostText={setNewPostText}
@@ -20,7 +20,9 @@ const rerenderEntireTree = () => {
     );
 }
 
-
+// первый вызов
 rerenderEntireTree()
+
+// передача в state (по изменению стейта вызывается заново --> перерисывавается компонента)
 subscribe(rerenderEntireTree)
 

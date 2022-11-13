@@ -132,10 +132,12 @@ const state: StateType = {
     }
 }
 
+// изменение текста в Message textarea
 export const setNewMessageText = (newMessageText: string) => {
     state.dialogsPage.newMessageText = newMessageText;
     onChange()  // вызов функции из замыкания
 }
+// добавление нового Message
 export const addNewMessage = () => {
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.newMessageText}
     state.dialogsPage.messages.push(newMessage);
@@ -143,11 +145,12 @@ export const addNewMessage = () => {
     onChange()  // вызов функции из замыкания
 }
 
-
+// зменение текста в Post textarea
 export const setNewPostText = (newPostText: string) => {
     state.profilePage.newPostText = newPostText;
     onChange()  // вызов функции из замыкания
 }
+// добавление нового поста
 export const addNewPost = () => {
     let newPost: PostType = {
         id: state.profilePage.posts.length + 1,
@@ -160,18 +163,19 @@ export const addNewPost = () => {
     onChange()  // вызов функции из замыкания
 }
 
+// увеличение кол-ва лайков в посте
 export const addLikeForPost = (postsId: number) => {
     state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
     onChange()  // вызов функции из замыкания
 }
 
-let onChange = () => {}  // пустая функция, которая потом будет перезаписываться (из-за этого объявлена через let)
+// пустая функция, которая потом будет перезаписываться (из-за этого объявлена через let)
+let onChange = () => {}
 
 export const subscribe = (observer: () => void) => {   //"подписчик" передал "наблюдателя" за изменением стейта (в каждой логической функции стейта)
     onChange = observer; // переопределение пустой функции на переданную
 }
 
-
-
-
 export default state;
+
+//store

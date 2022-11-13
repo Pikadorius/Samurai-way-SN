@@ -6,7 +6,7 @@ import {addNewMessage, addNewPost, setNewMessageText, setNewPostText, StateType}
 
 export const rerenderEntireTree = (state: StateType) => {
     ReactDOM.render(
-        <App state={state} addPost={addNewPost} addMessage={addNewMessage} setPostValue={setNewPostText}
+        <App state={state} addNewPost={addNewPost} addNewMessage={addNewMessage} setNewPostText={setNewPostText}
              setNewMessageText={setNewMessageText}/>,
         document.getElementById('root')
     );

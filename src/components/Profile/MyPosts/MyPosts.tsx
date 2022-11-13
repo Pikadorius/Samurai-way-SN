@@ -5,13 +5,13 @@ import {PostType} from '../../../redux/state';
 
 type MyPostsType = {
     posts: PostType[]
-    addPost: (post: string) => void
-    setPostValue: (postValue: string) => void
-    postValue: string
+    addNewPost: () => void
+    setNewPostText: (postValue: string) => void
+    newPostText: string
 }
 
 
-const MyPosts: React.FC<MyPostsType> = ({posts, addPost, setPostValue, postValue}) => {
+const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, setNewPostText, newPostText}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
@@ -19,13 +19,12 @@ const MyPosts: React.FC<MyPostsType> = ({posts, addPost, setPostValue, postValue
                                           id={p.id}
                                           key={p.id}/>)
 
-    const changePostValue = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        setPostValue(e.currentTarget.value)
+    const setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setNewPostText(e.currentTarget.value)
     }
 
-    const addNewPost = () => {
-        addPost(postValue)
-        setPostValue('')
+    const addNewPostCallback = () => {
+        addNewPost()
     }
 
     return (
@@ -33,8 +32,8 @@ const MyPosts: React.FC<MyPostsType> = ({posts, addPost, setPostValue, postValue
             <div className={s.postsBlock}>
                 <h3>Posts</h3>
                 <div>
-                    <textarea cols={30} rows={5} value={postValue} onChange={changePostValue}></textarea>
-                    <button onClick={addNewPost}>Add post</button>
+                    <textarea cols={30} rows={5} value={newPostText} onChange={setPost}></textarea>
+                    <button onClick={addNewPostCallback}>Add post</button>
                 </div>
                 <div>
                     {allPosts}

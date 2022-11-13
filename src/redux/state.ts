@@ -51,12 +51,7 @@ const state: StateType = {
         newPostText: '',
         posts: [
             {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
-            {
-                id: 2,
-                title: "It works, I'm very excited!",
-                description: "Hmmm... I really enjoy the result!",
-                likesCount: 0
-            },
+            {id: 2, title: "It works, I'm very excited!", description: "Hmmm... I really enjoy the result!", likesCount: 0},
             {id: 3, title: "Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
         ],
         facts: [
@@ -134,32 +129,36 @@ const state: StateType = {
     }
 }
 
-export const setNewMessageText = (text: string) => {
-    state.dialogsPage.newMessageText = text;
+export const setNewMessageText = (newMessageText: string) => {
+    state.dialogsPage.newMessageText = newMessageText;
     rerenderEntireTree(state)
 }
-export const addNewMessage = (message: string) => {
-    let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: message}
+export const addNewMessage = () => {
+    let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.newMessageText}
     state.dialogsPage.messages.push(newMessage);
-    state.dialogsPage.newMessageText = ''
+    state.dialogsPage.newMessageText = '';
     rerenderEntireTree(state)
 }
 
 
-export const setNewPostText = (postValue: string) => {
-    state.profilePage.newPostText = postValue;
+export const setNewPostText = (newPostText: string) => {
+    state.profilePage.newPostText = newPostText;
     rerenderEntireTree(state)
 }
-export const addNewPost = (post: string) => {
+export const addNewPost = () => {
     let newPost: PostType = {
         id: state.profilePage.posts.length + 1,
         title: `Post ${state.profilePage.posts.length + 1}`,
-        description: post,
+        description: state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = ''
+    state.profilePage.newPostText = "";
     rerenderEntireTree(state)
+}
+
+export const addLikeForPost=()=>{
+
 }
 
 export default state;

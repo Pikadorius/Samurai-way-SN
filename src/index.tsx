@@ -8,8 +8,8 @@ import store from "./redux/state";
 // объявление функции рисующей JSX
 const rerenderEntireTree = () => {
     ReactDOM.render(
-        <App state={store.getState()} addNewPost={store.addNewPost} addNewMessage={store.addNewMessage} setNewPostText={store.setNewPostText}
-             setNewMessageText={store.setNewMessageText} addLikeForPost={store.addLikeForPost}/>,
+        <App state={store.getState()} addNewPost={store.addNewPost.bind(store)} addNewMessage={store.addNewMessage.bind(store)} setNewPostText={store.setNewPostText.bind(store)}
+             setNewMessageText={store.setNewMessageText.bind(store)} addLikeForPost={store.addLikeForPost.bind(store)}/>,
         document.getElementById('root')
     );
 }

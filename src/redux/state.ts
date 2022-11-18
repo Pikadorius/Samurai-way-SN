@@ -44,8 +44,9 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
+    getState: ()=>StateType
     setNewMessageText: (newMessageText:string)=>void
     addNewMessage: ()=>void
     setNewPostText: (newPostText: string) => void
@@ -56,7 +57,7 @@ export type StoreType = {
 }
 
 
-export const state: StateType = {
+const state: StateType = {
     profilePage: {
         newPostText: '',
         posts: [
@@ -145,12 +146,12 @@ export const state: StateType = {
 }
 
 // изменение текста в Message textarea
-export const setNewMessageText = (newMessageText: string) => {
+const setNewMessageText = (newMessageText: string) => {
     state.dialogsPage.newMessageText = newMessageText;
     onChange()  // вызов функции из замыкания
 }
 // добавление нового Message
-export const addNewMessage = () => {
+const addNewMessage = () => {
     let newMessage: MessageType = {id: state.dialogsPage.messages.length + 1, message: state.dialogsPage.newMessageText}
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = '';
@@ -158,12 +159,12 @@ export const addNewMessage = () => {
 }
 
 // изменение текста в Post textarea
-export const setNewPostText = (newPostText: string) => {
+const setNewPostText = (newPostText: string) => {
     state.profilePage.newPostText = newPostText;
     onChange()  // вызов функции из замыкания
 }
 // добавление нового поста
-export const addNewPost = () => {
+const addNewPost = () => {
     let newPost: PostType = {
         id: state.profilePage.posts.length + 1,
         title: `Post ${state.profilePage.posts.length + 1}`,
@@ -176,7 +177,7 @@ export const addNewPost = () => {
 }
 
 // увеличение кол-ва лайков в посте
-export const addLikeForPost = (postsId: number) => {
+const addLikeForPost = (postsId: number) => {
     state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
     onChange()  // вызов функции из замыкания
 }
@@ -184,13 +185,16 @@ export const addLikeForPost = (postsId: number) => {
 // пустая функция, которая потом будет перезаписываться (из-за этого объявлена через let)
 let onChange = () => {}
 
-export const subscribe = (observer: () => void) => {   //"подписчик" передал "наблюдателя" за изменением стейта (в каждой логической функции стейта)
+const subscribe = (observer: () => void) => {   //"подписчик" передал "наблюдателя" за изменением стейта (в каждой логической функции стейта)
     onChange = observer; // переопределение пустой функции на переданную
 }
 
 //store
-export const store: StoreType = {
+const store: StoreType = {
     _state: state,
+    getState() {
+        return this._state
+    },
     setNewMessageText,
     addNewMessage,
     setNewPostText,
@@ -199,3 +203,5 @@ export const store: StoreType = {
     onChange,
     subscribe
 }
+
+export default store;

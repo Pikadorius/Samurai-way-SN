@@ -90,12 +90,7 @@ let store: StoreType = {
             newPostText: '',
             posts: [
                 {id: 1, title: "My  first post", description: "I try to set props to my first post...", likesCount: 0},
-                {
-                    id: 2,
-                    title: "It works, I'm very excited!",
-                    description: "Hmmm... I really enjoy the result!",
-                    likesCount: 0
-                },
+                {id: 2, title: "It works, I'm very excited!",  description: "Hmmm... I really enjoy the result!", likesCount: 0},
                 {id: 3, title: "Dimych is the best!", description: "Dimych has a talent to teach", likesCount: 10}
             ],
             facts: [
@@ -221,43 +216,6 @@ let store: StoreType = {
             this._onChange()  // вызов функции из замыкания
         }
     }
-    // изменение текста в Message textarea
-   /* setNewMessageText(newMessageText: string) {
-        this._state.dialogsPage.newMessageText = newMessageText;
-        this._onChange()  // вызов функции из замыкания
-    },*/
-    // добавление нового Message
-    /*addNewMessage() {
-        let newMessage: MessageType = {
-            id: this._state.dialogsPage.messages.length + 1,
-            message: this._state.dialogsPage.newMessageText
-        }
-        this._state.dialogsPage.messages.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._onChange()  // вызов функции из замыкания
-    },*/
-    // изменение текста в Post textarea
-    /*setNewPostText(newPostText: string) {
-        this._state.profilePage.newPostText = newPostText;
-        this._onChange()  // вызов функции из замыкания
-    },*/
-    // добавление нового поста
-    /*addNewPost() {
-        let newPost: PostType = {
-            id: this._state.profilePage.posts.length + 1,
-            title: `Post ${this._state.profilePage.posts.length + 1}`,
-            description: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = "";
-        this._onChange()  // вызов функции из замыкания
-    },*/
-    // увеличение кол-ва лайков в посте
-    /*addLikeForPost(postsId: number) {
-        this._state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
-        this._onChange()  // вызов функции из замыкания
-    }*/
 }
 
 export default store;

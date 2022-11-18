@@ -44,23 +44,35 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-const state: StateType = {
+export type StoreType = {
+    _state: StateType
+    setNewMessageText: (newMessageText:string)=>void
+    addNewMessage: ()=>void
+    setNewPostText: (newPostText: string) => void
+    addNewPost: ()=>void
+    addLikeForPost: (postsId: number)=>void
+    onChange: ()=>void
+    subscribe: Function
+}
+
+
+export const state: StateType = {
     profilePage: {
         newPostText: '',
         posts: [
-            {id: 1, title: "My  first post", description: "I try to set props to my firts post...", likesCount: 0},
+            {id: 1, title: "My  first post", description: "I try to set props to my first post...", likesCount: 0},
             {
                 id: 2,
                 title: "It works, I'm very excited!",
                 description: "Hmmm... I really enjoy the result!",
                 likesCount: 0
             },
-            {id: 3, title: "Dimych is the best!", description: "Dimych has a talant to teach", likesCount: 10}
+            {id: 3, title: "Dimych is the best!", description: "Dimych has a talent to teach", likesCount: 10}
         ],
         facts: [
             {id: 1, fact: 'I am 30 years old'},
             {id: 2, fact: 'I have a son'},
-            {id: 3, fact: 'I am a Chief Engeneer'},
+            {id: 3, fact: 'I am a Chief Engineer'},
 
         ]
     },
@@ -145,7 +157,7 @@ export const addNewMessage = () => {
     onChange()  // вызов функции из замыкания
 }
 
-// зменение текста в Post textarea
+// изменение текста в Post textarea
 export const setNewPostText = (newPostText: string) => {
     state.profilePage.newPostText = newPostText;
     onChange()  // вызов функции из замыкания
@@ -176,6 +188,14 @@ export const subscribe = (observer: () => void) => {   //"подписчик" п
     onChange = observer; // переопределение пустой функции на переданную
 }
 
-export default state;
-
 //store
+export const store: StoreType = {
+    _state: state,
+    setNewMessageText,
+    addNewMessage,
+    setNewPostText,
+    addNewPost,
+    addLikeForPost,
+    onChange,
+    subscribe
+}

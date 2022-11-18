@@ -38,6 +38,29 @@ export type SidebarType = {
     friends: FriendType[]
 }
 
+type AddPostActionType = {
+    type: 'ADD-NEW-POST'
+}
+
+type SetPostTextActionType = {
+    type: 'SET-POST-TEXT'
+    newPostText: string
+}
+
+type AddNewMessageActionType = {
+    type: "ADD-NEW-MESSAGE"
+}
+
+type SetNewMessageActionType = {
+    type:"SET-MESSAGE-TEXT"
+    newMessageText: string
+}
+
+type AddLikeActionType = {
+    type: "ADD-LIKE"
+    postId: number
+}
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -46,18 +69,20 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    getState: ()=>StateType
-    setNewMessageText: (newMessageText:string)=>void
-    addNewMessage: ()=>void
-    setNewPostText: (newPostText: string) => void
-    addNewPost: ()=>void
-    addLikeForPost: (postsId: number)=>void
-    _onChange: ()=>void
-    subscribe: (observer:()=>void)=>void
+    _onChange: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => StateType
+    dispatch: (action: AddPostActionType | SetPostTextActionType | AddNewMessageActionType | SetNewMessageActionType | AddLikeActionType) => void
+    // setNewMessageText: (newMessageText: string) => void
+    // addNewMessage: () => void
+    // setNewPostText: (newPostText: string) => void
+    // addNewPost: () => void
+    // addLikeForPost: (postsId: number) => void
 }
 
 //store
 let store: StoreType = {
+    // BLL / главный стейт
     _state: {
         profilePage: {
             newPostText: '',
@@ -145,28 +170,77 @@ let store: StoreType = {
             ]
         }
     },
+    // пустой метод, который потом будет перезаписываться
+    _onChange() {
+        console.log('State changed')
+    },
+
+    //"подписчик" передал "наблюдателя" за изменением стейта (в каждом методе store)
+    subscribe(observer) {
+        this._onChange = observer; // переопределение пустой функции на переданную
+    },
+    // получение state, т.к. напрямую к нему обращаться нельзя (условно, т.к. разработчик написал _state)
     getState() {
         return this._state
     },
+
+
+    dispatch(action) {  // action - объект!! с обязательным свойством {type: 'addNewPost(как пример)')
+        if (action.type === 'ADD-NEW-POST') {
+            let newPost: PostType = {
+                id: this._state.profilePage.posts.length + 1,
+                title: `Post ${this._state.profilePage.posts.length + 1}`,
+                description: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = "";
+            this._onChange()  // вызов функции из замыкания
+        }
+        else if(action.type==='SET-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPostText;
+            this._onChange()  // вызов функции из замыкания
+        }
+        else if (action.type === "ADD-NEW-MESSAGE") {
+            let newMessage: MessageType = {
+                id: this._state.dialogsPage.messages.length + 1,
+                message: this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._onChange()  // вызов функции из замыкания
+        }
+        else if (action.type==="SET-MESSAGE-TEXT") {
+            this._state.dialogsPage.newMessageText = action.newMessageText;
+            this._onChange()  // вызов функции из замыкания
+        }
+        else if (action.type==="ADD-LIKE") {
+            this._state.profilePage.posts.map(p => p.id === action.postId ? p.likesCount++ : p);
+            this._onChange()  // вызов функции из замыкания
+        }
+    }
     // изменение текста в Message textarea
-    setNewMessageText (newMessageText: string) {
+   /* setNewMessageText(newMessageText: string) {
         this._state.dialogsPage.newMessageText = newMessageText;
         this._onChange()  // вызов функции из замыкания
-    },
+    },*/
     // добавление нового Message
-    addNewMessage() {
-        let newMessage: MessageType = {id: this._state.dialogsPage.messages.length + 1, message: this._state.dialogsPage.newMessageText}
+    /*addNewMessage() {
+        let newMessage: MessageType = {
+            id: this._state.dialogsPage.messages.length + 1,
+            message: this._state.dialogsPage.newMessageText
+        }
         this._state.dialogsPage.messages.push(newMessage);
         this._state.dialogsPage.newMessageText = '';
         this._onChange()  // вызов функции из замыкания
-    },
+    },*/
     // изменение текста в Post textarea
-    setNewPostText(newPostText: string) {
-        this._state.profilePage.newPostText=newPostText;
+    /*setNewPostText(newPostText: string) {
+        this._state.profilePage.newPostText = newPostText;
         this._onChange()  // вызов функции из замыкания
-    },
+    },*/
     // добавление нового поста
-    addNewPost() {
+    /*addNewPost() {
         let newPost: PostType = {
             id: this._state.profilePage.posts.length + 1,
             title: `Post ${this._state.profilePage.posts.length + 1}`,
@@ -176,19 +250,12 @@ let store: StoreType = {
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = "";
         this._onChange()  // вызов функции из замыкания
-    },
+    },*/
     // увеличение кол-ва лайков в посте
-    addLikeForPost(postsId: number){
+    /*addLikeForPost(postsId: number) {
         this._state.profilePage.posts.map(p => p.id === postsId ? p.likesCount++ : p);
         this._onChange()  // вызов функции из замыкания
-    },
-    // пустая функция, которая потом будет перезаписываться (из-за этого объявлена через let)
-    _onChange() {
-        console.log('State changed')
-    },
-    subscribe(observer){   //"подписчик" передал "наблюдателя" за изменением стейта (в каждой логической функции стейта)
-        this._onChange = observer; // переопределение пустой функции на переданную
-    }
+    }*/
 }
 
 export default store;

@@ -1,32 +1,30 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {PostType} from '../../../redux/state';
+import {ActionsType, PostType} from '../../../redux/state';
 
 type MyPostsType = {
-    posts: PostType[]
-    addNewPost: () => void
-    setNewPostText: (postValue: string) => void
     newPostText: string
-    addLikeForPost: (id:number)=>void
+    posts: PostType[]
+    dispatch: (action: ActionsType)=>void
 }
 
 
-const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, setNewPostText, newPostText,addLikeForPost}) => {
+const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,dispatch}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
                                           likesCount={p.likesCount}
                                           id={p.id}
                                           key={p.id}
-                                          addLikeForPost={addLikeForPost}/>)
+                                          dispatch={dispatch}/>)
 
     const setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setNewPostText(e.currentTarget.value)
+        dispatch({type:"SET-POST-TEXT",newPostText:e.currentTarget.value})
     }
 
     const addNewPostCallback = () => {
-        addNewPost()
+        dispatch({type:"ADD-NEW-POST"})
     }
 
     return (

@@ -8,21 +8,16 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
-import {StateType, StoreType} from './redux/state';
+import {ActionsType, StateType, StoreType} from './redux/state';
 
 type AppType = {
     state: StateType
-    addNewPost: () => void
-    addNewMessage: () => void
-    setNewPostText: (postValue: string) => void
-    setNewMessageText: (text: string) => void
-    addLikeForPost: (id:number)=>void
+    dispatch: (action: ActionsType)=>void
 }
 
-const App: React.FC<AppType> = ({state, addNewPost, addNewMessage, setNewPostText, setNewMessageText,addLikeForPost}) => {
-    const ProfileWithProps = () => <Profile profileState={state.profilePage} addNewPost={addNewPost} setNewPostText={setNewPostText} addLikeForPost={addLikeForPost}/>
-    const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} addNewMessage={addNewMessage}
-                                            setNewMessageText={setNewMessageText}/>
+const App: React.FC<AppType> = ({state, dispatch}) => {
+    const ProfileWithProps = () => <Profile profileState={state.profilePage} dispatch={dispatch}/>
+    const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} dispatch={dispatch}/>
     return (
         <BrowserRouter>
             <div className='App'>

@@ -61,6 +61,8 @@ type AddLikeActionType = {
     postId: number
 }
 
+export type ActionsType = AddPostActionType | SetPostTextActionType | AddNewMessageActionType | SetNewMessageActionType | AddLikeActionType
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

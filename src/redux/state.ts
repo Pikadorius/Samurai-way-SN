@@ -38,30 +38,7 @@ export type SidebarType = {
     friends: FriendType[]
 }
 
-type AddPostActionType = {
-    type: 'ADD-NEW-POST'
-}
-
-type SetPostTextActionType = {
-    type: 'SET-POST-TEXT'
-    newPostText: string
-}
-
-type AddNewMessageActionType = {
-    type: "ADD-NEW-MESSAGE"
-}
-
-type SetNewMessageActionType = {
-    type:"SET-MESSAGE-TEXT"
-    newMessageText: string
-}
-
-type AddLikeActionType = {
-    type: "ADD-LIKE"
-    postId: number
-}
-
-export type ActionsType = AddPostActionType | SetPostTextActionType | AddNewMessageActionType | SetNewMessageActionType | AddLikeActionType
+export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof setPostActionCreator> | ReturnType<typeof addMessageActionCreator> | ReturnType<typeof setMessageActionCreator> | ReturnType<typeof addLIkeActionCreator>
 
 export type StateType = {
     profilePage: ProfilePageType
@@ -74,13 +51,14 @@ export type StoreType = {
     _onChange: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-    dispatch: (action: AddPostActionType | SetPostTextActionType | AddNewMessageActionType | SetNewMessageActionType | AddLikeActionType) => void
+    dispatch: (action: ActionsType) => void
     // setNewMessageText: (newMessageText: string) => void
     // addNewMessage: () => void
     // setNewPostText: (newPostText: string) => void
     // addNewPost: () => void
     // addLikeForPost: (postsId: number) => void
 }
+
 
 //store
 let store: StoreType = {
@@ -180,8 +158,7 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-
-
+    // ипспользвание функции через получение объекта action
     dispatch(action) {  // action - объект!! с обязательным свойством {type: 'addNewPost(как пример)')
         if (action.type === 'ADD-NEW-POST') {
             let newPost: PostType = {
@@ -217,5 +194,28 @@ let store: StoreType = {
         }
     }
 }
+
+
+export const addPostActionCreator = () => {
+    return {type:"ADD-NEW-POST"} as const
+}
+
+export const setPostActionCreator = (newPostText: string) => {
+    return {type:"SET-POST-TEXT",newPostText: newPostText} as const
+}
+
+export const addLIkeActionCreator = (postId: number) => {
+    return {type: "ADD-LIKE", postId} as const
+}
+
+export const addMessageActionCreator = () => {
+    return {type: "ADD-NEW-MESSAGE"} as const
+}
+
+export const setMessageActionCreator = (newMessageText: string) => {
+    return {type: "SET-MESSAGE-TEXT", newMessageText: newMessageText} as const
+
+}
+
 
 export default store;

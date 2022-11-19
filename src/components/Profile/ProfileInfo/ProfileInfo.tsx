@@ -15,7 +15,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({facts}) => {
                      alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                <img className={s.avatar} src="https://world.edu/wp-content/uploads/2020/05/Professional-Programmer.jpg"
+                <img className={s.avatar} src="https://www.shkolazhizni.ru/img/content/i156/156707_or.jpg"
                      alt=""/>
                 <div>
                     <ul>

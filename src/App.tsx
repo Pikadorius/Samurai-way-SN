@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
@@ -19,7 +19,6 @@ const App: React.FC<AppType> = ({state, dispatch}) => {
     const ProfileWithProps = () => <Profile profileState={state.profilePage} dispatch={dispatch}/>
     const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} dispatch={dispatch}/>
     return (
-        <BrowserRouter>
             <div className='App'>
                 <Header list={['Video', 'Music', 'Photos']}/>
                 <Navbar friends={state.sidebar.friends}/>
@@ -31,7 +30,6 @@ const App: React.FC<AppType> = ({state, dispatch}) => {
                     <Route component={Settings} path={'/settings'}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 

@@ -15,14 +15,11 @@ const Dialogs: React.FC<DialogsType> = ({dialogsState, dispatch}) => {
                                                                       avatar={d.avatar}/>)
     const messagesElements = dialogsState.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)
 
-    let messageRef = React.createRef<HTMLTextAreaElement>();
-
-    const addNewMessageCallback = () => {
-        let newMessage = messageRef.current?.value
-        newMessage && dispatch(addMessageActionCreator())
+    const onClickAddMessage= () => {
+        dispatch(addMessageActionCreator())
     }
 
-    let messageOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(setMessageActionCreator(e.currentTarget.value))
     }
 
@@ -32,10 +29,10 @@ const Dialogs: React.FC<DialogsType> = ({dialogsState, dispatch}) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
                 <div>
-                    <textarea ref={messageRef} value={dialogsState.newMessageText} onChange={messageOnChange}/>
-                    <button onClick={addNewMessageCallback}>Add message</button>
+                    <textarea value={dialogsState.newMessageText} onChange={onChangeMessageHandler} placeholder={'Enter new message...'}/>
+                    <button onClick={onClickAddMessage}>Add message</button>
                 </div>
             </div>
         </div>

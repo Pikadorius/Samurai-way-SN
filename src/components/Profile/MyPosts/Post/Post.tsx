@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
-import {ActionsType, addLIkeActionCreator} from "../../../../redux/store";
+import {ActionsType} from "../../../../redux/store";
+import {addLIkeActionCreator} from "../../../../redux/profile_reducer";
 
 export type PostType = {
     name: string

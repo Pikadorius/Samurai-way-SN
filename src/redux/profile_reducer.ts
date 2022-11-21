@@ -24,3 +24,5 @@ const profileReducer = (state: ProfilePageType, action: ActionsType): ProfilePag
 
     return state;
 }
+
+export default profileReducer;

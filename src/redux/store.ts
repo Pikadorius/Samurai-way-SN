@@ -1,6 +1,6 @@
-import profileReducer from "./profile_reducer";
+import profileReducer, {addLIkeActionCreator, addPostActionCreator, setPostActionCreator} from "./profile_reducer";
 import sidebarReducer from "./sidebar_reducer";
-import dialogsReducer from "./dialogs_reducer";
+import dialogsReducer, {addMessageActionCreator, setMessageActionCreator} from "./dialogs_reducer";
 
 export type PostType = {
     id: number
@@ -67,7 +67,6 @@ export type StoreType = {
     // addNewPost: () => void
     // addLikeForPost: (postsId: number) => void
 }
-
 
 //store
 let store: StoreType = {
@@ -210,31 +209,6 @@ let store: StoreType = {
             this._onChange()  // вызов функции из замыкания
         }*/
     }
-}
-const ADD_POST = 'ADD-NEW-POST'
-const SET_POST_TEXT = 'SET-POST-TEXT'
-const ADD_MESSAGE = 'ADD-NEW-MESSAGE'
-const SET_MESSAGE = 'SET-MESSAGE-TEXT'
-const ADD_LIKE = 'ADD-LIKE'
-
-export const addPostActionCreator = () => {
-    return {type: ADD_POST} as const
-}
-
-export const setPostActionCreator = (newPostText: string) => {
-    return {type: SET_POST_TEXT, newPostText: newPostText} as const
-}
-
-export const addMessageActionCreator = () => {
-    return {type: ADD_MESSAGE} as const
-}
-
-export const setMessageActionCreator = (newMessageText: string) => {
-    return {type: SET_MESSAGE, newMessageText: newMessageText} as const
-}
-
-export const addLIkeActionCreator = (postId: number) => {
-    return {type: ADD_LIKE, postId} as const
 }
 
 export default store;

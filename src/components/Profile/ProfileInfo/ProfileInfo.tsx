@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {FactType} from '../../../redux/state';
+import {FactType} from '../../../redux/store';
 
 type ProfileInfoType = {
     facts: FactType[]

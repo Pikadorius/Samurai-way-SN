@@ -1,3 +1,7 @@
+import profileReducer from "./profile_reducer";
+import sidebarReducer from "./sidebar_reducer";
+import dialogsReducer from "./dialogs_reducer";
+
 export type PostType = {
     id: number
     title: string
@@ -170,7 +174,14 @@ let store: StoreType = {
     },
     // ипспользвание функции через получение объекта action
     dispatch(action) {  // action - объект!! с обязательным свойством {type: 'addNewPost(как пример)')
-        if (action.type === ADD_POST) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._onChange()
+
+        // до 41 урока логика dispatch была прописана внутри диспатч
+        // в 41 уроке сделали reducers в которые перенесли логику из dispatch
+        /*if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: this._state.profilePage.posts.length + 1,
                 title: `Post ${this._state.profilePage.posts.length + 1}`,
@@ -197,7 +208,7 @@ let store: StoreType = {
         } else if (action.type === ADD_LIKE) {
             this._state.profilePage.posts.map(p => p.id === action.postId ? p.likesCount++ : p);
             this._onChange()  // вызов функции из замыкания
-        }
+        }*/
     }
 }
 const ADD_POST = 'ADD-NEW-POST'

@@ -19,5 +19,5 @@ const dialogsReducer = (state: DialogsPageType, action: ActionsType): DialogsPag
 
     return state;
 }
-
+//редьюсеры эскпортируем по умолчанию
 export default dialogsReducer;

@@ -25,4 +25,5 @@ const profileReducer = (state: ProfilePageType, action: ActionsType): ProfilePag
     return state;
 }
 
+//редьюсеры эскпортируем по умолчанию
 export default profileReducer;

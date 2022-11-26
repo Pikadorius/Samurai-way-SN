@@ -14,11 +14,9 @@ const dialogsReducer = (state: DialogsPageType, action: ActionsType): DialogsPag
             state.messages.push(newMessage);
             state.newMessageText = '';
             return state;
-            break;
         case SET_MESSAGE:
             state.newMessageText = action.newMessageText;
             return state;
-            break;
         default:
             return state;
     }

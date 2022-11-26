@@ -69,7 +69,7 @@ export type StoreType = {
 }
 
 //store
-let store: StoreType = {
+export let store: StoreType = {
     // BLL / главный стейт
     _state: {
         profilePage: {
@@ -211,4 +211,3 @@ let store: StoreType = {
     }
 }
 
-export default store;

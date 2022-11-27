@@ -1,46 +1,31 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionsType, PostType} from '../../../redux/store';
-import {addPostActionCreator, setPostActionCreator} from "../../../redux/profile_reducer";
+import {ActionsType, PostType, ProfilePageType} from '../../../redux/store';
+import {addLikeActionCreator, addPostActionCreator, setPostActionCreator} from "../../../redux/profile_reducer";
+import MyPosts from './MyPosts';
 
 type MyPostsType = {
-    newPostText: string
-    posts: PostType[]
-    dispatch: (action: ActionsType)=>void
+    state: ProfilePageType
+    dispatch: (action: ActionsType) => void
 }
 
-const MyPostsContainer: React.FC<MyPostsType> = ({newPostText,posts,dispatch}) => {
+const MyPostsContainer: React.FC<MyPostsType> = ({state, dispatch}) => {
 
-    const allPosts = posts.map(p => <Post name={p.title}
-                                          description={p.description}
-                                          likesCount={p.likesCount}
-                                          id={p.id}
-                                          key={p.id}
-                                          dispatch={dispatch}/>)
-
-    const setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(setPostActionCreator(e.currentTarget.value))
+    const setPost = (post: string) => {
+        dispatch(setPostActionCreator(post))
     }
 
-    const addNewPostCallback = () => {
+    const addNewPost = () => {
         dispatch(addPostActionCreator())
     }
 
-    return (
-        <div className={s.content}>
-            <div className={s.postsBlock}>
-                <h3>Posts</h3>
-                <div>
-                    <textarea cols={30} rows={5} value={newPostText} onChange={setPost}></textarea>
-                    <button onClick={addNewPostCallback}>Add post</button>
-                </div>
-                <div>
-                    {allPosts}
-                </div>
-            </div>
-        </div>
-    );
+    const addLike = (id: number) => {
+        dispatch(addLikeActionCreator(id))
+    }
+
+    return <MyPosts newPostText={state.newPostText} posts={state.posts} setPost={setPost} addNewPost={addNewPost}
+                    addLike={addLike}/>;
 };
 
 export default MyPostsContainer;

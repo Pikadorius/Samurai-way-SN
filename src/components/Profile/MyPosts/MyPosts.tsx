@@ -1,30 +1,37 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {ActionsType, PostType} from '../../../redux/store';
-import {addPostActionCreator, setPostActionCreator} from "../../../redux/profile_reducer";
+
+type PostType = {
+    id: number
+    title: string
+    description: string
+    likesCount: number
+}
 
 type MyPostsType = {
     newPostText: string
     posts: PostType[]
-    dispatch: (action: ActionsType)=>void
+    setPost: (post: string)=>void
+    addNewPost: ()=>void
+    addLike: (id:number)=>void
 }
 
-const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,dispatch}) => {
+const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,addLike}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
                                           likesCount={p.likesCount}
                                           id={p.id}
                                           key={p.id}
-                                          dispatch={dispatch}/>)
+                                          addLike={addLike}/>)
 
-    const setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(setPostActionCreator(e.currentTarget.value))
+    const onSetPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+       setPost(e.currentTarget.value)
     }
 
-    const addNewPostCallback = () => {
-        dispatch(addPostActionCreator())
+    const onAddNewPost = () => {
+        addNewPost()
     }
 
     return (
@@ -32,8 +39,8 @@ const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,dispatch}) => {
             <div className={s.postsBlock}>
                 <h3>Posts</h3>
                 <div>
-                    <textarea cols={30} rows={5} value={newPostText} onChange={setPost}></textarea>
-                    <button onClick={addNewPostCallback}>Add post</button>
+                    <textarea cols={30} rows={5} value={newPostText} onChange={onSetPost}></textarea>
+                    <button onClick={onAddNewPost}>Add post</button>
                 </div>
                 <div>
                     {allPosts}

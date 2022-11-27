@@ -55,7 +55,7 @@ export const addPostActionCreator = () => {
 export const setPostActionCreator = (newPostText: string) => {
     return {type: SET_POST_TEXT, newPostText: newPostText} as const
 }
-export const addLIkeActionCreator = (postId: number) => {
+export const addLikeActionCreator = (postId: number) => {
     return {type: ADD_LIKE, postId} as const
 }
 

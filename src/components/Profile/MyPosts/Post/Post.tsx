@@ -1,23 +1,19 @@
 import React from 'react';
 import s from './Post.module.css';
-import {ActionsType} from "../../../../redux/store";
-import {addLIkeActionCreator} from "../../../../redux/profile_reducer";
 
 export type PostType = {
     name: string
     description: string
     likesCount: number
     id: number
-    dispatch: (action: ActionsType) => void
+    addLike: (id:number) => void
 }
-
 
 const Post = (props: PostType) => {
 
-    const addLike = () => {
-        props.dispatch(addLIkeActionCreator(props.id));
+    const onAddLike= () => {
+        props.addLike(props.id);
     }
-
 
         return (
             <div className={s.item}>
@@ -26,7 +22,7 @@ const Post = (props: PostType) => {
                     <h2>{props.name}</h2>
                     <p>{props.description}</p>
                 </div>
-                <button onClick={addLike}>Likes: {props.likesCount}</button>
+                <button onClick={onAddLike}>Likes: {props.likesCount}</button>
             </div>
         );
     };

@@ -1,55 +1,54 @@
-import profileReducer, {addLikeActionCreator, addPostActionCreator, setPostActionCreator} from "./profile_reducer";
-import sidebarReducer from "./sidebar_reducer";
-import dialogsReducer, {addMessageActionCreator, setMessageActionCreator} from "./dialogs_reducer";
+import {addLikeActionCreator, addPostActionCreator, setPostActionCreator} from "./profile_reducer";
+import  {addMessageActionCreator, setMessageActionCreator} from "./dialogs_reducer";
 
-export type PostType = {
+type PostType = {
     id: number
     title: string
     description: string
     likesCount: number
 }
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
     avatar: string
 }
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
-export type FactType = {
+type FactType = {
     id: number
     fact: string
 }
-export type FriendType = {
+type FriendType = {
     id: number
     name: string
     avatar: string
 }
 
 
-export type ProfilePageType = {
+type ProfilePageType = {
     newPostText: string,
     posts: PostType[]
     facts: FactType[]
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: DialogType[]
     newMessageText: string
     messages: MessageType[]
 }
-export type SidebarType = {
+type SidebarType = {
     friends: FriendType[]
 }
 
-export type ActionsType =
+type ActionsType =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setPostActionCreator>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof setMessageActionCreator>
     | ReturnType<typeof addLikeActionCreator>
 
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
@@ -61,15 +60,10 @@ type StoreType = {
     subscribe: (observer: () => void) => void
     getState: () => StateType
     dispatch: (action: ActionsType) => void
-    // setNewMessageText: (newMessageText: string) => void
-    // addNewMessage: () => void
-    // setNewPostText: (newPostText: string) => void
-    // addNewPost: () => void
-    // addLikeForPost: (postsId: number) => void
 }
 
 //store
-let store: StoreType = {
+/*let store: StoreType = {
     // BLL / главный стейт
     _state: {
         profilePage: {
@@ -180,7 +174,7 @@ let store: StoreType = {
 
         // до 41 урока логика dispatch была прописана внутри диспатч
         // в 41 уроке сделали reducers в которые перенесли логику из dispatch
-        /*if (action.type === ADD_POST) {
+        /!*if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: this._state.profilePage.posts.length + 1,
                 title: `Post ${this._state.profilePage.posts.length + 1}`,
@@ -207,7 +201,7 @@ let store: StoreType = {
         } else if (action.type === ADD_LIKE) {
             this._state.profilePage.posts.map(p => p.id === action.postId ? p.likesCount++ : p);
             this._onChange()  // вызов функции из замыкания
-        }*/
+        }*!/
     }
-}
+}*/
 

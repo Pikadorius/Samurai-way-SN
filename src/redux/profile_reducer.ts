@@ -1,8 +1,23 @@
-import {ActionsType, PostType, ProfilePageType} from "./store";
+export type FactType = {
+    id: number
+    fact: string
+}
+export type PostType = {
+    id: number
+    title: string
+    description: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    newPostText: string,
+    posts: PostType[]
+    facts: FactType[]
+}
 
-const ADD_POST = 'ADD-NEW-POST'
-const SET_POST_TEXT = 'SET-POST-TEXT'
-const ADD_LIKE = 'ADD-LIKE'
+export type ProdileActionsType =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof setPostActionCreator>|
+    ReturnType<typeof addLikeActionCreator>
 
 const initialState: ProfilePageType = {
     newPostText: '',
@@ -24,10 +39,10 @@ const initialState: ProfilePageType = {
     ]
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProdileActionsType): ProfilePageType => {
 
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD-NEW-POST':
             let newPost: PostType = {
                 id: state.posts.length + 1,
                 title: `Post ${state.posts.length + 1}`,
@@ -37,10 +52,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             state.posts.push(newPost);
             state.newPostText = "";
             return state;
-        case SET_POST_TEXT:
+        case 'SET-POST-TEXT':
             state.newPostText = action.newPostText;
             return state;
-        case ADD_LIKE:
+        case 'ADD-LIKE':
             state.posts.map(p => p.id === action.postId ? p.likesCount++ : p);
             return state;
         default:
@@ -49,14 +64,14 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 }
 
 export const addPostActionCreator = () => {
-    return {type: ADD_POST} as const
+    return {type: 'ADD-NEW-POST'} as const
 }
 
 export const setPostActionCreator = (newPostText: string) => {
-    return {type: SET_POST_TEXT, newPostText: newPostText} as const
+    return {type: 'SET-POST-TEXT', newPostText: newPostText} as const
 }
 export const addLikeActionCreator = (postId: number) => {
-    return {type: ADD_LIKE, postId} as const
+    return {type: 'ADD-LIKE', postId} as const
 }
 
 //редьюсеры эскпортируем по умолчанию

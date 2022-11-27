@@ -6,7 +6,7 @@ import store from "./redux/redux-store";
 import {BrowserRouter} from 'react-router-dom';
 
 
-// объявление функции рисующей JSX
+// function that render JSX
 const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
@@ -15,9 +15,9 @@ const rerenderEntireTree = () => {
     );
 }
 
-// передача в state (по изменению стейта вызывается заново --> перерисывавается компонента)
+// subscribe to store (if state changes - will be called)
 store.subscribe(rerenderEntireTree)
 
-// первый вызов
+// first render
 rerenderEntireTree()
 

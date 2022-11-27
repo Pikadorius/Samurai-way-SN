@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {SidebarType} from '../../redux/store';
+import {SidebarType} from '../../redux/sidebar_reducer';
 
 const Navbar: React.FC<SidebarType> = ({friends}) => {
     return (

@@ -1,7 +1,22 @@
-import {ActionsType, DialogsPageType, MessageType} from "./store";
+export type MessageType = {
+    id: number
+    message: string
+}
+export type DialogType = {
+    id: number
+    name: string
+    avatar: string
+}
 
-const ADD_MESSAGE = 'ADD-NEW-MESSAGE'
-const SET_MESSAGE = 'SET-MESSAGE-TEXT'
+export type DialogsPageType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageText: string
+}
+
+export type DialogsActionsType =
+    ReturnType<typeof addMessageActionCreator> |
+    ReturnType<typeof setMessageActionCreator>
 
 const initialState: DialogsPageType = {
     dialogs: [
@@ -51,10 +66,10 @@ const initialState: DialogsPageType = {
     ]
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsType): DialogsPageType => {
 
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'ADD-NEW-MESSAGE':
             let newMessage: MessageType = {
                 id: state.messages.length + 1,
                 message: state.newMessageText
@@ -62,7 +77,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
             state.messages.push(newMessage);
             state.newMessageText = '';
             return state;
-        case SET_MESSAGE:
+        case 'SET-MESSAGE-TEXT':
             state.newMessageText = action.newMessageText;
             return state;
         default:
@@ -71,11 +86,11 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
 }
 
 export const addMessageActionCreator = () => {
-    return {type: ADD_MESSAGE} as const
+    return {type: 'ADD-NEW-MESSAGE'} as const
 }
 
 export const setMessageActionCreator = (newMessageText: string) => {
-    return {type: SET_MESSAGE, newMessageText: newMessageText} as const
+    return {type: 'SET-MESSAGE-TEXT', newMessageText: newMessageText} as const
 }
 
 //редьюсеры эскпортируем по умолчанию

@@ -7,8 +7,8 @@ import {Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import Dialogs from './components/Dialogs/Dialogs';
 import {ActionsType, StateType} from './redux/store';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 type AppType = {
     state: StateType
@@ -17,7 +17,7 @@ type AppType = {
 
 const App: React.FC<AppType> = ({state, dispatch}) => {
     const ProfileWithProps = () => <Profile profileState={state.profilePage} dispatch={dispatch}/>
-    const DialogsWithProps = () => <Dialogs dialogsState={state.dialogsPage} dispatch={dispatch}/>
+    const DialogsWithProps = () => <DialogsContainer dialogsState={state.dialogsPage} dispatch={dispatch}/>
     return (
             <div className='App'>
                 <Header list={['Video', 'Music', 'Photos']}/>

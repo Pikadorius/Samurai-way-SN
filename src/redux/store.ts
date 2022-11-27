@@ -55,7 +55,7 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     _onChange: () => void
     subscribe: (observer: () => void) => void
@@ -69,7 +69,7 @@ export type StoreType = {
 }
 
 //store
-export let store: StoreType = {
+let store: StoreType = {
     // BLL / главный стейт
     _state: {
         profilePage: {

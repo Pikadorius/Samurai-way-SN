@@ -1,28 +1,29 @@
 import React from 'react';
-import {ActionsType, ProfilePageType} from '../../../redux/store';
 import {addLikeActionCreator, addPostActionCreator, setPostActionCreator} from "../../../redux/profile_reducer";
 import MyPosts from './MyPosts';
+import {StoreType} from '../../../redux/redux-store';
 
 type MyPostsType = {
-    state: ProfilePageType
-    dispatch: (action: ActionsType) => void
+    store: StoreType
 }
 
-const MyPostsContainer: React.FC<MyPostsType> = ({state, dispatch}) => {
+const MyPostsContainer: React.FC<MyPostsType> = (props) => {
+
+    const MyPostsState = props.store.getState();
 
     const setPost = (post: string) => {
-        dispatch(setPostActionCreator(post))
+        props.store.dispatch(setPostActionCreator(post))
     }
 
     const addNewPost = () => {
-        dispatch(addPostActionCreator())
+        props.store.dispatch(addPostActionCreator())
     }
 
     const addLike = (id: number) => {
-        dispatch(addLikeActionCreator(id))
+        props.store.dispatch(addLikeActionCreator(id))
     }
 
-    return <MyPosts newPostText={state.newPostText} posts={state.posts} setPost={setPost} addNewPost={addNewPost}
+    return <MyPosts newPostText={MyPostsState.profilePage.newPostText} posts={MyPostsState.profilePage.posts} setPost={setPost} addNewPost={addNewPost}
                     addLike={addLike}/>;
 };
 

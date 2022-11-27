@@ -3,17 +3,17 @@ import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import {ActionsType, ProfilePageType} from '../../redux/store';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
+import {StoreType} from '../../redux/redux-store';
 
 type ProfilePropsType = {
-    profileState: ProfilePageType
-    dispatch: (action: ActionsType)=>void
+    store: StoreType
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profileState, dispatch}) => {
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
-            <ProfileInfo facts={profileState.facts}/>
-            <MyPostsContainer state={profileState} dispatch={dispatch}/>
+            <ProfileInfo facts={props.store.getState().profilePage.facts}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     );
 };

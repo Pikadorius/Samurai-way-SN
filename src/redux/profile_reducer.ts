@@ -14,7 +14,7 @@ export type ProfilePageType = {
     facts: FactType[]
 }
 
-export type ProdileActionsType =
+export type ProfileActionsType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setPostActionCreator>|
     ReturnType<typeof addLikeActionCreator>
@@ -39,7 +39,7 @@ const initialState: ProfilePageType = {
     ]
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ProdileActionsType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType): ProfilePageType => {
 
     switch (action.type) {
         case 'ADD-NEW-POST':

@@ -16,7 +16,7 @@ type AppType = {
 
 const App: React.FC<AppType> = (props) => {
     const ProfileWithProps = () => <Profile store={props.store}/>
-    const DialogsWithProps = () => <DialogsContainer store={props.store}/>
+    const DialogsWithProps = () => <DialogsContainer/>
     return (
         <div className='App'>
             <Header list={['Video', 'Music', 'Photos']}/>

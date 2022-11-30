@@ -2,11 +2,10 @@ import React from 'react';
 import {
     addLikeActionCreator,
     addPostActionCreator,
-    ProfilePageType,
     setPostActionCreator
 } from "../../../redux/profile_reducer";
 import MyPosts from './MyPosts';
-import {StateType, StoreType} from '../../../redux/redux-store';
+import {StateType} from '../../../redux/redux-store';
 import {connect} from "react-redux";
 
 /*
@@ -44,12 +43,18 @@ const mapStateToProps = (state: StateType) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        setPost: (post:string)=>{dispatch(setPostActionCreator(post))},
-        addNewPost:()=>{dispatch(addPostActionCreator())},
-        addLike:(id:number)=>{dispatch(addLikeActionCreator(id))}
+        setPost: (post: string) => {
+            dispatch(setPostActionCreator(post))
+        },
+        addNewPost: () => {
+            dispatch(addPostActionCreator())
+        },
+        addLike: (id: number) => {
+            dispatch(addLikeActionCreator(id))
+        }
     }
 }
 
-const MyPostsContainer=connect(mapStateToProps,mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 export default MyPostsContainer;

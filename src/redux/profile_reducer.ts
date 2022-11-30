@@ -49,15 +49,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
                 description: state.newPostText,
                 likesCount: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = "";
-            return state;
+            return {...state, newPostText:'', posts:[...state.posts, newPost]};
         case 'SET-POST-TEXT':
-            state.newPostText = action.newPostText;
-            return state;
+            return {...state, newPostText: action.newPostText}
         case 'ADD-LIKE':
-            state.posts.map(p => p.id === action.postId ? p.likesCount++ : p);
-            return state;
+            return {...state, posts:state.posts.map(p => p.id === action.postId ? {...p, likesCount: p.likesCount+1} : p)};
         default:
             return state;
     }

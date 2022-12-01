@@ -8,6 +8,7 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App: React.FC = () => {
     const ProfileWithProps = () => <Profile/>
@@ -18,7 +19,8 @@ const App: React.FC = () => {
             <NavbarContainer/>
             <div className='app-wrapper-content'>
                 <Route render={ProfileWithProps} path={'/profile'}/>
-                <Route render={DialogsWithProps} path={'/dialogs'}/>
+                <Route component={DialogsContainer} path={'/dialogs'}/>
+                <Route component={UsersContainer} path={'/users'}/>
                 <Route component={News} path={'/news'}/>
                 <Route component={Music} path={'/music'}/>
                 <Route component={Settings} path={'/settings'}/>

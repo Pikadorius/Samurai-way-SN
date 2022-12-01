@@ -23,7 +23,9 @@ const Users: React.FC<UsersPropsType> = ({usersPage, follow, unfollow, showMore}
                     const userClassName=u.followed? `${s.userItem} ${s.followed}` : s.userItem
 
                     return <div className={userClassName} key={u.id}>
-                        <div className={s.name}>{u.fullName}</div>
+                        <div className={s.about}>
+                            <div>{u.fullName}</div><div className={s.location}>{u.location.country}/{u.location.city}</div>
+                        </div>
                         <div className={s.statusBar}>{u.status}</div>
                         <button onClick={followHandler}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>

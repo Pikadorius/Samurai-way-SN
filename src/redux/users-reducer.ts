@@ -5,12 +5,13 @@ type LocationType = {
     country: string
 }
 
-type UserType = {
+export type UserType = {
     id: string
     fullName: string
     status: string
     location: LocationType
     followed: boolean
+    photoURL: 'string'
 }
 
 const initialState = {
@@ -77,7 +78,7 @@ const initialState = {
 
 export type InitialStateType = typeof initialState
 
-export const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW_USER": {
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: true} : u)}
@@ -87,12 +88,16 @@ export const usersReducer = (state: InitialStateType = initialState, action: Use
         }
         case "SHOW-MORE":
             return {...state, count: state.count + 2}
+        case 'SET_USERS':
+            return {...state, users: [...state.users, ...action.payload.newState]}
+        case 'DELETE-USER':
+            return {...state, users: state.users.filter(u=>u.id!==action.payload)}
         default:
             return state;
     }
 }
 
-type UsersActionsType = FollowACType | UnfollowACType | ShowMoreACType
+type UsersActionsType = FollowACType | UnfollowACType | ShowMoreACType | SetUserACType | DeleteUserACType
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (id: string) => {
@@ -116,3 +121,25 @@ export const showMoreAC = () => {
         type: 'SHOW-MORE'
     } as const
 }
+
+
+type SetUserACType = ReturnType<typeof setUsersAC>
+export const setUsersAC = (users: UserType[]) => {
+    return {
+        type: 'SET_USERS',
+        payload: {
+            newState: users
+        }
+    } as const
+}
+
+
+type DeleteUserACType = ReturnType<typeof deleteUserAC>
+export const deleteUserAC = (id: string) => {
+    return {
+        type: 'DELETE-USER',
+        payload: id
+    } as const
+}
+
+export default usersReducer;

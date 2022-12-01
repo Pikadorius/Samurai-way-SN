@@ -4,17 +4,17 @@ import dialogsReducer, {DialogsActionsType} from './dialogs_reducer';
 import sidebarReducer from './sidebar_reducer';
 
 // combine all reducers
-let reducers = combineReducers({
+let reducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 })
-export type StateType = ReturnType<typeof reducers>
+export type StateType = ReturnType<typeof reducer>
 
 // combine all actions type
 export type ActionsType = DialogsActionsType | ProfileActionsType;
 
 export type StoreType = typeof store;
-let store = createStore(reducers);
+let store = createStore(reducer);
 
 export default store;

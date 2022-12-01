@@ -1,12 +1,13 @@
 import React from 'react';
 import {
     addLikeActionCreator,
-    addPostActionCreator,
+    addPostActionCreator, PostType,
     setPostActionCreator
 } from "../../../redux/profile_reducer";
 import MyPosts from './MyPosts';
 import {StateType} from '../../../redux/redux-store';
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 /*
 type MyPostsType = {
@@ -34,14 +35,25 @@ const superMyPostsContainer: React.FC<MyPostsType> = (props) => {
 };
 */
 
-const mapStateToProps = (state: StateType) => {
+type MapStatePropsType = {
+    newPostText: string
+    posts: PostType[]
+}
+
+const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts,
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+type MapDispatchPropsType = {
+    setPost: (post: string) => void
+    addNewPost: () => void
+    addLike: (id: number) => void
+}
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         setPost: (post: string) => {
             dispatch(setPostActionCreator(post))

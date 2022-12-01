@@ -11,72 +11,86 @@ export type UserType = {
     status: string
     location: LocationType
     followed: boolean
-    photoURL: 'string'
+    photoURL: string
 }
 
-const initialState = {
+
+const initialState:InitialStateType = {
     users: [
         {
             id: v1(),
             fullName: 'Egor K',
             status: 'Studying!',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: false
+            followed: false,
+            photoURL: '111'
         },
         {
             id: v1(),
             fullName: 'Anton K',
             status: 'Working in Alpha Bank',
             location: {city: 'St.Petersburg', country: 'Russia'},
-            followed: true
+            followed: true,
+            photoURL: '2222'
         },
         {
             id: v1(),
             fullName: 'Daniil K',
             status: 'Playing toys %)',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: true
+            followed: true,
+            photoURL: '22s22'
         },
         {
             id: v1(),
             fullName: 'Katerina K',
             status: 'Cooking',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: false
+            followed: false,
+            photoURL: '2asdsad222'
         },
         {
             id: v1(),
             fullName: 'Nikita P',
             status: 'Reading book',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: false
+            followed: false,
+            photoURL: '22aasd22'
         },
         {
             id: v1(),
             fullName: 'Vadim T',
             status: 'Selling cars',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: true
+            followed: true,
+            photoURL: 'asdasd2222'
         },
         {
             id: v1(),
             fullName: 'Kim G',
             status: 'Learning about Redux',
             location: {city: 'Gomel', country: 'Belarus'},
-            followed: false
+            followed: false,
+            photoURL: '22asdaq22'
         },
         {
             id: v1(),
-            fullName: 'Denis K',
+            fullName: 'Denis B',
             status: 'Working hard...',
             location: {city: 'Minsk', country: 'Belarus'},
-            followed: false
+            followed: false,
+            photoURL: '22112322'
         },
-    ] as UserType[],
+    ] ,
     count: 2,
 }
 
-export type InitialStateType = typeof initialState
+export type InitialStateType = {
+    users: UserType[],
+    count: number
+}
+
+// export type InitialStateType = typeof initialState
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {

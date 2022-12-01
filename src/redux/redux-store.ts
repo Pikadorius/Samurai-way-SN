@@ -14,8 +14,6 @@ let reducer = combineReducers({
 
 export type StateType = ReturnType<typeof reducer>
 
-// combine all actions type
-export type ActionsType = DialogsActionsType | ProfileActionsType;
 
 export type StoreType = typeof store;
 let store = createStore(reducer);

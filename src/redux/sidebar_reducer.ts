@@ -1,5 +1,3 @@
-import {ActionsType} from './redux-store';
-
 export type FriendType = {
     id: number
     name: string
@@ -29,7 +27,7 @@ const initialState: SidebarType = {
     ]
 }
 
-const sidebarReducer = (state: SidebarType = initialState, action: ActionsType): SidebarType => {
+const sidebarReducer = (state: SidebarType = initialState, action: any): SidebarType => {
     return state;
 }
 //редьюсеры эскпортируем по умолчанию

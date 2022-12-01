@@ -1,8 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {MyPostsType} from "./MyPostsContainer";
 
-type PostType = {
+/*type PostType = {
     id: number
     title: string
     description: string
@@ -15,7 +16,7 @@ type MyPostsType = {
     setPost: (post: string)=>void
     addNewPost: ()=>void
     addLike: (id:number)=>void
-}
+}*/
 
 const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,addLike}) => {
 

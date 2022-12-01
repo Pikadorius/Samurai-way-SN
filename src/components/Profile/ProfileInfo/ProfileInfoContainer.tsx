@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import {FactType} from '../../../redux/profile_reducer';
 import {connect} from "react-redux";
 import {StateType} from "../../../redux/redux-store";
-import ProfileInfo, {ProfileInfoType} from "./ProfileInfo";
+import ProfileInfo  from "./ProfileInfo";
 
 
 type MapStateType = {
@@ -15,6 +15,8 @@ const mapStateToProps= (state:StateType):MapStateType => {
         facts: state.profilePage.facts
     }
 }
+
+export type ProfileInfoType = MapStateType
 
 export const ProfileInfoContainer = connect(mapStateToProps)(ProfileInfo);
 

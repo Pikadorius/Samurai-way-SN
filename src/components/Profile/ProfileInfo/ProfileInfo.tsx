@@ -1,10 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {FactType} from '../../../redux/profile_reducer';
+import {ProfileInfoType} from "./ProfileInfoContainer";
 
-export type ProfileInfoType = {
-    facts: FactType[]
-}
 
 const ProfileInfo: React.FC<ProfileInfoType> = ({facts}) => {
     return (

@@ -53,6 +53,7 @@ type MapDispatchPropsType = {
     addLike: (id: number) => void
 }
 
+
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         setPost: (post: string) => {
@@ -66,6 +67,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         }
     }
 }
+
+export type MyPostsType = MapStatePropsType & MapDispatchPropsType
 
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 

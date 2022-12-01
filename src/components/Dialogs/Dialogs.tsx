@@ -2,27 +2,8 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
+import {DialogsType} from "./DialogsContainer";
 
-type DialogType = {
-    id: number
-    name: string
-    avatar: string
-}
-type MessageType = {
-    id: number
-    message: string
-}
-
-type DialogsState = {
-    dialogs: DialogType[]
-    newMessageText: string
-    messages: MessageType[]
-}
-type DialogsType = {
-    dialogsState: DialogsState
-    addMessage: ()=>void
-    setMessage: (message: string)=>void
-}
 
 const Dialogs: React.FC<DialogsType> = ({dialogsState, addMessage, setMessage}) => {
 

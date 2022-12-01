@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessageActionCreator, DialogsPageType, setMessageActionCreator} from "../../redux/dialogs_reducer";
+import {addMessageActionCreator, InitialStateType, setMessageActionCreator} from "../../redux/dialogs_reducer";
 import Dialogs from './Dialogs';
 import {StateType} from '../../redux/redux-store';
 import {connect} from "react-redux";
@@ -26,7 +26,7 @@ const superDialogsContainer: React.FC<DialogsType> = (props) => {
 };*/
 
 type MapStatePropsType = {
-    dialogsState: DialogsPageType
+    dialogsState: InitialStateType
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
@@ -50,6 +50,8 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         }
     }
 }
+
+export type DialogsType = MapStatePropsType & MapDispatchPropsType
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 

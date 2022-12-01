@@ -11,6 +11,7 @@ let reducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer
 })
+
 export type StateType = ReturnType<typeof reducer>
 
 // combine all actions type

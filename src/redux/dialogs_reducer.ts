@@ -1,24 +1,19 @@
+export type DialogsActionsType =
+    ReturnType<typeof addMessageActionCreator> |
+    ReturnType<typeof setMessageActionCreator>
+
 export type MessageType = {
     id: number
     message: string
 }
+
 export type DialogType = {
     id: number
     name: string
     avatar: string
 }
 
-export type DialogsPageType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    newMessageText: string
-}
-
-export type DialogsActionsType =
-    ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof setMessageActionCreator>
-
-const initialState: DialogsPageType = {
+const initialState = {
     dialogs: [
         {
             id: 1,
@@ -55,7 +50,7 @@ const initialState: DialogsPageType = {
             name: 'Andrew',
             avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"
         },
-    ],
+    ] as DialogType[],
     newMessageText: '',
     messages: [
         {id: 1, message: 'Hi!'},
@@ -63,10 +58,13 @@ const initialState: DialogsPageType = {
         {id: 3, message: "I'm fine, and you?",},
         {id: 4, message: "Let's make some styles!",},
         {id: 5, message: "Here we go!",},
-    ]
+    ] as MessageType[]
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsType): DialogsPageType => {
+
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state: InitialStateType = initialState, action: DialogsActionsType): InitialStateType => {
 
     switch (action.type) {
         case 'ADD-NEW-MESSAGE':
@@ -77,9 +75,9 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsAc
             // state.messages.push(newMessage);
             // state.newMessageText = '';
             // return state;
-            return {...state, newMessageText:'', messages:[...state.messages, newMessage]}
+            return {...state, newMessageText: '', messages: [...state.messages, newMessage]}
         case 'SET-MESSAGE-TEXT':
-            return {...state, newMessageText:action.newMessageText}
+            return {...state, newMessageText: action.newMessageText}
         default:
             return state;
     }

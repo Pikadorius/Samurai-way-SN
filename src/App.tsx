@@ -1,26 +1,21 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import {StoreType} from './redux/redux-store';
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
-type AppType = {
-    store: StoreType
-}
-
-const App: React.FC<AppType> = (props) => {
+const App: React.FC = () => {
     const ProfileWithProps = () => <Profile/>
     const DialogsWithProps = () => <DialogsContainer/>
     return (
         <div className='App'>
             <Header list={['Video', 'Music', 'Photos']}/>
-            <Navbar friends={props.store.getState().sidebar.friends}/>
+            <NavbarContainer/>
             <div className='app-wrapper-content'>
                 <Route render={ProfileWithProps} path={'/profile'}/>
                 <Route render={DialogsWithProps} path={'/dialogs'}/>

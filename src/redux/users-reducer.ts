@@ -16,73 +16,8 @@ export type UserType = {
 
 
 const initialState:InitialStateType = {
-    users: [
-        {
-            id: v1(),
-            fullName: 'Egor K',
-            status: 'Studying!',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: false,
-            photoURL: '111'
-        },
-        {
-            id: v1(),
-            fullName: 'Anton K',
-            status: 'Working in Alpha Bank',
-            location: {city: 'St.Petersburg', country: 'Russia'},
-            followed: true,
-            photoURL: '2222'
-        },
-        {
-            id: v1(),
-            fullName: 'Daniil K',
-            status: 'Playing toys %)',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: true,
-            photoURL: '22s22'
-        },
-        {
-            id: v1(),
-            fullName: 'Katerina K',
-            status: 'Cooking',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: false,
-            photoURL: '2asdsad222'
-        },
-        {
-            id: v1(),
-            fullName: 'Nikita P',
-            status: 'Reading book',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: false,
-            photoURL: '22aasd22'
-        },
-        {
-            id: v1(),
-            fullName: 'Vadim T',
-            status: 'Selling cars',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: true,
-            photoURL: 'asdasd2222'
-        },
-        {
-            id: v1(),
-            fullName: 'Kim G',
-            status: 'Learning about Redux',
-            location: {city: 'Gomel', country: 'Belarus'},
-            followed: false,
-            photoURL: '22asdaq22'
-        },
-        {
-            id: v1(),
-            fullName: 'Denis B',
-            status: 'Working hard...',
-            location: {city: 'Minsk', country: 'Belarus'},
-            followed: false,
-            photoURL: '22112322'
-        },
-    ] ,
-    count: 2,
+    users: [],
+    count: 6,
 }
 
 export type InitialStateType = {
@@ -101,7 +36,7 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: false} : u)}
         }
         case "SHOW-MORE":
-            return {...state, count: state.count + 2}
+            return {...state, count: state.count + 6}
         case 'SET_USERS':
             return {...state, users: [...state.users, ...action.payload.newState]}
         case 'DELETE-USER':

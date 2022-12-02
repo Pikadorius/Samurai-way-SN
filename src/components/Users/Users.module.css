@@ -8,10 +8,10 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    border:3px solid cornflowerblue;
+    border: 3px solid cornflowerblue;
     border-radius: 5px;
-    max-width: 220px;
-    min-width: 220px;
+    max-width: 305px;
+    min-width: 305px;
     margin: 10px;
 }
 
@@ -33,4 +33,15 @@
     font-size: 10px;
     opacity: 0.7;
     align-self: center;
+}
+
+.userAvatar img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.btn {
+    display: inline-block;
+    align-self: start;
 }

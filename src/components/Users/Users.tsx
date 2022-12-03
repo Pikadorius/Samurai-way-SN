@@ -5,15 +5,12 @@ import axios from 'axios';
 import {UsersPropsType} from './UsersContainer';
 
 class Users extends Component<UsersPropsType> {
-
-    getUsers = () => {
-        debugger
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
-            debugger
-            this.props.usersPage.users.length ? alert('No more new users') : this.props.setUsers(response.data.items)
-        })
-
+    constructor(props:UsersPropsType) {
+        super(props);
+        alert('NEW')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => this.props.setUsers(response.data.items))
     }
+
     showMore = () => this.props.showMore()
 
     render() {
@@ -48,7 +45,6 @@ class Users extends Component<UsersPropsType> {
                 <div>
                     <button onClick={this.showMore} disabled={this.props.usersPage.users.length <= this.props.usersPage.count}>Show more
                     </button>
-                    <button onClick={ this.getUsers}>Get new users</button>
                 </div>
 
             </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Users from "./Users";
 import {StateType} from "../../redux/redux-store";
 import {
     deleteUserAC,
@@ -12,6 +11,7 @@ import {
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
+import Users from './Users';
 
 
 type MapStateType = {

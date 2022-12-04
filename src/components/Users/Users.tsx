@@ -5,10 +5,10 @@ import axios from 'axios';
 import {UsersPropsType} from './UsersContainer';
 
 class Users extends Component<UsersPropsType> {
-    constructor(props:UsersPropsType) {
-        super(props);
-        alert('NEW')
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => this.props.setUsers(response.data.items))
+
+    componentDidMount() {
+        alert('i am inside DOM')
+        this.props.usersPage.users.length===0 && axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => this.props.setUsers(response.data.items))
     }
 
     showMore = () => this.props.showMore()

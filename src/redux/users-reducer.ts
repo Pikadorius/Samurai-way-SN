@@ -1,17 +1,10 @@
-import {v1} from "uuid";
-
-type LocationType = {
-    city: string
-    country: string
-}
-
 type PhotosType = {
     small: string
     large: string
 }
 
 export type UserType = {
-    id: string
+    id: number
     name: string
     status: string
     photos: PhotosType
@@ -55,7 +48,7 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
 type UsersActionsType = FollowACType | UnfollowACType | ShowMoreACType | SetUserACType | DeleteUserACType
 
 type FollowACType = ReturnType<typeof followAC>
-export const followAC = (id: string) => {
+export const followAC = (id: number) => {
     return {
         type: 'FOLLOW_USER',
         payload: id
@@ -63,7 +56,7 @@ export const followAC = (id: string) => {
 }
 
 type UnfollowACType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (id: string) => {
+export const unfollowAC = (id: number) => {
     return {
         type: 'UNFOLLOW_USER',
         payload: id
@@ -90,7 +83,7 @@ export const setUsersAC = (users: UserType[]) => {
 
 
 type DeleteUserACType = ReturnType<typeof deleteUserAC>
-export const deleteUserAC = (id: string) => {
+export const deleteUserAC = (id: number) => {
     return {
         type: 'DELETE-USER',
         payload: id

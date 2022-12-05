@@ -25,24 +25,24 @@ const mapStateToProps = (state: StateType): MapStateType => {
 }
 
 type MapDispatchType = {
-    follow: (id: string) => void
-    unfollow: (id: string) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
     showMore: () => void
     setUsers: (users: UserType[]) => void
-    deleteUser: (id: string)=>void
+    deleteUser: (id: number)=>void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
-        follow: (id: string) => {
+        follow: (id: number) => {
             dispatch(followAC(id))
         },
-        unfollow: (id: string) => {
+        unfollow: (id: number) => {
             dispatch(unfollowAC(id))
         },
         showMore: () => dispatch(showMoreAC()),
         setUsers: (users: UserType[])=>dispatch(setUsersAC(users)),
-        deleteUser: (id:string)=>dispatch(deleteUserAC(id))
+        deleteUser: (id:number)=>dispatch(deleteUserAC(id))
     }
 }
 

@@ -5,11 +5,11 @@ import DialogItem from './DialogItem/DialogItem';
 import {DialogsType} from "./DialogsContainer";
 
 
-const Dialogs: React.FC<DialogsType> = ({dialogsState, addMessage, setMessage}) => {
+const Dialogs: React.FC<DialogsType> = ({dialogsState, addMessage, setMessage, deleteMessage}) => {
 
     const dialogsElements = dialogsState.dialogs.map(d => <DialogItem key={d.id} id={d.id} name={d.name}
                                                                       avatar={d.avatar}/>)
-    const messagesElements = dialogsState.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)
+    const messagesElements = dialogsState.messages.map(m => <Message key={m.id} id={m.id} message={m.message} onClick={()=>deleteMessage(m.id)}/>)
 
     const onClickAddMessage= () => {
         addMessage()

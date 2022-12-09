@@ -1,6 +1,7 @@
 export type DialogsActionsType =
     ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof setMessageActionCreator>
+    ReturnType<typeof setMessageActionCreator> |
+    DeleteMessageType
 
 export type MessageType = {
     id: number
@@ -72,12 +73,12 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
                 id: state.messages.length + 1,
                 message: state.newMessageText
             }
-            // state.messages.push(newMessage);
-            // state.newMessageText = '';
-            // return state;
             return {...state, newMessageText: '', messages: [...state.messages, newMessage]}
         case 'SET-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}
+        case 'DELETE_MESSAGE': {
+            return {...state, messages: state.messages.filter(m=>m.id!==action.payload.id)}
+        }
         default:
             return state;
     }
@@ -89,6 +90,16 @@ export const addMessageActionCreator = () => {
 
 export const setMessageActionCreator = (newMessageText: string) => {
     return {type: 'SET-MESSAGE-TEXT', newMessageText: newMessageText} as const
+}
+
+type DeleteMessageType = ReturnType<typeof deleteMessageAC>
+export const deleteMessageAC = (id: number) => {
+    return {
+        type: 'DELETE_MESSAGE',
+        payload: {
+            id
+        }
+    } as const
 }
 
 //редьюсеры эскпортируем по умолчанию

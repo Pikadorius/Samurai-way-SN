@@ -16,7 +16,7 @@ const Music = () => {
 
 
     return (
-        <div>
+        <div className={s.wrapper}>
             <div>{state.tracks.map(t => {
 
                 const deleteTrack = () => {

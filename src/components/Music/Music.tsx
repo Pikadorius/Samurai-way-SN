@@ -23,7 +23,7 @@ const Music = () => {
                     dispatch(deleteTrackAC(t.id))
                 }
 
-                return <div>{t.trackPerformer} - {t.trackName}
+                return <div key={t.id}>{t.trackPerformer} - {t.trackName}
                     <button onClick={deleteTrack}>x</button>
                 </div>
             })}

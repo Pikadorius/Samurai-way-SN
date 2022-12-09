@@ -2,21 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {reducer} from "./redux/redux-store";
+import store, {reducer} from "./redux/redux-store";
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 import {loadState, saveState} from './localStorage/localStorage';
 import {createStore} from 'redux';
 import throttle from 'lodash/throttle';
 
-
+/*
 const localState = loadState()
 const store = createStore(reducer, localState)
-// added Provider, so we don't need to rerender all if something changes
+
 
 store.subscribe(throttle(()=>{
     saveState(store.getState())
 },1000))
+*/
 
 ReactDOM.render(
     <BrowserRouter>

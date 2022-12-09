@@ -6,7 +6,7 @@ import usersReducer from "./users-reducer";
 import {musicReducer} from './music_reducer';
 
 // combine all reducers
-let reducer = combineReducers({
+export let reducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,

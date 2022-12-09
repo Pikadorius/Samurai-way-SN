@@ -69,15 +69,18 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
 
     switch (action.type) {
         case 'ADD-NEW-MESSAGE':
-            let newMessage: MessageType = {
-                id: state.messages.length + 1,
-                message: state.newMessageText
+            if (state.newMessageText.trim() !== '') {
+                let newMessage: MessageType = {
+                    id: state.messages.length + 1,
+                    message: state.newMessageText
+                }
+                return {...state, newMessageText: '', messages: [...state.messages, newMessage]}
             }
-            return {...state, newMessageText: '', messages: [...state.messages, newMessage]}
+            else return state
         case 'SET-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}
         case 'DELETE_MESSAGE': {
-            return {...state, messages: state.messages.filter(m=>m.id!==action.payload.id)}
+            return {...state, messages: state.messages.filter(m => m.id !== action.payload.id)}
         }
         default:
             return state;

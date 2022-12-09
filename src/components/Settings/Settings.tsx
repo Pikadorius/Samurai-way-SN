@@ -1,12 +1,15 @@
-import React from 'react';
-import s from './Settings.module.css'
+import React, {Component} from 'react';
 
-const Settings = () => {
-    return (
-        <div>
-            Settings
-        </div>
-    );
-};
+
+class Settings extends Component {
+
+    render() {
+        return (
+            <div>
+                Settings
+            </div>
+        );
+    }
+}
 
 export default Settings;

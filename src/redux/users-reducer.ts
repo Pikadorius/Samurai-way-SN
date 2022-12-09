@@ -42,7 +42,7 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
         case ACTIONS_TYPE.SHOW_MORE:
             return {...state, count: state.count + 6}
         case ACTIONS_TYPE.SET_USERS:
-            return {...state, users: [...state.users, ...action.payload.users]}
+            return {...state, users: [...action.payload.users]}
         case ACTIONS_TYPE.DELETE_USER:
             return {...state, users: state.users.filter(u=>u.id!==action.payload)}
         default:

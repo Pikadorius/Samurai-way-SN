@@ -7,7 +7,10 @@ import {UsersPropsType} from './UsersContainer';
 class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
-        this.props.usersPage.users.length===0 && axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => this.props.setUsers(response.data.items))
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+            debugger
+            this.props.setUsers(response.data.items)
+        })
         //https://social-network.samuraijs.com/api/1.0/users
     }
 

@@ -29,11 +29,6 @@
     align-self: end;
 }
 
-.location {
-    font-size: 10px;
-    opacity: 0.7;
-    align-self: center;
-}
 
 .userAvatar img {
     border-radius: 50%;

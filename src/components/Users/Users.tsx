@@ -34,7 +34,6 @@ class Users extends Component<UsersPropsType> {
                                 <div className={s.userAvatar}><img src={u.photos.small ? u.photos.small : avatar}
                                                                    alt="avatar"/></div>
                                 <div>{u.name}</div>
-                                <div className={s.location}></div>
                                 <button className={s.btn} onClick={() => this.props.deleteUser(u.id)}>x</button>
                             </div>
                             <div className={s.statusBar}>{u.status}</div>

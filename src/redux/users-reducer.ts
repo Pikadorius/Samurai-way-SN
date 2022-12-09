@@ -9,10 +9,8 @@ export type UserType = {
     status: string
     photos: PhotosType
     uniqueUrlName: string
-    // location: LocationType
     followed: boolean
 }
-
 
 const initialState:InitialStateType = {
     users: [],
@@ -24,21 +22,28 @@ export type InitialStateType = {
     count: number
 }
 
+export const enum ACTIONS_TYPE {
+    FOLLOW_USER ='FOLLOW_USER',
+    UNFOLLOW_USER = 'UNFOLLOW_USER',
+    DELETE_USER = 'DELETE_USER',
+    SET_USERS = 'SET_USERS',
+    SHOW_MORE = 'SHOW_MORE'
+}
 // export type InitialStateType = typeof initialState
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
-        case "FOLLOW_USER": {
+        case ACTIONS_TYPE.FOLLOW_USER: {
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: true} : u)}
         }
-        case "UNFOLLOW_USER": {
+        case ACTIONS_TYPE.UNFOLLOW_USER: {
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: false} : u)}
         }
-        case "SHOW-MORE":
+        case ACTIONS_TYPE.SHOW_MORE:
             return {...state, count: state.count + 6}
-        case 'SET_USERS':
-            return {...state, users: [...state.users, ...action.payload.newState]}
-        case 'DELETE-USER':
+        case ACTIONS_TYPE.SET_USERS:
+            return {...state, users: [...state.users, ...action.payload.users]}
+        case ACTIONS_TYPE.DELETE_USER:
             return {...state, users: state.users.filter(u=>u.id!==action.payload)}
         default:
             return state;
@@ -50,7 +55,7 @@ type UsersActionsType = FollowACType | UnfollowACType | ShowMoreACType | SetUser
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (id: number) => {
     return {
-        type: 'FOLLOW_USER',
+        type: ACTIONS_TYPE.FOLLOW_USER,
         payload: id
     } as const
 }
@@ -58,7 +63,7 @@ export const followAC = (id: number) => {
 type UnfollowACType = ReturnType<typeof unfollowAC>
 export const unfollowAC = (id: number) => {
     return {
-        type: 'UNFOLLOW_USER',
+        type: ACTIONS_TYPE.UNFOLLOW_USER,
         payload: id
     } as const
 }
@@ -66,7 +71,7 @@ export const unfollowAC = (id: number) => {
 type ShowMoreACType = ReturnType<typeof showMoreAC>
 export const showMoreAC = () => {
     return {
-        type: 'SHOW-MORE'
+        type: ACTIONS_TYPE.SHOW_MORE
     } as const
 }
 
@@ -74,9 +79,9 @@ export const showMoreAC = () => {
 type SetUserACType = ReturnType<typeof setUsersAC>
 export const setUsersAC = (users: UserType[]) => {
     return {
-        type: 'SET_USERS',
+        type: ACTIONS_TYPE.SET_USERS,
         payload: {
-            newState: users
+            users
         }
     } as const
 }
@@ -85,7 +90,7 @@ export const setUsersAC = (users: UserType[]) => {
 type DeleteUserACType = ReturnType<typeof deleteUserAC>
 export const deleteUserAC = (id: number) => {
     return {
-        type: 'DELETE-USER',
+        type: ACTIONS_TYPE.DELETE_USER,
         payload: id
     } as const
 }

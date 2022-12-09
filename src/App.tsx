@@ -11,8 +11,9 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
 const App: React.FC = () => {
+
     const ProfileWithProps = () => <Profile/>
-    const DialogsWithProps = () => <DialogsContainer/>
+
     return (
         <div className='App'>
             <Header list={['Video', 'Music', 'Photos']}/>

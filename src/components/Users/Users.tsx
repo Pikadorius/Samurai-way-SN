@@ -7,8 +7,8 @@ import {UsersPropsType} from './UsersContainer';
 class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
-        alert('i am inside DOM')
         this.props.usersPage.users.length===0 && axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => this.props.setUsers(response.data.items))
+        //https://social-network.samuraijs.com/api/1.0/users
     }
 
     showMore = () => this.props.showMore()
@@ -42,7 +42,7 @@ class Users extends Component<UsersPropsType> {
                         </div>
                     })}
                 </div>
-                <div>
+                <div style={{margin:'10px'}}>
                     <button onClick={this.showMore} disabled={this.props.usersPage.users.length <= this.props.usersPage.count}>Show more
                     </button>
                 </div>

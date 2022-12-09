@@ -7,16 +7,25 @@ import {UsersPropsType} from './UsersContainer';
 class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
+        console.log('Users are inside DOM')
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
-            debugger
             this.props.setUsers(response.data.items)
         })
         //https://social-network.samuraijs.com/api/1.0/users
     }
 
+    componentDidUpdate(prevProps: Readonly<UsersPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        console.log('Users have been updated')
+    }
+
+    componentWillUnmount() {
+        console.log('Component Users die...')
+    }
+
     showMore = () => this.props.showMore()
 
-    render() {
+    render = () => {
+        console.log('Users rendering')
         const filteredUser = this.props.usersPage.users.filter((u, i) => i < this.props.usersPage.count)
 
         return (

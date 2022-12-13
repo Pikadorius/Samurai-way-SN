@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Users.module.css'
-import {UsersPropsType} from "./UsersContainer";
 import axios from 'axios';
-import avatar from '../../assets/images/defaultUsersAvatar.jpg'
+import avatar from '../../assets/images/defaultUsersAvatar.jpg';
 import {useDispatch, useSelector} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
 import {deleteUserAC, followAC, InitialStateType, setUsersAC, showMoreAC, unfollowAC} from '../../redux/users-reducer';
@@ -12,8 +11,7 @@ const UsersFunctional: React.FC = () => {
     const state=useSelector<StateType, InitialStateType>(state=>state.usersPage)
     const dispatch=useDispatch()
 
-    const filteredUser = state.users.filter((u, i) => i < state.count)
-
+    /*
     const getUsers = () => {
         debugger
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
@@ -21,8 +19,17 @@ const UsersFunctional: React.FC = () => {
             state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items))
         })
 
-    }
+    }*/
 
+    useEffect(()=>{
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+            debugger
+            state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items, response.data.totalCount))
+            console.log(state.totalCount)
+        })
+    },[])
+
+    const filteredUser = state.users.filter((u, i) => i < state.count)
 
     return (
         <div>
@@ -52,7 +59,7 @@ const UsersFunctional: React.FC = () => {
             <div>
                 <button onClick={()=>dispatch(showMoreAC())} disabled={state.users.length <= state.count}>Show more
                 </button>
-                <button onClick={getUsers}>Get new users</button>
+                {/*<button onClick={getUsers}>Get new users</button>*/}
             </div>
 
         </div>

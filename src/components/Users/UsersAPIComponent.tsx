@@ -4,7 +4,7 @@ import avatar from '../../assets/images/defaultUsersAvatar.jpg';
 import axios from 'axios';
 import {UsersPropsType} from './UsersContainer';
 
-class Users extends Component<UsersPropsType> {
+class UsersAPIComponent extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
@@ -84,4 +84,4 @@ class Users extends Component<UsersPropsType> {
     }
 }
 
-export default Users;
+export default UsersAPIComponent;

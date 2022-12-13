@@ -10,7 +10,7 @@ import {
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
-import Users from './Users';
+import UsersAPIComponent from './UsersAPIComponent';
 import UsersFunctional from "./UsersFunctional";
 
 
@@ -50,6 +50,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
 
 export type UsersPropsType = MapStateType & MapDispatchType
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
 
 export default UsersContainer;

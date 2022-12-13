@@ -5,11 +5,11 @@ import {InitialStateType} from "../../redux/users-reducer";
 
 type UsersType = {
     usersPage: InitialStateType
-    onPageChanged:(n:number)=>void
+    onPageChanged: (n: number) => void
     follow: (id: number) => void
     unfollow: (id: number) => void
-    deleteUser: (id: number)=>void
-    setCurrentPage: (pageNumber:number)=>void
+    deleteUser: (id: number) => void
+    setCurrentPage: (pageNumber: number) => void
 }
 
 const Users = (props: UsersType) => {

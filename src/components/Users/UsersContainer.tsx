@@ -7,12 +7,13 @@ import {
     InitialStateType, setCurrentPageAC,
     setUsersAC,
     unfollowAC, setTotalUsersCountAC,
-    UserType
+    UserType, setIsFetchingAC
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import UsersFunctional from "./UsersFunctional";
 import axios from "axios";
 import Users from "./Users";
+import Preloader from "../common/Preloader/Preloader";
 
 
 type MapStateType = {
@@ -28,9 +29,10 @@ type MapDispatchType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
     setUsers: (users: UserType[]) => void
-    deleteUser: (id: number)=>void
-    setCurrentPage: (pageNumber:number)=>void
-    setTotalUsersCount: (totalCount: number)=>void
+    deleteUser: (id: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+    setIsFetching: (isFetching: boolean) => void
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
@@ -40,22 +42,25 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
         unfollow: (id) => {
             dispatch(unfollowAC(id))
         },
-        setUsers: (users)=>dispatch(setUsersAC(users)),
-        deleteUser: (id)=>dispatch(deleteUserAC(id)),
-        setCurrentPage: (pageNumber)=>dispatch(setCurrentPageAC(pageNumber)),
-        setTotalUsersCount:(totalCount)=>dispatch(setTotalUsersCountAC(totalCount))
+        setUsers: (users) => dispatch(setUsersAC(users)),
+        deleteUser: (id) => dispatch(deleteUserAC(id)),
+        setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
+        setTotalUsersCount: (totalCount) => dispatch(setTotalUsersCountAC(totalCount)),
+        setIsFetching: (isFetching) => dispatch(setIsFetchingAC(isFetching))
     }
 }
 
 type UsersPropsType = MapStateType & MapDispatchType
+
 class UsersAPIComponent extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
+        this.props.setIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count={${this.props.usersPage.pageSize}`).then((response) => {
+            this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
-            console.log(this.props.usersPage.totalUsersCount)
         })
         //https://social-network.samuraijs.com/api/1.0/users
     }
@@ -68,21 +73,27 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         console.log('Component Users die...')
     }
 
-    onPageChanged = (p:number) => {
+    onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
+        this.props.setIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count={${this.props.usersPage.pageSize}`).then((response) => {
+            this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
         })
     }
 
     render = () => {
         console.log('Users rendering')
-        return <Users usersPage={this.props.usersPage}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      deleteUser={this.props.deleteUser}
-                      setCurrentPage={this.props.setCurrentPage}
-                      onPageChanged={this.onPageChanged}/>
+        return (
+            this.props.usersPage.isFetching ?
+                <Preloader/> :
+                <Users usersPage={this.props.usersPage}
+                       follow={this.props.follow}
+                       unfollow={this.props.unfollow}
+                       deleteUser={this.props.deleteUser}
+                       setCurrentPage={this.props.setCurrentPage}
+                       onPageChanged={this.onPageChanged}/>
+        )
     }
 }
 

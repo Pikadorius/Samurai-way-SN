@@ -17,12 +17,14 @@ export type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 const initialState:InitialStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 2,
+    isFetching: false
 }
 
 export const enum ACTIONS_TYPE {
@@ -30,9 +32,9 @@ export const enum ACTIONS_TYPE {
     UNFOLLOW_USER = 'UNFOLLOW_USER',
     DELETE_USER = 'DELETE_USER',
     SET_USERS = 'SET_USERS',
-    SHOW_MORE = 'SHOW_MORE',
     SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
-    SET_TOTAL_USERS = 'SET_TOTAL_USERS_COUNT'
+    SET_TOTAL_USERS = 'SET_TOTAL_USERS_COUNT',
+    SET_IS_FETCHING = 'SET_IS_FETCHING'
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
@@ -53,12 +55,30 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
         case ACTIONS_TYPE.SET_TOTAL_USERS: {
             return {...state, totalUsersCount:action.payload.totalCount}
         }
+        case ACTIONS_TYPE.SET_IS_FETCHING: {
+            return {...state, isFetching: action.payload.isFetching}
+        }
         default:
             return state;
     }
 }
 
-type UsersActionsType = FollowACType | UnfollowACType | SetUserACType | DeleteUserACType | SetCurrentPageType | SetTotalUsersCountType
+type UsersActionsType =
+    FollowACType |
+    UnfollowACType |
+    SetUserACType |
+    DeleteUserACType |
+    SetCurrentPageType |
+    SetTotalUsersCountType |
+    SetIsFetchingType
+
+type DeleteUserACType = ReturnType<typeof deleteUserAC>
+export const deleteUserAC = (id: number) => {
+    return {
+        type: ACTIONS_TYPE.DELETE_USER,
+        payload: id
+    } as const
+}
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (id: number) => {
@@ -106,12 +126,16 @@ export const setTotalUsersCountAC = (totalCount: number) => {
     } as const
 }
 
-type DeleteUserACType = ReturnType<typeof deleteUserAC>
-export const deleteUserAC = (id: number) => {
+type SetIsFetchingType = ReturnType<typeof setIsFetchingAC>
+export const setIsFetchingAC = (isFetching: boolean) => {
     return {
-        type: ACTIONS_TYPE.DELETE_USER,
-        payload: id
+        type: ACTIONS_TYPE.SET_IS_FETCHING,
+        payload: {
+            isFetching
+        }
     } as const
 }
+
+
 
 export default usersReducer;

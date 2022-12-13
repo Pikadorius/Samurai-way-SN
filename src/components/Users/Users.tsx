@@ -8,8 +8,9 @@ class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}`).then((response) => {
-            this.props.setUsers(response.data.items, response.data.totalCount)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count={${this.props.usersPage.pageSize}`).then((response) => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
             console.log(this.props.usersPage.totalUsersCount)
         })
         //https://social-network.samuraijs.com/api/1.0/users
@@ -23,8 +24,12 @@ class Users extends Component<UsersPropsType> {
         console.log('Component Users die...')
     }
 
-    showMore = () => this.props.showMore()
-
+    updateUsers = (p:number) => {
+        this.props.setCurrentPage(p)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count={${this.props.usersPage.pageSize}`).then((response) => {
+            this.props.setUsers(response.data.items)
+        })
+    }
 
     render = () => {
         console.log('Users rendering')
@@ -38,13 +43,17 @@ class Users extends Component<UsersPropsType> {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
+
+        let curPF = ((currentPage - 5) < 0) ?  0  : currentPage - 5 ;
+        let curPL = currentPage + 5;
+        let slicedPages = pages.slice(curPF, curPL);
         return (
             <div>
                 {/*pagination*/}
                 <div className={s.pagination}>
                     {
-                        pages.map(p => <button key={p} className={currentPage===p ? s.selectedPage : ""}> {p} </button>)
-                    }
+                        slicedPages.map(p => <span onClick={()=>this.updateUsers(p)} key={p} className={currentPage===p ? s.selectedPage : ""}> {p} </span>)
+                    } <input placeholder={`1-${pagesCount}`} onChange={(e)=>this.updateUsers(+e.currentTarget.value)}/>
                 </div>
 
                 <div className={s.usersField}>

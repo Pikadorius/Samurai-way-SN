@@ -12,18 +12,17 @@ export type UserType = {
     followed: boolean
 }
 
-const initialState:InitialStateType = {
-    users: [],
-    pageSize: 10,
-    totalUsersCount: 0,
-    currentPage: 1
-}
-
 export type InitialStateType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
+}
+const initialState:InitialStateType = {
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 2
 }
 
 export const enum ACTIONS_TYPE {
@@ -31,9 +30,10 @@ export const enum ACTIONS_TYPE {
     UNFOLLOW_USER = 'UNFOLLOW_USER',
     DELETE_USER = 'DELETE_USER',
     SET_USERS = 'SET_USERS',
-    SHOW_MORE = 'SHOW_MORE'
+    SHOW_MORE = 'SHOW_MORE',
+    SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
+    SET_TOTAL_USERS = 'SET_TOTAL_USERS_COUNT'
 }
-// export type InitialStateType = typeof initialState
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
@@ -43,18 +43,22 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
         case ACTIONS_TYPE.UNFOLLOW_USER: {
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: false} : u)}
         }
-        case ACTIONS_TYPE.SHOW_MORE:
-            return {...state, pageSize: state.pageSize + 5}
         case ACTIONS_TYPE.SET_USERS:
-            return {...state, users: [...action.payload.users], totalUsersCount: action.payload.totalCount}
+            return {...state, users: [...action.payload.users]}
         case ACTIONS_TYPE.DELETE_USER:
             return {...state, users: state.users.filter(u=>u.id!==action.payload)}
+        case ACTIONS_TYPE.SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.payload.pageNumber}
+        }
+        case ACTIONS_TYPE.SET_TOTAL_USERS: {
+            return {...state, totalUsersCount:action.payload.totalCount}
+        }
         default:
             return state;
     }
 }
 
-type UsersActionsType = FollowACType | UnfollowACType | ShowMoreACType | SetUserACType | DeleteUserACType
+type UsersActionsType = FollowACType | UnfollowACType | SetUserACType | DeleteUserACType | SetCurrentPageType | SetTotalUsersCountType
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (id: number) => {
@@ -72,25 +76,35 @@ export const unfollowAC = (id: number) => {
     } as const
 }
 
-type ShowMoreACType = ReturnType<typeof showMoreAC>
-export const showMoreAC = () => {
-    return {
-        type: ACTIONS_TYPE.SHOW_MORE
-    } as const
-}
-
-
 type SetUserACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: UserType[], totalCount:number) => {
+export const setUsersAC = (users: UserType[]) => {
     return {
         type: ACTIONS_TYPE.SET_USERS,
         payload: {
-            users,
-            totalCount
+            users
         }
     } as const
 }
 
+type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
+export const setCurrentPageAC = (pageNumber:number) => {
+    return {
+        type: ACTIONS_TYPE.SET_CURRENT_PAGE,
+        payload: {
+            pageNumber
+        }
+    } as const
+}
+
+type SetTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: ACTIONS_TYPE.SET_TOTAL_USERS,
+        payload: {
+            totalCount
+        }
+    } as const
+}
 
 type DeleteUserACType = ReturnType<typeof deleteUserAC>
 export const deleteUserAC = (id: number) => {

@@ -4,10 +4,9 @@ import {StateType} from "../../redux/redux-store";
 import {
     deleteUserAC,
     followAC,
-    InitialStateType,
+    InitialStateType, setCurrentPageAC,
     setUsersAC,
-    showMoreAC,
-    unfollowAC,
+    unfollowAC, setTotalUsersCountAC,
     UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
@@ -28,22 +27,24 @@ const mapStateToProps = (state: StateType): MapStateType => {
 type MapDispatchType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
-    showMore: () => void
-    setUsers: (users: UserType[], totalCount: number) => void
+    setUsers: (users: UserType[]) => void
     deleteUser: (id: number)=>void
+    setCurrentPage: (pageNumber:number)=>void
+    setTotalUsersCount: (totalCount: number)=>void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
-        follow: (id: number) => {
+        follow: (id) => {
             dispatch(followAC(id))
         },
-        unfollow: (id: number) => {
+        unfollow: (id) => {
             dispatch(unfollowAC(id))
         },
-        showMore: () => dispatch(showMoreAC()),
-        setUsers: (users: UserType[], totalCount)=>dispatch(setUsersAC(users, totalCount)),
-        deleteUser: (id:number)=>dispatch(deleteUserAC(id))
+        setUsers: (users)=>dispatch(setUsersAC(users)),
+        deleteUser: (id)=>dispatch(deleteUserAC(id)),
+        setCurrentPage: (pageNumber)=>dispatch(setCurrentPageAC(pageNumber)),
+        setTotalUsersCount:(totalCount)=>dispatch(setTotalUsersCountAC(totalCount))
     }
 }
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 import avatar from '../../assets/images/defaultUsersAvatar.jpg';
 import {useDispatch, useSelector} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
-import {deleteUserAC, followAC, InitialStateType, setUsersAC, showMoreAC, unfollowAC} from '../../redux/users-reducer';
+import {deleteUserAC, followAC, InitialStateType, setUsersAC, unfollowAC} from '../../redux/users-reducer';
 
 const UsersFunctional: React.FC = () => {
 
@@ -24,8 +24,7 @@ const UsersFunctional: React.FC = () => {
     useEffect(()=>{
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
             debugger
-            state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items, response.data.totalCount))
-            console.log(state.totalUsersCount)
+            state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items))
         })
     },[])
 
@@ -56,12 +55,6 @@ const UsersFunctional: React.FC = () => {
                     </div>
                 })}
             </div>
-            <div>
-                <button onClick={()=>dispatch(showMoreAC())} disabled={state.users.length <= state.pageSize}>Show more
-                </button>
-                {/*<button onClick={getUsers}>Get new users</button>*/}
-            </div>
-
         </div>
     );
 };

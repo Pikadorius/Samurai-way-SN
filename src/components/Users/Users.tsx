@@ -8,9 +8,9 @@ class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=30').then((response) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=10`).then((response) => {
             this.props.setUsers(response.data.items, response.data.totalCount)
-            console.log(this.props.usersPage.totalCount)
+            console.log(this.props.usersPage.totalUsersCount)
         })
         //https://social-network.samuraijs.com/api/1.0/users
     }
@@ -25,15 +25,29 @@ class Users extends Component<UsersPropsType> {
 
     showMore = () => this.props.showMore()
 
+
     render = () => {
         console.log('Users rendering')
-        const filteredUser = this.props.usersPage.users.filter((u, i) => i < this.props.usersPage.count)
 
+        const {users,totalUsersCount,currentPage,pageSize}=this.props.usersPage
+
+        let pagesCount: number = totalUsersCount / pageSize
+        let pages: number[] = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
         return (
             <div>
+
+                <div className={s.pagination}>
+                    {
+                        pages.map(p => <span key={p} className={currentPage===p ? s.selectedPage : ""}> {p} </span>)
+                    }
+                </div>
+
                 <div className={s.usersField}>
 
-                    {filteredUser.map(u => {
+                    {users.map(u => {
 
                         const followHandler = () => {
                             u.followed ? this.props.unfollow(u.id) : this.props.follow(u.id)
@@ -54,11 +68,6 @@ class Users extends Component<UsersPropsType> {
                         </div>
                     })}
                 </div>
-                <div style={{margin:'10px'}}>
-                    <button onClick={this.showMore} disabled={this.props.usersPage.users.length <= this.props.usersPage.count}>Show more
-                    </button>
-                </div>
-
             </div>
         );
     }

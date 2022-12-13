@@ -25,11 +25,11 @@ const UsersFunctional: React.FC = () => {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
             debugger
             state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items, response.data.totalCount))
-            console.log(state.totalCount)
+            console.log(state.totalUsersCount)
         })
     },[])
 
-    const filteredUser = state.users.filter((u, i) => i < state.count)
+    const filteredUser = state.users.filter((u, i) => i < state.pageSize)
 
     return (
         <div>
@@ -57,7 +57,7 @@ const UsersFunctional: React.FC = () => {
                 })}
             </div>
             <div>
-                <button onClick={()=>dispatch(showMoreAC())} disabled={state.users.length <= state.count}>Show more
+                <button onClick={()=>dispatch(showMoreAC())} disabled={state.users.length <= state.pageSize}>Show more
                 </button>
                 {/*<button onClick={getUsers}>Get new users</button>*/}
             </div>

@@ -14,14 +14,16 @@ export type UserType = {
 
 const initialState:InitialStateType = {
     users: [],
-    count: 6,
-    totalCount: 0
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export type InitialStateType = {
     users: UserType[]
-    count: number
-    totalCount: number
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export const enum ACTIONS_TYPE {
@@ -42,9 +44,9 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
             return {...state, users: state.users.map(u => u.id === action.payload ? {...u, followed: false} : u)}
         }
         case ACTIONS_TYPE.SHOW_MORE:
-            return {...state, count: state.count + 6}
+            return {...state, pageSize: state.pageSize + 5}
         case ACTIONS_TYPE.SET_USERS:
-            return {...state, users: [...action.payload.users], totalCount: action.payload.totalCount}
+            return {...state, users: [...action.payload.users], totalUsersCount: action.payload.totalCount}
         case ACTIONS_TYPE.DELETE_USER:
             return {...state, users: state.users.filter(u=>u.id!==action.payload)}
         default:

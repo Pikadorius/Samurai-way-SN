@@ -6,7 +6,7 @@ type TrackType = {
     trackName: string
 }
 
-export type InititalStateType = {
+export type InitialStateType = {
     tracks: TrackType[]
     newTrackPerformer: string
     newTrackName: string
@@ -14,7 +14,7 @@ export type InititalStateType = {
 
 type ActionType = DeleteTrackType | AddTrackType | SearchTrackType | SetTrackPerformerType | SetTrackNameType
 
-const initialState:InititalStateType= {
+const initialState:InitialStateType= {
     tracks: [
         {id:v1(),trackPerformer:'Bad Omens', trackName: 'Villian'},
         {id:v1(),trackPerformer:'BMTH', trackName: 'True friend'},
@@ -25,7 +25,7 @@ const initialState:InititalStateType= {
 }
 
 
-export const musicReducer = (state:InititalStateType=initialState, action:ActionType):InititalStateType => {
+export const musicReducer = (state:InitialStateType=initialState, action:ActionType):InitialStateType => {
     switch (action.type) {
         case 'DELETE_TRACK': {
             return {...state, tracks: state.tracks.filter(t=>t.id!==action.payload.id)}

@@ -5,14 +5,14 @@ import {StateType} from '../../redux/redux-store';
 import {
     addTrackAC,
     deleteTrackAC,
-    InititalStateType,
+    InitialStateType,
     setTrackNameAC,
     setTrackPerformerAC
 } from '../../redux/music_reducer';
 
 const Music = () => {
     const dispatch = useDispatch()
-    const state = useSelector<StateType, InititalStateType>(state => state.musicPage)
+    const state = useSelector<StateType, InitialStateType>(state => state.musicPage)
 
 
     return (

@@ -8,7 +8,7 @@ class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=10`).then((response) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}`).then((response) => {
             this.props.setUsers(response.data.items, response.data.totalCount)
             console.log(this.props.usersPage.totalUsersCount)
         })
@@ -29,19 +29,21 @@ class Users extends Component<UsersPropsType> {
     render = () => {
         console.log('Users rendering')
 
+        // destructuring usersPage
         const {users,totalUsersCount,currentPage,pageSize}=this.props.usersPage
-
-        let pagesCount: number = totalUsersCount / pageSize
+        // calculate pages count
+        let pagesCount: number = Math.ceil(totalUsersCount / pageSize)
+        // create pages array
         let pages: number[] = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
         return (
             <div>
-
+                {/*pagination*/}
                 <div className={s.pagination}>
                     {
-                        pages.map(p => <span key={p} className={currentPage===p ? s.selectedPage : ""}> {p} </span>)
+                        pages.map(p => <button key={p} className={currentPage===p ? s.selectedPage : ""}> {p} </button>)
                     }
                 </div>
 

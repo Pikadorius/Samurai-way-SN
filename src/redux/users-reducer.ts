@@ -15,11 +15,13 @@ export type UserType = {
 const initialState:InitialStateType = {
     users: [],
     count: 6,
+    totalCount: 0
 }
 
 export type InitialStateType = {
-    users: UserType[],
+    users: UserType[]
     count: number
+    totalCount: number
 }
 
 export const enum ACTIONS_TYPE {
@@ -42,7 +44,7 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
         case ACTIONS_TYPE.SHOW_MORE:
             return {...state, count: state.count + 6}
         case ACTIONS_TYPE.SET_USERS:
-            return {...state, users: [...action.payload.users]}
+            return {...state, users: [...action.payload.users], totalCount: action.payload.totalCount}
         case ACTIONS_TYPE.DELETE_USER:
             return {...state, users: state.users.filter(u=>u.id!==action.payload)}
         default:
@@ -77,11 +79,12 @@ export const showMoreAC = () => {
 
 
 type SetUserACType = ReturnType<typeof setUsersAC>
-export const setUsersAC = (users: UserType[]) => {
+export const setUsersAC = (users: UserType[], totalCount:number) => {
     return {
         type: ACTIONS_TYPE.SET_USERS,
         payload: {
-            users
+            users,
+            totalCount
         }
     } as const
 }

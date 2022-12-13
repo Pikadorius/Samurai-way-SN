@@ -8,8 +8,9 @@ class Users extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
-            this.props.setUsers(response.data.items)
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=30').then((response) => {
+            this.props.setUsers(response.data.items, response.data.totalCount)
+            console.log(this.props.usersPage.totalCount)
         })
         //https://social-network.samuraijs.com/api/1.0/users
     }

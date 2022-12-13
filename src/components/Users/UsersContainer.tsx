@@ -12,6 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import Users from './Users';
+import UsersFunctional from "./UsersFunctional";
 
 
 type MapStateType = {
@@ -28,7 +29,7 @@ type MapDispatchType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
     showMore: () => void
-    setUsers: (users: UserType[]) => void
+    setUsers: (users: UserType[], totalCount: number) => void
     deleteUser: (id: number)=>void
 }
 
@@ -41,7 +42,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
             dispatch(unfollowAC(id))
         },
         showMore: () => dispatch(showMoreAC()),
-        setUsers: (users: UserType[])=>dispatch(setUsersAC(users)),
+        setUsers: (users: UserType[], totalCount)=>dispatch(setUsersAC(users, totalCount)),
         deleteUser: (id:number)=>dispatch(deleteUserAC(id))
     }
 }

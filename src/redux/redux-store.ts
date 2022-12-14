@@ -20,3 +20,7 @@ export type StoreType = typeof store;
 let store = createStore(reducer);
 
 export default store;
+
+
+// @ts-ignore
+window.store=store;

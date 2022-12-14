@@ -1,4 +1,4 @@
-import {addLikeActionCreator, addPostActionCreator, setPostActionCreator} from "./profile_reducer";
+import {addLike, addPost, setPost} from "./profile_reducer";
 import  {addMessageActionCreator, setMessageActionCreator} from "./dialogs_reducer";
 
 type PostType = {
@@ -42,11 +42,11 @@ type SidebarType = {
 }
 
 type ActionsType =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof setPostActionCreator>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof setPost>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof setMessageActionCreator>
-    | ReturnType<typeof addLikeActionCreator>
+    | ReturnType<typeof addLike>
 
 type StateType = {
     profilePage: ProfilePageType

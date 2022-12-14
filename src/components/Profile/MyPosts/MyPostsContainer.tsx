@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-    addLikeActionCreator,
-    addPostActionCreator, PostType,
-    setPostActionCreator
+    addLike,
+    addPost, PostType,
+    setPost
 } from "../../../redux/profile_reducer";
 import MyPosts from './MyPosts';
 import {StateType} from '../../../redux/redux-store';
@@ -57,13 +57,13 @@ type MapDispatchPropsType = {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         setPost: (post: string) => {
-            dispatch(setPostActionCreator(post))
+            dispatch(setPost(post))
         },
         addNewPost: () => {
-            dispatch(addPostActionCreator())
+            dispatch(addPost())
         },
         addLike: (id: number) => {
-            dispatch(addLikeActionCreator(id))
+            dispatch(addLike(id))
         }
     }
 }

@@ -1,18 +1,37 @@
 export type ProfileActionsType =
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof setPostActionCreator> |
-    ReturnType<typeof addLikeActionCreator>
-
-export type FactType = {
-    id: number
-    fact: string
-}
+    ReturnType<typeof addPost> |
+    ReturnType<typeof setPost> |
+    ReturnType<typeof addLike> |
+    ReturnType<typeof setUserProfile>
 
 export type PostType = {
     id: number
     title: string
     description: string
     likesCount: number
+}
+type ContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+
+export type ServerProfileType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: {
+        small: string
+        large: string
+    }
 }
 
 const initialState = {
@@ -26,10 +45,15 @@ const initialState = {
             likesCount: 0
         },
         {id: 3, title: "Dimych is the best!", description: "Dimych has a talent to teach", likesCount: 10}
-    ] as PostType[]
+    ] as PostType[],
+    profile: null
 }
 
-export type InitialStateType = typeof initialState
+export type InitialStateType = {
+    newPostText: string
+    posts: PostType[]
+    profile: ServerProfileType | null
+}
 
 const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsType): InitialStateType => {
 
@@ -49,20 +73,38 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
                 ...state,
                 posts: state.posts.map(p => p.id === action.postId ? {...p, likesCount: p.likesCount + 1} : p)
             };
+        case ACTION_TYPES.SET_USER_PROFILE: {
+            return {...state, profile: action.payload.profile};
+        }
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = () => {
-    return {type: 'ADD-NEW-POST'} as const
+export const addPost = () => {
+    return {type: ACTION_TYPES.ADD_POST} as const
 }
 
-export const setPostActionCreator = (newPostText: string) => {
-    return {type: 'SET-POST-TEXT', newPostText: newPostText} as const
+export const setPost = (newPostText: string) => {
+    return {type: ACTION_TYPES.SET_POST, newPostText: newPostText} as const
 }
-export const addLikeActionCreator = (postId: number) => {
-    return {type: 'ADD-LIKE', postId} as const
+export const addLike = (postId: number) => {
+    return {type: ACTION_TYPES.ADD_LIKE, postId} as const
+}
+export const setUserProfile = (profile: any) => {
+    return {
+        type: ACTION_TYPES.SET_USER_PROFILE,
+        payload: {
+            profile
+        }
+    } as const
+}
+
+const enum ACTION_TYPES  {
+    ADD_POST='ADD-NEW-POST',
+    SET_POST='SET-POST-TEXT',
+    ADD_LIKE='ADD-LIKE',
+    SET_USER_PROFILE='SET_USER_PROFILE'
 }
 
 //редьюсеры эскпортируем по умолчанию

@@ -12,12 +12,12 @@ import {
 
 const Music = () => {
     const dispatch = useDispatch()
-    const state = useSelector<StateType, InitialStateType>(state => state.musicPage)
+    const {tracks,newTrackPerformer,newTrackName} = useSelector<StateType, InitialStateType>(state => state.musicPage)
 
 
     return (
         <div className={s.wrapper}>
-            <div>{state.tracks.map(t => {
+            <div>{tracks.map(t => {
 
                 const deleteTrack = () => {
                     dispatch(deleteTrackAC(t.id))
@@ -29,8 +29,8 @@ const Music = () => {
             })}
             </div>
             <div>Add new track:
-                <input value={state.newTrackPerformer} onChange={(e)=>dispatch(setTrackPerformerAC(e.currentTarget.value))}/>
-                <input value={state.newTrackName} onChange={(e)=>dispatch(setTrackNameAC(e.currentTarget.value))}/>
+                <input value={newTrackPerformer} onChange={(e)=>dispatch(setTrackPerformerAC(e.currentTarget.value))}/>
+                <input value={newTrackName} onChange={(e)=>dispatch(setTrackNameAC(e.currentTarget.value))}/>
                 <button onClick={()=>dispatch(addTrackAC())}>+</button>
             </div>
         </div>

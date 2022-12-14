@@ -2,19 +2,17 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {
-    deleteUserAC,
-    followAC,
-    InitialStateType, setCurrentPageAC,
-    setUsersAC,
-    unfollowAC, setTotalUsersCountAC,
-    UserType, setIsFetchingAC
+    deleteUser,
+    follow,
+    InitialStateType, setCurrentPage,
+    setUsers,
+    unfollow, setTotalUsersCount, setIsFetching
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import UsersFunctional from "./UsersFunctional";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-
 
 type MapStateType = {
     usersPage: InitialStateType
@@ -25,6 +23,7 @@ const mapStateToProps = (state: StateType): MapStateType => {
     }
 }
 
+/*
 type MapDispatchType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
@@ -33,7 +32,8 @@ type MapDispatchType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setIsFetching: (isFetching: boolean) => void
-}
+}*/
+/*
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
         follow: (id) => {
@@ -49,6 +49,19 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
         setIsFetching: (isFetching) => dispatch(setIsFetchingAC(isFetching))
     }
 }
+*/
+
+// we can pass an object of actions instead of function to connect (so we reduce our code)
+const actions = {
+    follow,
+    unfollow,
+    setUsers,
+    deleteUser,
+    setCurrentPage,
+    setTotalUsersCount,
+    setIsFetching
+}
+type MapDispatchType = typeof actions
 
 type UsersPropsType = MapStateType & MapDispatchType
 
@@ -97,6 +110,6 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+const UsersContainer = connect(mapStateToProps, actions)(UsersAPIComponent);
 
 export default UsersContainer;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import avatar from '../../assets/images/defaultUsersAvatar.jpg';
 import {useDispatch, useSelector} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
-import {deleteUserAC, followAC, InitialStateType, setUsersAC, unfollowAC} from '../../redux/users-reducer';
+import {deleteUser, follow, InitialStateType, setUsers, unfollow} from '../../redux/users-reducer';
 
 const UsersFunctional: React.FC = () => {
 
@@ -24,7 +24,7 @@ const UsersFunctional: React.FC = () => {
     useEffect(()=>{
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
             debugger
-            state.users.length ? alert('No more new users') : dispatch(setUsersAC(response.data.items))
+            state.users.length ? alert('No more new users') : dispatch(setUsers(response.data.items))
         })
     },[])
 
@@ -37,7 +37,7 @@ const UsersFunctional: React.FC = () => {
                 {filteredUser.map(u => {
 
                     const followHandler = () => {
-                        u.followed ? dispatch(unfollowAC(u.id)) : dispatch(followAC(u.id))
+                        u.followed ? dispatch(unfollow(u.id)) : dispatch(follow(u.id))
                     }
 
                     const userClassName = u.followed ? `${s.userItem} ${s.followed}` : s.userItem
@@ -48,7 +48,7 @@ const UsersFunctional: React.FC = () => {
                                                                alt="avatar"/></div>
                             <div>{u.name}</div>
                             <div className={s.location}></div>
-                            <button className={s.btn} onClick={() => dispatch(deleteUserAC(u.id))}>x</button>
+                            <button className={s.btn} onClick={() => dispatch(deleteUser(u.id))}>x</button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
                         <button onClick={followHandler}>{u.followed ? 'Unfollow' : 'Follow'}</button>

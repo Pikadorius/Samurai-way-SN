@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType} from "../../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
     usersPage: InitialStateType
@@ -51,8 +52,13 @@ const Users = (props: UsersType) => {
 
                     return <div className={userClassName} key={u.id}>
                         <div className={s.about}>
-                            <div className={s.userAvatar}><img src={u.photos.small ? u.photos.small : avatar}
-                                                               alt="avatar"/></div>
+                            <div className={s.userAvatar}>
+                                <NavLink to={`/profile/${u.id}`}>
+                                <img
+                                    src={u.photos.small ? u.photos.small : avatar}
+                                    alt="avatar"/>
+                                </NavLink>
+                            </div>
                             <div>{u.name}</div>
                             <button className={s.btn} onClick={() => props.deleteUser(u.id)}>x</button>
                         </div>

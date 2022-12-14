@@ -9,17 +9,18 @@ import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App: React.FC = () => {
 
-    const ProfileWithProps = () => <Profile/>
+
 
     return (
         <div className='App'>
             <Header list={['Video', 'Music', 'Photos']}/>
             <NavbarContainer/>
             <div className='app-wrapper-content'>
-                <Route render={ProfileWithProps} path={'/profile'}/>
+                <Route component={ProfileContainer} path={'/profile*'}/>
                 <Route component={DialogsContainer} path={'/dialogs'}/>
                 <Route component={UsersContainer} path={'/users'}/>
                 <Route component={News} path={'/news'}/>

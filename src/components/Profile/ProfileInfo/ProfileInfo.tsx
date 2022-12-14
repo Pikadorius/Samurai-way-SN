@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {ProfileInfoType} from "./ProfileInfoContainer";
 
 
-const ProfileInfo: React.FC<ProfileInfoType> = ({facts}) => {
+const ProfileInfo: React.FC = () => {
     return (
         <div>
             <div>
@@ -14,11 +13,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({facts}) => {
             <div className={s.descriptionBlock}>
                 <img className={s.avatar} src="https://www.shkolazhizni.ru/img/content/i156/156707_or.jpg"
                      alt=""/>
-                <div>
-                    <ul>
-                        {facts.map(f => <li key={f.id}>{f.fact}</li>)}
-                    </ul>
-                </div>
             </div>
         </div>
     );

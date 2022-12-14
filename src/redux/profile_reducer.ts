@@ -26,13 +26,7 @@ const initialState = {
             likesCount: 0
         },
         {id: 3, title: "Dimych is the best!", description: "Dimych has a talent to teach", likesCount: 10}
-    ] as PostType[],
-    facts: [
-        {id: 1, fact: 'I am 30 years old'},
-        {id: 2, fact: 'I have a son'},
-        {id: 3, fact: 'I am a Chief Engineer'},
-
-    ] as FactType[]
+    ] as PostType[]
 }
 
 export type InitialStateType = typeof initialState

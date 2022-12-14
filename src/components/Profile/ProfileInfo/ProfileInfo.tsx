@@ -18,7 +18,7 @@ const ProfileInfo: React.FC<ProfileType> = (props) => {
                      alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                    <img className={s.avatar} src={props.profile.photos.small}
+                    <img className={s.avatar} src={props.profile.photos.large}
                          alt=""/>
                 <p>My name is {props.profile.fullName}</p>
                 <p>{props.profile.aboutMe}</p>

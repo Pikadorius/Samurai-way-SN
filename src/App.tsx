@@ -20,7 +20,7 @@ const App: React.FC = () => {
             <Header list={['Video', 'Music', 'Photos']}/>
             <NavbarContainer/>
             <div className='app-wrapper-content'>
-                <Route component={ProfileContainer} path={'/profile*'}/>
+                <Route component={ProfileContainer} path={'/profile/:userId?'}/>
                 <Route component={DialogsContainer} path={'/dialogs'}/>
                 <Route component={UsersContainer} path={'/users'}/>
                 <Route component={News} path={'/news'}/>

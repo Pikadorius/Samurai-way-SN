@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,KeyboardEvent} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType} from "../../redux/users-reducer";
@@ -25,6 +25,16 @@ const Users = (props: UsersType) => {
         pages.push(i)
     }
 
+    const [page, setPage]=useState<number>(currentPage)
+
+    const onEnter = (e:KeyboardEvent<HTMLInputElement>) => {
+        if(e.key==="Enter" && page<pagesCount) {
+            console.log(typeof e)
+            props.setCurrentPage(page)
+        }
+    }
+
+
     let curPF = ((currentPage - 5) < 0) ? 0 : currentPage - 5;
     let curPL = currentPage + 5;
     let slicedPages = pages.slice(curPF, curPL);
@@ -36,7 +46,9 @@ const Users = (props: UsersType) => {
                 {
                     slicedPages.map(p => <span onClick={() => props.onPageChanged(p)} key={p}
                                                className={currentPage === p ? s.selectedPage : ""}> {p} </span>)
-                } <input placeholder={`1-${pagesCount}`} onChange={(e) => props.onPageChanged(+e.currentTarget.value)}/>
+                } <input
+                placeholder={`1-${pagesCount}`}
+                onChange={(e) =>setPage(+e.currentTarget.value)} onKeyDown={onEnter}/>
             </div>
 
             <div className={s.usersField}>

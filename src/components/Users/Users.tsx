@@ -28,9 +28,8 @@ const Users = (props: UsersType) => {
     const [page, setPage]=useState<number>(currentPage)
 
     const onEnter = (e:KeyboardEvent<HTMLInputElement>) => {
-        if(e.key==="Enter" && page<pagesCount) {
-            console.log(typeof e)
-            props.setCurrentPage(page)
+        if(e.key==="Enter" && page<=pagesCount) {
+            props.onPageChanged(page)
         }
     }
 
@@ -54,7 +53,6 @@ const Users = (props: UsersType) => {
             <div className={s.usersField}>
 
                 {users.map(u => {
-
                     const followHandler = () => {
                         u.followed ? props.unfollow(u.id) : props.follow(u.id)
                     }

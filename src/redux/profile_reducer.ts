@@ -54,6 +54,8 @@ export type InitialStateType = {
     posts: PostType[]
     profile: ServerProfileType | null
 }
+// export type InitialStateType = typeof initialState
+
 
 const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsType): InitialStateType => {
 

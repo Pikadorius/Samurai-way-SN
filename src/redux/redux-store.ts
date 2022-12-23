@@ -4,6 +4,7 @@ import dialogsReducer from './dialogs_reducer';
 import sidebarReducer from './sidebar_reducer';
 import usersReducer from "./users-reducer";
 import {musicReducer} from './music_reducer';
+import {authReducer} from './auth-reducer';
 
 // combine all reducers
 export let reducer = combineReducers({
@@ -11,7 +12,8 @@ export let reducer = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-    musicPage: musicReducer
+    musicPage: musicReducer,
+    auth: authReducer
 })
 
 export type StateType = ReturnType<typeof reducer>

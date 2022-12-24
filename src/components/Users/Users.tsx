@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from 'axios';
 
 type UsersType = {
     usersPage: InitialStateType
@@ -54,7 +55,22 @@ const Users = (props: UsersType) => {
 
                 {users.map(u => {
                     const followHandler = () => {
-                        u.followed ? props.unfollow(u.id) : props.follow(u.id)
+                        // u.followed ? props.unfollow(u.id) : props.follow(u.id)
+                        if (!u.followed) {
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{withCredentials:true, headers:}).then((responce)=>{
+                                debugger
+                                if (responce.data.resultCode===0) {
+                                    props.follow(u.id)
+                                }
+                            })
+                        } else {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true}).then((responce)=>{
+                                debugger
+                                if (responce.data.resultCode===0) {
+                                    props.unfollow(u.id)
+                                }
+                            })
+                        }
                     }
 
 

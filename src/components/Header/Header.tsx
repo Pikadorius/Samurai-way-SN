@@ -8,7 +8,7 @@ import {InititalStateType, setAuthUserData} from '../../redux/auth-reducer';
 import {MapStateToPropsType} from './HeaderContainer';
 
 
-const Header = ( props: MapStateToPropsType) => {
+const Header = (props: MapStateToPropsType) => {
 
     // const dispatch=useDispatch()
     //
@@ -23,9 +23,10 @@ const Header = ( props: MapStateToPropsType) => {
 
     return (
         <header className={s.header}>
-            <img width={'200px'} src="https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png" alt="" />
+            <img width={'200px'} src="https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png"
+                 alt=""/>
             <div className={s.loginBlock}>
-                {props.isAuth? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ? <div><img alt={'avatar'} src={props.photo}/> {props.login}</div> : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

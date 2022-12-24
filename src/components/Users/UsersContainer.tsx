@@ -100,12 +100,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         return (
             this.props.usersPage.isFetching ?
                 <Preloader/> :
-                <Users usersPage={this.props.usersPage}
-                       follow={this.props.follow}
-                       unfollow={this.props.unfollow}
-                       deleteUser={this.props.deleteUser}
-                       setCurrentPage={this.props.setCurrentPage}
-                       onPageChanged={this.onPageChanged}/>
+                <Users {...this.props} onPageChanged={this.onPageChanged}/>
         )
     }
 }

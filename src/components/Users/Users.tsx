@@ -1,7 +1,7 @@
 import React, {useState, KeyboardEvent} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
-import {InitialStateType} from "../../redux/users-reducer";
+import {InitialStateType, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
 import {followUser, unfollowUser} from '../../API/API';
@@ -9,11 +9,9 @@ import {followUser, unfollowUser} from '../../API/API';
 type UsersType = {
     usersPage: InitialStateType
     onPageChanged: (n: number) => void
-    follow: (id: number) => void
-    unfollow: (id: number) => void
+    followHandler: (user: UserType) => void
     deleteUser: (id: number) => void
     setCurrentPage: (pageNumber: number) => void
-    setFollowingInProgress: (inProgress: boolean) => void
 }
 
 const Users = (props: UsersType) => {
@@ -57,24 +55,7 @@ const Users = (props: UsersType) => {
 
                 {users.map(u => {
                     const followHandler = () => {
-                        props.setFollowingInProgress(true)
-                        // u.followed ? props.unfollow(u.id) : props.follow(u.id)
-                        if (!u.followed) {
-                            followUser(u.id).then((data) => {
-                                props.setFollowingInProgress(false)
-                                if (data.resultCode === 0) {
-                                    props.follow(u.id)
-                                }
-                            })
-                        } else {
-                            props.setFollowingInProgress(true)
-                            unfollowUser(u.id).then((data) => {
-                                props.setFollowingInProgress(false)
-                                if (data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                }
-                            })
-                        }
+                        props.followHandler(u)
                     }
 
 
@@ -90,10 +71,13 @@ const Users = (props: UsersType) => {
                                 </NavLink>
                             </div>
                             <div>{u.name}</div>
-                            <button className={s.btn} onClick={() => props.deleteUser(u.id)} disabled={props.usersPage.followingInProgress}>x</button>
+                            <button className={s.btn} onClick={() => props.deleteUser(u.id)}
+                                    disabled={props.usersPage.followingInProgress}>x
+                            </button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
-                        <button onClick={followHandler} disabled={props.usersPage.followingInProgress}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                        <button onClick={followHandler}
+                                disabled={props.usersPage.followingInProgress}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                 })}
             </div>

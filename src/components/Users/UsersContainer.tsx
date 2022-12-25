@@ -6,14 +6,14 @@ import {
     follow,
     InitialStateType, setCurrentPage,
     setUsers,
-    unfollow, setTotalUsersCount, setIsFetching, setFollowingInProgress
+    unfollow, setTotalUsersCount, setIsFetching, setFollowingInProgress, UserType
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import UsersFunctional from "./UsersFunctional";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from '../../API/API';
+import {followUser, getUsers, unfollowUser} from '../../API/API';
 
 type MapStateType = {
     usersPage: InitialStateType
@@ -86,7 +86,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
 
     componentWillUnmount() {
         console.log('Component Users die...')
-    }   
+    }
 
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
@@ -97,12 +97,33 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         })
     }
 
+    followUnfollow = (u: UserType) => {
+        this.props.setFollowingInProgress(true)
+        // u.followed ? props.unfollow(u.id) : props.follow(u.id)
+        if (!u.followed) {
+            followUser(u.id).then((data) => {
+                if (data.resultCode === 0) {
+                    this.props.follow(u.id)
+                }
+                this.props.setFollowingInProgress(false)
+            })
+        } else {
+            this.props.setFollowingInProgress(true)
+            unfollowUser(u.id).then((data) => {
+                if (data.resultCode === 0) {
+                    this.props.unfollow(u.id)
+                }
+                this.props.setFollowingInProgress(false)
+            })
+        }
+    }
+
     render = () => {
         console.log('Users rendering')
         return (
             this.props.usersPage.isFetching ?
                 <Preloader/> :
-                <Users {...this.props} onPageChanged={this.onPageChanged}/>
+                <Users {...this.props} onPageChanged={this.onPageChanged} followHandler={this.followUnfollow}/>
         )
     }
 }

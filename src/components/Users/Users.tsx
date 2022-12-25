@@ -4,6 +4,7 @@ import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
+import {followUser, unfollowUser} from '../../API/API';
 
 type UsersType = {
     usersPage: InitialStateType
@@ -57,24 +58,15 @@ const Users = (props: UsersType) => {
                     const followHandler = () => {
                         // u.followed ? props.unfollow(u.id) : props.follow(u.id)
                         if (!u.followed) {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': 'abc137fc-ad0c-49be-975b-e12bdb8a93ad'
-                                }
-                            }).then((responce) => {
-                                if (responce.data.resultCode === 0) {
+                            followUser(u.id).then((data) => {
+                                if (data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
                             })
                         } else {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': 'abc137fc-ad0c-49be-975b-e12bdb8a93ad'
-                                }
-                            }).then((responce) => {
-                                if (responce.data.resultCode === 0) {
+                            unfollowUser(u.id).then((data) => {
+                                debugger
+                                if (data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
                             })

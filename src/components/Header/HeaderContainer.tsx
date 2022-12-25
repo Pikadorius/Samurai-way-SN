@@ -5,13 +5,14 @@ import {StateType} from '../../redux/redux-store';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {setAuthUserData, setUserPhoto} from '../../redux/auth-reducer';
+import {authMe} from '../../API/API';
 
 
 class HeaderContainer extends Component<HeaderContainerType> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true}).then((responce) => {
-            if (responce.data.resultCode === 0) {
-                this.props.setAuthUserData(responce.data.data)
+        authMe().then((result) => {
+            if (result.resultCode === 0) {
+                this.props.setAuthUserData(result.data)
             }
         }).then(()=>axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((responce) => {
             debugger

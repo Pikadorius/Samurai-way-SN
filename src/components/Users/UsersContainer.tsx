@@ -13,6 +13,7 @@ import UsersFunctional from "./UsersFunctional";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {getUsers} from '../../API/API';
 
 type MapStateType = {
     usersPage: InitialStateType
@@ -70,11 +71,12 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     componentDidMount() {
         console.log('Users are inside DOM')
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count={${this.props.usersPage.pageSize}`, {withCredentials:true}).then((response) => {
+        getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
+            debugger
             this.props.setIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
+        }).catch()
         //https://social-network.samuraijs.com/api/1.0/users
     }
 
@@ -84,12 +86,12 @@ class UsersAPIComponent extends Component<UsersPropsType> {
 
     componentWillUnmount() {
         console.log('Component Users die...')
-    }
+    }   
 
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count={${this.props.usersPage.pageSize}`, {withCredentials:true}).then((response) => {
+        getUsers(p, this.props.usersPage.pageSize).then((response) => {
             this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
         })

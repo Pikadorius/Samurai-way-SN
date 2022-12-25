@@ -1,4 +1,4 @@
-import React, {useState,KeyboardEvent} from 'react';
+import React, {useState, KeyboardEvent} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType} from "../../redux/users-reducer";
@@ -26,10 +26,10 @@ const Users = (props: UsersType) => {
         pages.push(i)
     }
 
-    const [page, setPage]=useState<number>(currentPage)
+    const [page, setPage] = useState<number>(currentPage)
 
-    const onEnter = (e:KeyboardEvent<HTMLInputElement>) => {
-        if(e.key==="Enter" && page<=pagesCount) {
+    const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && page <= pagesCount) {
             props.onPageChanged(page)
         }
     }
@@ -48,7 +48,7 @@ const Users = (props: UsersType) => {
                                                className={currentPage === p ? s.selectedPage : ""}> {p} </span>)
                 } <input
                 placeholder={`1-${pagesCount}`}
-                onChange={(e) =>setPage(+e.currentTarget.value)} onKeyDown={onEnter}/>
+                onChange={(e) => setPage(+e.currentTarget.value)} onKeyDown={onEnter}/>
             </div>
 
             <div className={s.usersField}>
@@ -57,16 +57,24 @@ const Users = (props: UsersType) => {
                     const followHandler = () => {
                         // u.followed ? props.unfollow(u.id) : props.follow(u.id)
                         if (!u.followed) {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{withCredentials:true, headers:}).then((responce)=>{
-                                debugger
-                                if (responce.data.resultCode===0) {
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                withCredentials: true,
+                                headers: {
+                                    'API-KEY': 'abc137fc-ad0c-49be-975b-e12bdb8a93ad'
+                                }
+                            }).then((responce) => {
+                                if (responce.data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
                             })
                         } else {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true}).then((responce)=>{
-                                debugger
-                                if (responce.data.resultCode===0) {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                withCredentials: true,
+                                headers: {
+                                    'API-KEY': 'abc137fc-ad0c-49be-975b-e12bdb8a93ad'
+                                }
+                            }).then((responce) => {
+                                if (responce.data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
                             })
@@ -80,9 +88,9 @@ const Users = (props: UsersType) => {
                         <div className={s.about}>
                             <div className={s.userAvatar}>
                                 <NavLink to={`/profile/${u.id}`}>
-                                <img
-                                    src={u.photos.small ? u.photos.small : avatar}
-                                    alt="avatar"/>
+                                    <img
+                                        src={u.photos.small ? u.photos.small : avatar}
+                                        alt="avatar"/>
                                 </NavLink>
                             </div>
                             <div>{u.name}</div>

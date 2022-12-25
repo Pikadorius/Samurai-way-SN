@@ -70,7 +70,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     componentDidMount() {
         console.log('Users are inside DOM')
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count={${this.props.usersPage.pageSize}`).then((response) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count={${this.props.usersPage.pageSize}`, {withCredentials:true}).then((response) => {
             this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -89,7 +89,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count={${this.props.usersPage.pageSize}`).then((response) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count={${this.props.usersPage.pageSize}`, {withCredentials:true}).then((response) => {
             this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
         })

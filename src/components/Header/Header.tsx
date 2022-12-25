@@ -26,7 +26,7 @@ const Header = (props: MapStateToPropsType) => {
             <img width={'200px'} src="https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png"
                  alt=""/>
             <div className={s.loginBlock}>
-                {props.isAuth ? <div><img alt={'avatar'} src={props.photo}/> {props.login}</div> : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

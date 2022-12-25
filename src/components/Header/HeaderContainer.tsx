@@ -14,11 +14,7 @@ class HeaderContainer extends Component<HeaderContainerType> {
             if (result.resultCode === 0) {
                 this.props.setAuthUserData(result.data)
             }
-        }).then(()=>axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((responce) => {
-            debugger
-            this.props.setUserPhoto(responce.data.photos.small)
-        }))
-
+        })
     }
 
     render() {

@@ -18,7 +18,7 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followingInProgress: number[]
 }
 const initialState: InitialStateType = {
     users: [],
@@ -26,7 +26,7 @@ const initialState: InitialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false
+    followingInProgress: []
 }
 
 export const enum ACTIONS_TYPE {
@@ -62,7 +62,9 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
             return {...state, isFetching: action.payload.isFetching}
         }
         case ACTIONS_TYPE.SET_FOLLOWING_IN_PROGRESS: {
-            return {...state, followingInProgress: action.payload.inProgress}
+            return {...state, followingInProgress: action.payload.inProgress ?
+                    [...state.followingInProgress, action.payload.userId] :
+                    state.followingInProgress.filter(u=>u!==action.payload.userId)}
         }
         default:
             return state;
@@ -104,11 +106,12 @@ export const unfollow = (id: number) => {
 }
 
 type SetFollowingInProgressACType = ReturnType<typeof setFollowingInProgress>
-export const setFollowingInProgress = (inProgress: boolean) => {
+export const setFollowingInProgress = (inProgress: boolean, userId: number) => {
     return {
         type: ACTIONS_TYPE.SET_FOLLOWING_IN_PROGRESS,
         payload: {
-            inProgress
+            inProgress,
+            userId
         }
     } as const
 }

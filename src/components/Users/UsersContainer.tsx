@@ -98,22 +98,22 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     }
 
     followUnfollow = (u: UserType) => {
-        this.props.setFollowingInProgress(true)
+        this.props.setFollowingInProgress(true, u.id)
         // u.followed ? props.unfollow(u.id) : props.follow(u.id)
         if (!u.followed) {
             followUser(u.id).then((data) => {
                 if (data.resultCode === 0) {
                     this.props.follow(u.id)
                 }
-                this.props.setFollowingInProgress(false)
+                this.props.setFollowingInProgress(false, u.id)
             })
         } else {
-            this.props.setFollowingInProgress(true)
+            this.props.setFollowingInProgress(true, u.id)
             unfollowUser(u.id).then((data) => {
                 if (data.resultCode === 0) {
                     this.props.unfollow(u.id)
                 }
-                this.props.setFollowingInProgress(false)
+                this.props.setFollowingInProgress(false, u.id)
             })
         }
     }

@@ -72,12 +72,12 @@ const Users = (props: UsersType) => {
                             </div>
                             <div>{u.name}</div>
                             <button className={s.btn} onClick={() => props.deleteUser(u.id)}
-                                    disabled={props.usersPage.followingInProgress}>x
+                                    disabled={props.usersPage.followingInProgress.includes(u.id)}>x
                             </button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
                         <button onClick={followHandler}
-                                disabled={props.usersPage.followingInProgress}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                                disabled={props.usersPage.followingInProgress.some(id=>id===u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                 })}
             </div>

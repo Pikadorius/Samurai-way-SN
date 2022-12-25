@@ -13,6 +13,7 @@ type UsersType = {
     unfollow: (id: number) => void
     deleteUser: (id: number) => void
     setCurrentPage: (pageNumber: number) => void
+    setFollowingInProgress: (inProgress: boolean) => void
 }
 
 const Users = (props: UsersType) => {
@@ -56,16 +57,19 @@ const Users = (props: UsersType) => {
 
                 {users.map(u => {
                     const followHandler = () => {
+                        props.setFollowingInProgress(true)
                         // u.followed ? props.unfollow(u.id) : props.follow(u.id)
                         if (!u.followed) {
                             followUser(u.id).then((data) => {
+                                props.setFollowingInProgress(false)
                                 if (data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
                             })
                         } else {
+                            props.setFollowingInProgress(true)
                             unfollowUser(u.id).then((data) => {
-                                debugger
+                                props.setFollowingInProgress(false)
                                 if (data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
@@ -86,10 +90,10 @@ const Users = (props: UsersType) => {
                                 </NavLink>
                             </div>
                             <div>{u.name}</div>
-                            <button className={s.btn} onClick={() => props.deleteUser(u.id)}>x</button>
+                            <button className={s.btn} onClick={() => props.deleteUser(u.id)} disabled={props.usersPage.followingInProgress}>x</button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
-                        <button onClick={followHandler}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                        <button onClick={followHandler} disabled={props.usersPage.followingInProgress}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                 })}
             </div>

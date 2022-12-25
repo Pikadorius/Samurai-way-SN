@@ -6,7 +6,7 @@ import {
     follow,
     InitialStateType, setCurrentPage,
     setUsers,
-    unfollow, setTotalUsersCount, setIsFetching
+    unfollow, setTotalUsersCount, setIsFetching, setFollowingInProgress
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import UsersFunctional from "./UsersFunctional";
@@ -60,7 +60,8 @@ const actions = {
     deleteUser,
     setCurrentPage,
     setTotalUsersCount,
-    setIsFetching
+    setIsFetching,
+    setFollowingInProgress
 }
 type MapDispatchType = typeof actions
 
@@ -72,7 +73,6 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         console.log('Users are inside DOM')
         this.props.setIsFetching(true)
         getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
-            debugger
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)

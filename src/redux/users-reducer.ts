@@ -18,23 +18,26 @@ export type InitialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: boolean
 }
-const initialState:InitialStateType = {
+const initialState: InitialStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false
 }
 
 export const enum ACTIONS_TYPE {
-    FOLLOW_USER ='FOLLOW_USER',
+    FOLLOW_USER = 'FOLLOW_USER',
     UNFOLLOW_USER = 'UNFOLLOW_USER',
     DELETE_USER = 'DELETE_USER',
     SET_USERS = 'SET_USERS',
     SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
     SET_TOTAL_USERS = 'SET_TOTAL_USERS_COUNT',
-    SET_IS_FETCHING = 'SET_IS_FETCHING'
+    SET_IS_FETCHING = 'SET_IS_FETCHING',
+    SET_FOLLOWING_IN_PROGRESS = 'SET_FOLLOWING_IN_PROGRESS'
 }
 
 const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
@@ -48,15 +51,18 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
         case ACTIONS_TYPE.SET_USERS:
             return {...state, users: [...action.payload.users]}
         case ACTIONS_TYPE.DELETE_USER:
-            return {...state, users: state.users.filter(u=>u.id!==action.payload)}
+            return {...state, users: state.users.filter(u => u.id !== action.payload)}
         case ACTIONS_TYPE.SET_CURRENT_PAGE: {
             return {...state, currentPage: action.payload.pageNumber}
         }
         case ACTIONS_TYPE.SET_TOTAL_USERS: {
-            return {...state, totalUsersCount:action.payload.totalCount}
+            return {...state, totalUsersCount: action.payload.totalCount}
         }
         case ACTIONS_TYPE.SET_IS_FETCHING: {
             return {...state, isFetching: action.payload.isFetching}
+        }
+        case ACTIONS_TYPE.SET_FOLLOWING_IN_PROGRESS: {
+            return {...state, followingInProgress: action.payload.inProgress}
         }
         default:
             return state;
@@ -66,6 +72,7 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
 type UsersActionsType =
     FollowACType |
     UnfollowACType |
+    SetFollowingInProgressACType |
     SetUserACType |
     DeleteUserACType |
     SetCurrentPageType |
@@ -96,6 +103,16 @@ export const unfollow = (id: number) => {
     } as const
 }
 
+type SetFollowingInProgressACType = ReturnType<typeof setFollowingInProgress>
+export const setFollowingInProgress = (inProgress: boolean) => {
+    return {
+        type: ACTIONS_TYPE.SET_FOLLOWING_IN_PROGRESS,
+        payload: {
+            inProgress
+        }
+    } as const
+}
+
 type SetUserACType = ReturnType<typeof setUsers>
 export const setUsers = (users: UserType[]) => {
     return {
@@ -107,7 +124,7 @@ export const setUsers = (users: UserType[]) => {
 }
 
 type SetCurrentPageType = ReturnType<typeof setCurrentPage>
-export const setCurrentPage = (pageNumber:number) => {
+export const setCurrentPage = (pageNumber: number) => {
     return {
         type: ACTIONS_TYPE.SET_CURRENT_PAGE,
         payload: {
@@ -135,7 +152,6 @@ export const setIsFetching = (isFetching: boolean) => {
         }
     } as const
 }
-
 
 
 export default usersReducer;

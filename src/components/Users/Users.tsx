@@ -1,10 +1,10 @@
-import React, {useState, KeyboardEvent} from 'react';
+import React, {useState, KeyboardEvent, FC} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {NavLink} from "react-router-dom";
 import {UsersPropsType} from './UsersContainer';
 
-const Users = (props: UsersPropsType) => {
+const Users:FC<UsersPropsType> = (props) => {
 
     // destructuring usersPage
     const {users, totalUsersCount, currentPage, pageSize} = props.usersPage
@@ -44,10 +44,14 @@ const Users = (props: UsersPropsType) => {
             <div className={s.usersField}>
 
                 {users.map(u => {
-                    const followHandler = () => {
-                        props.followUnfollow(u)
+
+                    const followUser = () => {
+                        props.followSuccess(u.id)
                     }
 
+                    const unfollowUser = () => {
+                        props.unfollowSuccess(u.id)
+                    }
 
                     const userClassName = u.followed ? `${s.userItem} ${s.followed}` : s.userItem
 
@@ -66,8 +70,8 @@ const Users = (props: UsersPropsType) => {
                             </button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
-                        <button onClick={followHandler}
-                                disabled={props.usersPage.followingInProgress.some(id=>id===u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                        <button onClick={u.followed ? unfollowUser : followUser}
+                                disabled={props.usersPage.followingInProgress.some(id => id === u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                 })}
             </div>

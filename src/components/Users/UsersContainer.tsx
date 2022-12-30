@@ -5,7 +5,7 @@ import {
     deleteUser,
     InitialStateType,
     GetUsersTCType,
-    FollowTCType, OnPageChangedTCType, onPageChanged, getUsers, followUnfollow
+    FollowTCType, OnPageChangedTCType, onPageChanged, getUsers, followSuccess, unfollowSuccess
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -22,7 +22,8 @@ const mapStateToProps = (state: StateType): MapStateType => {
 type MapDispatchType = {
     deleteUser: (id: number) => void
     getUsers: GetUsersTCType
-    followUnfollow: FollowTCType
+    followSuccess: FollowTCType
+    unfollowSuccess: FollowTCType
     onPageChanged: OnPageChangedTCType
 }
 
@@ -30,7 +31,8 @@ type MapDispatchType = {
 const mapDispatchToProps: MapDispatchType = {
     deleteUser,
     getUsers,
-    followUnfollow,
+    followSuccess,
+    unfollowSuccess,
     onPageChanged
 }
 

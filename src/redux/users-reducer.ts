@@ -171,27 +171,28 @@ export const getUsers: GetUsersTCType = (currentPage: number, pageSize: number) 
     }).catch()
 }
 
-export type FollowTCType = (u: UserType) => void
-export const followUnfollow: FollowTCType = (u) => (dispatch: Dispatch) => {
-    dispatch(setFollowingInProgress(true, u.id))
+export type FollowTCType = (id: number) => void
+export const followSuccess: FollowTCType = (id) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(true, id))
     // u.followed ? props.unfollow(u.id) : props.follow(u.id)
-    if (!u.followed) {
-        API.followUser(u.id).then((data) => {
+        API.followUser(id).then((data) => {
             if (data.resultCode === 0) {
-                dispatch(follow(u.id))
+                dispatch(follow(id))
             }
-            dispatch(setFollowingInProgress(false, u.id))
-        })
-    } else {
-        dispatch(setFollowingInProgress(true, u.id))
-        API.unfollowUser(u.id).then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(unfollow(u.id))
-            }
-            dispatch(setFollowingInProgress(false, u.id))
+            dispatch(setFollowingInProgress(false, id))
         })
     }
+
+export const unfollowSuccess: FollowTCType = (id) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(true, id))
+    API.unfollowUser(id).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(unfollow(id))
+        }
+        dispatch(setFollowingInProgress(false, id))
+    })
 }
+
 
 export type OnPageChangedTCType = (p: number, pageSize: number) => void
 export const  onPageChanged:OnPageChangedTCType = (p, pageSize) => (dispatch: Dispatch) => {

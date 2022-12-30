@@ -1,18 +1,10 @@
 import React, {useState, KeyboardEvent} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
-import {InitialStateType, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {UsersPropsType} from './UsersContainer';
 
-type UsersType = {
-    usersPage: InitialStateType
-    onPageChanged: (n: number) => void
-    followHandler: (user: UserType) => void
-    deleteUser: (id: number) => void
-    setCurrentPage: (pageNumber: number) => void
-}
-
-const Users = (props: UsersType) => {
+const Users = (props: UsersPropsType) => {
 
     // destructuring usersPage
     const {users, totalUsersCount, currentPage, pageSize} = props.usersPage
@@ -28,7 +20,7 @@ const Users = (props: UsersType) => {
 
     const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && page <= pagesCount) {
-            props.onPageChanged(page)
+            props.onPageChanged(page, pageSize)
         }
     }
 
@@ -42,7 +34,7 @@ const Users = (props: UsersType) => {
             {/*pagination*/}
             <div className={s.pagination}>
                 {
-                    slicedPages.map(p => <span onClick={() => props.onPageChanged(p)} key={p}
+                    slicedPages.map(p => <span onClick={() => props.onPageChanged(p, pageSize)} key={p}
                                                className={currentPage === p ? s.selectedPage : ""}> {p} </span>)
                 } <input
                 placeholder={`1-${pagesCount}`}
@@ -53,7 +45,7 @@ const Users = (props: UsersType) => {
 
                 {users.map(u => {
                     const followHandler = () => {
-                        props.followHandler(u)
+                        props.followUnfollow(u)
                     }
 
 

@@ -161,14 +161,46 @@ export const setIsFetching = (isFetching: boolean) => {
     } as const
 }
 
-type ThunkType = (dispatch: Dispatch)=>void
-const loadUsersFromServerThunk:ThunkType = (dispatch) => () => {
+export type GetUsersTCType = (currentPage: number, pageSize: number) => void
+export const getUsers: GetUsersTCType = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(setIsFetching(true))
-    API.getUsers(initialState.currentPage, initialState.pageSize).then((data) => {
+    API.getUsers(currentPage, pageSize).then((data) => {
         dispatch(setIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
     }).catch()
+}
+
+export type FollowTCType = (u: UserType) => void
+export const followUnfollow: FollowTCType = (u) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(true, u.id))
+    // u.followed ? props.unfollow(u.id) : props.follow(u.id)
+    if (!u.followed) {
+        API.followUser(u.id).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(follow(u.id))
+            }
+            dispatch(setFollowingInProgress(false, u.id))
+        })
+    } else {
+        dispatch(setFollowingInProgress(true, u.id))
+        API.unfollowUser(u.id).then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unfollow(u.id))
+            }
+            dispatch(setFollowingInProgress(false, u.id))
+        })
+    }
+}
+
+export type OnPageChangedTCType = (p: number, pageSize: number) => void
+export const  onPageChanged:OnPageChangedTCType = (p, pageSize) => (dispatch: Dispatch) => {
+    dispatch(setCurrentPage(p))
+    dispatch(setIsFetching(true))
+    API.getUsers(p, pageSize).then((data) => {
+        dispatch(setIsFetching(false))
+        dispatch(setUsers(data.items))
+    })
 }
 
 export default usersReducer;

@@ -1,3 +1,6 @@
+import {Dispatch} from 'redux';
+import {authAPI} from '../API/API';
+
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',
     SET_USER_PHOTO = 'SET_USER_PHOTO'
@@ -20,16 +23,12 @@ const initailState: InititalStateType = {
 }
 
 type ActionType =
-    SetUserDataACType |
-    SetUserPhotoACType
+    SetUserDataACType
 
 export const authReducer = (state: InititalStateType = initailState, action: ActionType): InititalStateType => {
     switch (action.type) {
         case ACTIONS_TYPE.SET_USER_DATA: {
             return {...state, ...action.payload.data, isAuth: true}
-        }
-        case ACTIONS_TYPE.SET_USER_PHOTO: {
-            return {...state, photo: action.payload.photo}
         }
         default:
             return state
@@ -46,12 +45,11 @@ export const setAuthUserData = (data: InititalStateType) => {
     } as const
 }
 
-type SetUserPhotoACType = ReturnType<typeof setUserPhoto>
-export const setUserPhoto = (photo: string) => {
-    return {
-        type: ACTIONS_TYPE.SET_USER_PHOTO,
-        payload: {
-            photo
+export type AuthUserTCType = ()=>void
+export const authUser = ()=>(dispatch:Dispatch)=>{
+    authAPI.authMe().then((result) => {
+        if (result.resultCode === 0) {
+            dispatch(setAuthUserData(result.data))
         }
-    } as const
+    })
 }

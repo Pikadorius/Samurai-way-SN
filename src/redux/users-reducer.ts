@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {API} from '../API/API';
+import {usersAPI} from '../API/API';
 
 type PhotosType = {
     small: string
@@ -164,7 +164,7 @@ export const setIsFetching = (isFetching: boolean) => {
 export type GetUsersTCType = (currentPage: number, pageSize: number) => void
 export const getUsers: GetUsersTCType = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(setIsFetching(true))
-    API.getUsers(currentPage, pageSize).then((data) => {
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
         dispatch(setIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
@@ -175,7 +175,7 @@ export type FollowTCType = (id: number) => void
 export const followSuccess: FollowTCType = (id) => (dispatch: Dispatch) => {
     dispatch(setFollowingInProgress(true, id))
     // u.followed ? props.unfollow(u.id) : props.follow(u.id)
-        API.followUser(id).then((data) => {
+        usersAPI.followUser(id).then((data) => {
             if (data.resultCode === 0) {
                 dispatch(follow(id))
             }
@@ -185,7 +185,7 @@ export const followSuccess: FollowTCType = (id) => (dispatch: Dispatch) => {
 
 export const unfollowSuccess: FollowTCType = (id) => (dispatch: Dispatch) => {
     dispatch(setFollowingInProgress(true, id))
-    API.unfollowUser(id).then((data) => {
+    usersAPI.unfollowUser(id).then((data) => {
         if (data.resultCode === 0) {
             dispatch(unfollow(id))
         }
@@ -198,7 +198,7 @@ export type OnPageChangedTCType = (p: number, pageSize: number) => void
 export const  onPageChanged:OnPageChangedTCType = (p, pageSize) => (dispatch: Dispatch) => {
     dispatch(setCurrentPage(p))
     dispatch(setIsFetching(true))
-    API.getUsers(p, pageSize).then((data) => {
+    usersAPI.getUsers(p, pageSize).then((data) => {
         dispatch(setIsFetching(false))
         dispatch(setUsers(data.items))
     })

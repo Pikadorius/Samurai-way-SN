@@ -1,3 +1,6 @@
+import {Dispatch} from 'redux';
+import {profileAPI} from '../API/API';
+
 export type ProfileActionsType =
     ReturnType<typeof addPost> |
     ReturnType<typeof setPost> |
@@ -57,6 +60,14 @@ export type InitialStateType = {
 // export type InitialStateType = typeof initialState
 
 
+const enum ACTION_TYPES  {
+    ADD_POST='ADD-NEW-POST',
+    SET_POST='SET-POST-TEXT',
+    ADD_LIKE='ADD-LIKE',
+    SET_USER_PROFILE='SET_USER_PROFILE'
+}
+
+
 const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsType): InitialStateType => {
 
     switch (action.type) {
@@ -102,11 +113,12 @@ export const setUserProfile = (profile: any) => {
     } as const
 }
 
-const enum ACTION_TYPES  {
-    ADD_POST='ADD-NEW-POST',
-    SET_POST='SET-POST-TEXT',
-    ADD_LIKE='ADD-LIKE',
-    SET_USER_PROFILE='SET_USER_PROFILE'
+
+export type SetProfileTCType = (userId:string)=>void
+export const setProfile:SetProfileTCType = (userId)=>(dispatch:Dispatch) => {
+    profileAPI.showUserProfile(userId).then((data) => {
+        dispatch(setUserProfile(data))
+    })
 }
 
 //редьюсеры эскпортируем по умолчанию

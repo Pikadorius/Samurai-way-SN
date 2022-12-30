@@ -1,3 +1,6 @@
+import {Dispatch} from 'redux';
+import {API} from '../API/API';
+
 type PhotosType = {
     small: string
     large: string
@@ -62,9 +65,11 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersActio
             return {...state, isFetching: action.payload.isFetching}
         }
         case ACTIONS_TYPE.SET_FOLLOWING_IN_PROGRESS: {
-            return {...state, followingInProgress: action.payload.inProgress ?
+            return {
+                ...state, followingInProgress: action.payload.inProgress ?
                     [...state.followingInProgress, action.payload.userId] :
-                    state.followingInProgress.filter(u=>u!==action.payload.userId)}
+                    state.followingInProgress.filter(u => u !== action.payload.userId)
+            }
         }
         default:
             return state;
@@ -156,5 +161,14 @@ export const setIsFetching = (isFetching: boolean) => {
     } as const
 }
 
+type ThunkType = (dispatch: Dispatch)=>void
+const loadUsersFromServerThunk:ThunkType = (dispatch) => () => {
+    dispatch(setIsFetching(true))
+    API.getUsers(initialState.currentPage, initialState.pageSize).then((data) => {
+        dispatch(setIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    }).catch()
+}
 
 export default usersReducer;

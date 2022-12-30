@@ -13,7 +13,7 @@ import UsersFunctional from "./UsersFunctional";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {followUser, getUsers, unfollowUser} from '../../API/API';
+import {API} from '../../API/API';
 
 type MapStateType = {
     usersPage: InitialStateType
@@ -23,7 +23,6 @@ const mapStateToProps = (state: StateType): MapStateType => {
         usersPage: state.usersPage
     }
 }
-
 /*
 type MapDispatchType = {
     follow: (id: number) => void
@@ -33,21 +32,20 @@ type MapDispatchType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setIsFetching: (isFetching: boolean) => void
-}*/
-/*
+}
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
         follow: (id) => {
-            dispatch(followAC(id))
+            dispatch(follow(id))
         },
         unfollow: (id) => {
-            dispatch(unfollowAC(id))
+            dispatch(unfollow(id))
         },
-        setUsers: (users) => dispatch(setUsersAC(users)),
-        deleteUser: (id) => dispatch(deleteUserAC(id)),
-        setCurrentPage: (pageNumber) => dispatch(setCurrentPageAC(pageNumber)),
-        setTotalUsersCount: (totalCount) => dispatch(setTotalUsersCountAC(totalCount)),
-        setIsFetching: (isFetching) => dispatch(setIsFetchingAC(isFetching))
+        setUsers: (users) => dispatch(setUsers(users)),
+        deleteUser: (id) => dispatch(deleteUser(id)),
+        setCurrentPage: (pageNumber) => dispatch(setCurrentPage(pageNumber)),
+        setTotalUsersCount: (totalCount) => dispatch(setTotalUsersCount(totalCount)),
+        setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
     }
 }
 */
@@ -63,6 +61,7 @@ const actions = {
     setIsFetching,
     setFollowingInProgress
 }
+
 type MapDispatchType = typeof actions
 
 type UsersPropsType = MapStateType & MapDispatchType
@@ -72,7 +71,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     componentDidMount() {
         console.log('Users are inside DOM')
         this.props.setIsFetching(true)
-        getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
+        API.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)
@@ -91,7 +90,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
-        getUsers(p, this.props.usersPage.pageSize).then((response) => {
+        API.getUsers(p, this.props.usersPage.pageSize).then((response) => {
             this.props.setIsFetching(false)
             this.props.setUsers(response.data.items)
         })
@@ -101,7 +100,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         this.props.setFollowingInProgress(true, u.id)
         // u.followed ? props.unfollow(u.id) : props.follow(u.id)
         if (!u.followed) {
-            followUser(u.id).then((data) => {
+            API.followUser(u.id).then((data) => {
                 if (data.resultCode === 0) {
                     this.props.follow(u.id)
                 }
@@ -109,7 +108,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
             })
         } else {
             this.props.setFollowingInProgress(true, u.id)
-            unfollowUser(u.id).then((data) => {
+            API.unfollowUser(u.id).then((data) => {
                 if (data.resultCode === 0) {
                     this.props.unfollow(u.id)
                 }

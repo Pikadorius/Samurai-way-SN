@@ -5,12 +5,12 @@ import {StateType} from '../../redux/redux-store';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {setAuthUserData, setUserPhoto} from '../../redux/auth-reducer';
-import {authMe} from '../../API/API';
+import {API} from '../../API/API';
 
 
 class HeaderContainer extends Component<HeaderContainerType> {
     componentDidMount() {
-        authMe().then((result) => {
+        API.authMe().then((result) => {
             if (result.resultCode === 0) {
                 this.props.setAuthUserData(result.data)
             }

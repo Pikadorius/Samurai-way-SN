@@ -3,8 +3,6 @@ import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {InitialStateType, UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from 'axios';
-import {followUser, unfollowUser} from '../../API/API';
 
 type UsersType = {
     usersPage: InitialStateType

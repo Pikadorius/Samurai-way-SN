@@ -90,9 +90,9 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
-        API.getUsers(p, this.props.usersPage.pageSize).then((response) => {
+        API.getUsers(p, this.props.usersPage.pageSize).then((data) => {
             this.props.setIsFetching(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         })
     }
 

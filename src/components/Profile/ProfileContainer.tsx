@@ -12,7 +12,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
     componentDidMount() {
         debugger
         let userId = this.props.match.params.userId
-        if (!userId) userId = '2';
+        if (!userId) userId = '26933';
         this.props.setProfile(userId)
         // https://social-network.samuraijs.com/api/1.0/profile/2
     }

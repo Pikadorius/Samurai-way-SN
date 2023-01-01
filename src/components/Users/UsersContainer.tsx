@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, ComponentType} from 'react';
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {
@@ -10,6 +10,7 @@ import {
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
+import {compose} from 'redux';
 
 type MapStateType = {
     usersPage: InitialStateType
@@ -123,7 +124,10 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(UsersAPIComponent)
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+// const AuthRedirectComponent = withAuthRedirect(UsersAPIComponent)
+// const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
-export default UsersContainer;
+export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(UsersAPIComponent)

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, ComponentType} from 'react';
 import s from './Profile.module.css';
 import Profile from "./Profile";
 import {connect} from "react-redux";
@@ -8,6 +8,7 @@ import {
 import {StateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
+import {compose} from 'redux';
 
 
 class ProfileContainer extends Component<ProfileContainerType> {
@@ -28,7 +29,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
     };
 }
 
-const AuthProfileContainer = withAuthRedirect(ProfileContainer)
+// const AuthProfileContainer = withAuthRedirect(ProfileContainer)
 
 
 type PathParamsType = {
@@ -52,6 +53,10 @@ type MapDispatchType = typeof actions
 export type ProfileContainerType = MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
 export type ProfileType = MapStateType
 
-const ContainerComponentWithURL = withRouter(AuthProfileContainer)
+// const ContainerComponentWithURL = withRouter(AuthProfileContainer)
 
-export default connect(mapStateToProps, actions)(ContainerComponentWithURL);
+export default compose(
+    connect(mapStateToProps, actions),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer) as ComponentType

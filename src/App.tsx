@@ -9,6 +9,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 const App: React.FC = () => {
 
@@ -19,6 +20,7 @@ const App: React.FC = () => {
             <HeaderContainer/>
             <NavbarContainer/>
             <div className='app-wrapper-content'>
+                <Route component={Login} path={'/login'}/>
                 <Route component={ProfileContainer} path={'/profile/:userId?'}/>
                 <Route component={DialogsContainer} path={'/dialogs'}/>
                 <Route component={UsersContainer} path={'/users'}/>

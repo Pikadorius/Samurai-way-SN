@@ -32,11 +32,13 @@ const superDialogsContainer: React.FC<DialogsType> = (props) => {
 
 type MapStatePropsType = {
     dialogsState: InitialStateType
+    isAuth: boolean
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        dialogsState: state.dialogsPage
+        dialogsState: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

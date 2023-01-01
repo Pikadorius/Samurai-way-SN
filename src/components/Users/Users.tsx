@@ -1,8 +1,9 @@
 import React, {useState, KeyboardEvent, FC} from 'react';
 import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {UsersPropsType} from './UsersContainer';
+import {Provider} from 'react-redux';
 
 const Users:FC<UsersPropsType> = (props) => {
 

@@ -9,13 +9,16 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {Redirect} from 'react-router-dom';
 
 type MapStateType = {
     usersPage: InitialStateType
+    isAuth: boolean
 }
 const mapStateToProps = (state: StateType): MapStateType => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -114,6 +117,8 @@ class UsersAPIComponent extends Component<UsersPropsType> {
 
     render = () => {
         console.log('Users rendering')
+        if (!this.props.isAuth) return <Redirect to={'/login'}/>
+
         return (
             this.props.usersPage.isFetching ?
                 <Preloader/> :

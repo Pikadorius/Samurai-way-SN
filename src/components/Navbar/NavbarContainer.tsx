@@ -40,7 +40,7 @@ import {StateType} from "../../redux/redux-store";
     );
 };*/
 
-type MapStateType = {
+export type MapStateType = {
     friends: FriendType[]
 }
 

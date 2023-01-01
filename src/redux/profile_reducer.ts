@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {profileAPI} from '../API/API';
+import {usersAPI} from '../API/API';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost> |
@@ -116,7 +116,7 @@ export const setUserProfile = (profile: any) => {
 
 export type SetProfileTCType = (userId:string)=>void
 export const setProfile:SetProfileTCType = (userId)=>(dispatch:Dispatch) => {
-    profileAPI.showUserProfile(userId).then((data) => {
+    usersAPI.getUserProfile(userId).then((data) => {
         dispatch(setUserProfile(data))
     })
 }

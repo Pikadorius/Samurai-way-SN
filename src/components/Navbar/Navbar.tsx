@@ -4,13 +4,17 @@ import {NavLink} from 'react-router-dom';
 import {SidebarType} from '../../redux/sidebar_reducer';
 
 const Navbar: React.FC<SidebarType> = ({friends}) => {
+
     return (
         <nav className={s.sidebar}>
+            <div className={s.item}>
+                <NavLink to={'/login'} activeClassName={s.activeLink}>Login</NavLink>
+            </div>
             <div className={s.item}>
                 <NavLink to={'/profile'} activeClassName={s.activeLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to={'/dialogs'} activeClassName={s.activeLink}>Dialogs</NavLink>
+                <NavLink to={'/dialogs'} activeClassName={s.activeLink}>Messages</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to={'/users'} activeClassName={s.activeLink}>Users</NavLink>

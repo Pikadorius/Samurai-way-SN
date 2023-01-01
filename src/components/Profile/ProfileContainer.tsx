@@ -13,7 +13,6 @@ import {compose} from 'redux';
 
 class ProfileContainer extends Component<ProfileContainerType> {
     componentDidMount() {
-        debugger
         let userId = this.props.match.params.userId
         if (!userId) userId = '26933';
         this.props.setProfile(userId)

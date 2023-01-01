@@ -1,17 +1,18 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {SidebarType} from '../../redux/sidebar_reducer';
+import {NavbarType} from './NavbarContainer';
 
-const Navbar: React.FC<SidebarType> = ({friends}) => {
+const Navbar: React.FC<NavbarType> = ({friends, setProfile}) => {
+    const myProfileId = '26933';
 
     return (
         <nav className={s.sidebar}>
             <div className={s.item}>
                 <NavLink to={'/login'} activeClassName={s.activeLink}>Login</NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink to={'/profile'} activeClassName={s.activeLink}>Profile</NavLink>
+            <div className={s.item} onClick={() => setProfile(myProfileId)}>
+                <NavLink to={'/profile/26933'} activeClassName={s.activeLink}>My profile</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to={'/dialogs'} activeClassName={s.activeLink}>Messages</NavLink>
@@ -45,5 +46,6 @@ const Navbar: React.FC<SidebarType> = ({friends}) => {
         </nav>
     );
 };
+
 
 export default Navbar;

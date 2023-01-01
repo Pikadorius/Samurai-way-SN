@@ -104,7 +104,7 @@ export const setPost = (newPostText: string) => {
 export const addLike = (postId: number) => {
     return {type: ACTION_TYPES.ADD_LIKE, postId} as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ServerProfileType) => {
     return {
         type: ACTION_TYPES.SET_USER_PROFILE,
         payload: {

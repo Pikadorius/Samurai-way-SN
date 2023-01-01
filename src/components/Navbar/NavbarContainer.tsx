@@ -3,6 +3,7 @@ import {FriendType} from '../../redux/sidebar_reducer';
 import {connect} from "react-redux";
 import Navbar from "./Navbar";
 import {StateType} from "../../redux/redux-store";
+import {setProfile, SetProfileTCType} from '../../redux/profile_reducer';
 
 /*const Navbar: React.FC<SidebarType> = ({friends}) => {
     return (
@@ -50,7 +51,15 @@ const mapStateToProps = (state: StateType): MapStateType => {
     }
 }
 
-export const NavbarContainer = connect(mapStateToProps)(Navbar);
+type MapDispatchType = {
+    setProfile:SetProfileTCType
+}
+const action:MapDispatchType = {
+    setProfile
+}
+export type NavbarType = MapDispatchType & MapStateType
+
+export const NavbarContainer = connect(mapStateToProps, action)(Navbar);
 
 
 export default NavbarContainer;

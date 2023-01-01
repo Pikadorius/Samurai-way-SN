@@ -20,3 +20,14 @@ export const usersAPI = {
 export const authAPI = {
     authMe: () => instance.get(`auth/me`).then(responce => responce.data)
 }
+
+export const profileInfo = {
+    updateMyStatus: (status: string) => instance.put(`profile/status`, {status}).then(response => {
+        debugger
+        return response.data
+    }),
+    getUsersStatus: (userId: number) => instance.get('/profile/status/{userId}').then(response => {
+        debugger
+        return response.data
+    })
+}

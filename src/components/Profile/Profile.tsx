@@ -3,7 +3,6 @@ import s from './Profile.module.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "./ProfileContainer";
-import {Redirect} from 'react-router-dom';
 
 const Profile: React.FC<ProfileType> = (props) => {
     return (

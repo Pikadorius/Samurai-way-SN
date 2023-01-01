@@ -9,6 +9,7 @@ import Dialogs from './Dialogs';
 import {StateType} from '../../redux/redux-store';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
 
 /*
 type DialogsType = {
@@ -32,13 +33,11 @@ const superDialogsContainer: React.FC<DialogsType> = (props) => {
 
 type MapStatePropsType = {
     dialogsState: InitialStateType
-    isAuth: boolean
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        dialogsState: state.dialogsPage,
-        isAuth: state.auth.isAuth
+        dialogsState: state.dialogsPage
     }
 }
 
@@ -56,14 +55,16 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         setMessage: (message: string) => {
             dispatch(setMessageActionCreator(message))
         },
-        deleteMessage: (id:number)=> {
+        deleteMessage: (id: number) => {
             dispatch(deleteMessageAC(id))
         }
     }
 }
 
+const AuthRedirectComponent = withAuthRedirect(Dialogs)
+
 export type DialogsType = MapStatePropsType & MapDispatchPropsType
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default DialogsContainer;

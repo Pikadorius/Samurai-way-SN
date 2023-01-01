@@ -9,16 +9,14 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {Redirect} from 'react-router-dom';
+import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
 
 type MapStateType = {
     usersPage: InitialStateType
-    isAuth: boolean
 }
 const mapStateToProps = (state: StateType): MapStateType => {
     return {
-        usersPage: state.usersPage,
-        isAuth: state.auth.isAuth
+        usersPage: state.usersPage
     }
 }
 
@@ -56,7 +54,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     }
 }
 */
-
 
 export type UsersPropsType = MapStateType & MapDispatchType
 
@@ -117,7 +114,6 @@ class UsersAPIComponent extends Component<UsersPropsType> {
 
     render = () => {
         console.log('Users rendering')
-        if (!this.props.isAuth) return <Redirect to={'/login'}/>
 
         return (
             this.props.usersPage.isFetching ?
@@ -127,6 +123,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+const AuthRedirectComponent = withAuthRedirect(UsersAPIComponent)
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default UsersContainer;

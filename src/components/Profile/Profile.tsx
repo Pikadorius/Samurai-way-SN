@@ -8,7 +8,7 @@ const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div>
             <ProfileInfo {...props}/>
-            <MyPostsContainer/>
+            {/*<MyPostsContainer/>*/}
             {/*<MyPosts
                 newPostText={profilePage.newPostText}
                 posts={profilePage.posts}

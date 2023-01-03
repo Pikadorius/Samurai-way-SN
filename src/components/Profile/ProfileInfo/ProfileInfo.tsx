@@ -24,7 +24,7 @@ const ProfileInfo: React.FC<ProfileType> = (props) => {
                 <p>My name is {props.profile.fullName}</p>
                 <p>{props.profile.aboutMe}</p>
                 <p>Search work: {props.profile.lookingForAJob && props.profile.lookingForAJobDescription}</p>
-                <ProfileStatus profile={props.profile}/>
+                <ProfileStatus {...props}/>
             </div>
         </div>
     );

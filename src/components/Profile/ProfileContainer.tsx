@@ -3,7 +3,7 @@ import s from './Profile.module.css';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    ServerProfileType, setProfile
+    ServerProfileType, setProfile, setStatus
 } from "../../redux/profile_reducer";
 import {StateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -16,6 +16,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
         let userId = this.props.match.params.userId
         if (!userId) userId = '26933';
         this.props.setProfile(userId)
+        this.props.setStatus(+userId)
         // https://social-network.samuraijs.com/api/1.0/profile/2
     }
 
@@ -37,15 +38,19 @@ type PathParamsType = {
 
 type MapStateType = {
     profile: ServerProfileType | null
+    status: string
 }
 const mapStateToProps = (state: StateType): MapStateType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        status: state.profilePage.profileStatus
     }
 }
 
 const actions = {
-    setProfile
+    setProfile,
+    setStatus
+
 }
 type MapDispatchType = typeof actions
 

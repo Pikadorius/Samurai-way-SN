@@ -1,11 +1,12 @@
 import {Dispatch} from 'redux';
-import {usersAPI} from '../API/API';
+import {profileAPI, usersAPI} from '../API/API';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost> |
     ReturnType<typeof setPost> |
     ReturnType<typeof addLike> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setUserStatus>
 
 export type PostType = {
     id: number
@@ -37,7 +38,7 @@ export type ServerProfileType = {
     }
 }
 
-const initialState = {
+const initialState:InitialStateType = {
     newPostText: '',
     posts: [
         {id: 1, title: "My  first post", description: "I try to set props to my first post...", likesCount: 0},
@@ -49,13 +50,15 @@ const initialState = {
         },
         {id: 3, title: "Dimych is the best!", description: "Dimych has a talent to teach", likesCount: 10}
     ] as PostType[],
-    profile: null
+    profile: null,
+    profileStatus: ''
 }
 
 export type InitialStateType = {
     newPostText: string
     posts: PostType[]
     profile: ServerProfileType | null
+    profileStatus: string
 }
 // export type InitialStateType = typeof initialState
 
@@ -64,7 +67,8 @@ const enum ACTION_TYPES  {
     ADD_POST='ADD-NEW-POST',
     SET_POST='SET-POST-TEXT',
     ADD_LIKE='ADD-LIKE',
-    SET_USER_PROFILE='SET_USER_PROFILE'
+    SET_USER_PROFILE='SET_USER_PROFILE',
+    SET_USER_STATUS='SET_USER_STATUS'
 }
 
 
@@ -88,6 +92,9 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
             };
         case ACTION_TYPES.SET_USER_PROFILE: {
             return {...state, profile: action.payload.profile};
+        }
+        case ACTION_TYPES.SET_USER_STATUS: {
+            return {...state, profileStatus: action.payload.status}
         }
         default:
             return state;
@@ -113,11 +120,27 @@ export const setUserProfile = (profile: ServerProfileType) => {
     } as const
 }
 
+export const setUserStatus = (status: string) => {
+    return {
+        type: ACTION_TYPES.SET_USER_STATUS,
+        payload: {
+            status
+        }
+    } as const
+}
+
 
 export type SetProfileTCType = (userId:string)=>void
 export const setProfile:SetProfileTCType = (userId)=>(dispatch:Dispatch) => {
     usersAPI.getUserProfile(userId).then((data) => {
         dispatch(setUserProfile(data))
+    })
+}
+
+export type SetProfileStatusTCType = (userId:number)=>void
+export const setStatus:SetProfileStatusTCType = (userId)=>(dispatch:Dispatch) => {
+    profileAPI.getUsersStatus(userId).then((data) => {
+        dispatch(setUserStatus(data))
     })
 }
 

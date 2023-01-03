@@ -14,19 +14,19 @@ export const usersAPI = {
     getUsers: (currentPage: number, pageSize: number) => instance.get(`users?page=${currentPage}&count={${pageSize}`).then(responce => responce.data),
     followUser: (id: number) => instance.post(`follow/${id}`).then(responce => responce.data),
     unfollowUser: (id: number) => instance.delete(`follow/${id}`).then(responce => responce.data),
-    getUserProfile: (userId: string) => axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(response => response.data)
+    getUserProfile: (userId: string) => instance.get(`profile/${userId}`).then(response => response.data)
 }
 
 export const authAPI = {
     authMe: () => instance.get(`auth/me`).then(responce => responce.data)
 }
 
-export const profileInfo = {
+export const profileAPI = {
     updateMyStatus: (status: string) => instance.put(`profile/status`, {status}).then(response => {
         debugger
         return response.data
     }),
-    getUsersStatus: (userId: number) => instance.get('/profile/status/{userId}').then(response => {
+    getUsersStatus: (userId: number) => instance.get(`/profile/status/${userId}`).then(response => {
         debugger
         return response.data
     })

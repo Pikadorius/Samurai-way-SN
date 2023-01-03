@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {ProfileType} from "../ProfileContainer";
 import Preloader from "../../common/Preloader/Preloader";
-import EditableSpan from '../../universal/EditableSpan/EditableSpan';
-import {profileInfo} from '../../../API/API';
 
 /*
 const ProfileStatus = (props: ProfileType) => {
@@ -47,9 +45,10 @@ class ProfileStatus extends Component<ProfileType> {
 
 
         return <div>
+            Status:
             {this.state.editMode
-                ? <input value={this.props.profile.aboutMe} onBlur={this.deactivateEditMode}/>
-                : <span onDoubleClick={this.activateEditMode}>{this.props.profile.aboutMe}</span>
+                ? <input autoFocus value={this.props.status} onBlur={this.deactivateEditMode}/>
+                : <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
 
             }
         </div>;

@@ -1,4 +1,4 @@
-import React, {Component, LegacyRef} from 'react';
+import React, {ChangeEvent, Component, LegacyRef} from 'react';
 import {ProfileType} from "../ProfileContainer";
 import Preloader from "../../common/Preloader/Preloader";
 
@@ -31,6 +31,10 @@ class ProfileStatus extends Component<ProfileType> {
         status: this.props.status
     }
 
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: e.currentTarget.value})
+    }
+
     activateEditMode = () => {
         this.setState({editMode: true})
     }
@@ -50,7 +54,8 @@ class ProfileStatus extends Component<ProfileType> {
             Status:
             {this.state.editMode
                 ?
-                <input autoFocus value={this.state.status} onBlur={this.deactivateEditMode}/>
+                <input onChange={this.onStatusChange} autoFocus value={this.state.status}
+                       onBlur={this.deactivateEditMode}/>
                 : <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
 
             }

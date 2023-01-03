@@ -14,7 +14,6 @@ export const usersAPI = {
     getUsers: (currentPage: number, pageSize: number) => instance.get(`users?page=${currentPage}&count={${pageSize}`).then(responce => responce.data),
     followUser: (id: number) => instance.post(`follow/${id}`).then(responce => responce.data),
     unfollowUser: (id: number) => instance.delete(`follow/${id}`).then(responce => responce.data),
-    getUserProfile: (userId: string) => instance.get(`profile/${userId}`).then(response => response.data)
 }
 
 export const authAPI = {
@@ -22,6 +21,8 @@ export const authAPI = {
 }
 
 export const profileAPI = {
+    getUserProfile: (userId: string) => instance.get(`profile/${userId}`).then(response => response.data),
+
     updateMyStatus: (status: string) => instance.put(`profile/status`, {status}).then(response => {
         debugger
         return response.data

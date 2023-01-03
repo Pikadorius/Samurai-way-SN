@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux';
 import {profileAPI, usersAPI} from '../API/API';
+import news from '../components/News/News';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost> |
@@ -132,7 +133,7 @@ export const setUserStatus = (status: string) => {
 
 export type SetProfileTCType = (userId:string)=>void
 export const setProfile:SetProfileTCType = (userId)=>(dispatch:Dispatch) => {
-    usersAPI.getUserProfile(userId).then((data) => {
+    profileAPI.getUserProfile(userId).then((data) => {
         dispatch(setUserProfile(data))
     })
 }
@@ -141,6 +142,16 @@ export type SetProfileStatusTCType = (userId:number)=>void
 export const setStatus:SetProfileStatusTCType = (userId)=>(dispatch:Dispatch) => {
     profileAPI.getUsersStatus(userId).then((data) => {
         dispatch(setUserStatus(data))
+    })
+}
+
+export type UpdateStatusTCType = (newStatus: string) => void
+export const updateStatus:UpdateStatusTCType = (newStatus)=>(dispatch:Dispatch)=>{
+    profileAPI.updateMyStatus(newStatus).then(data=>{
+        if (data.resultCode===0) {
+           dispatch(setUserStatus(newStatus))
+        }
+        else alert(`ERROR OCCURED: ${data.messages[0]}`)
     })
 }
 

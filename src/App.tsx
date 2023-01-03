@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
@@ -19,7 +19,7 @@ const App: React.FC = () => {
             <NavbarContainer/>
             <div className='app-wrapper-content'>
                 <Route component={Login} path={'/login'}/>
-                <Route component={ProfileContainer} path={'/profile/:userId?'}/>
+                <Route component={ProfileContainer} path={['/profile/:userId?','/']} exact/>
                 <Route component={DialogsContainer} path={'/dialogs'}/>
                 <Route component={UsersContainer} path={'/users'}/>
                 <Route component={News} path={'/news'}/>

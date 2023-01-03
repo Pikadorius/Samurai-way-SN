@@ -11,6 +11,7 @@ const ProfileInfo: React.FC<ProfileType> = (props) => {
         return <Preloader/>
     }
 
+
     return (
         <div>
             {/*<div>

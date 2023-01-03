@@ -3,7 +3,7 @@ import s from './Profile.module.css';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    ServerProfileType, setProfile, setStatus
+    ServerProfileType, setProfile, setStatus, updateStatus
 } from "../../redux/profile_reducer";
 import {StateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -49,13 +49,13 @@ const mapStateToProps = (state: StateType): MapStateType => {
 
 const actions = {
     setProfile,
-    setStatus
-
+    setStatus,
+    updateStatus
 }
 type MapDispatchType = typeof actions
 
 export type ProfileContainerType = MapStateType & MapDispatchType & RouteComponentProps<PathParamsType>
-export type ProfileType = MapStateType
+export type ProfileType = MapStateType & MapDispatchType
 
 // const ContainerComponentWithURL = withRouter(AuthProfileContainer)
 

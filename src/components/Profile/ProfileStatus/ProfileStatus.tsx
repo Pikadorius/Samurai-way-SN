@@ -44,6 +44,16 @@ class ProfileStatus extends Component<ProfileType> {
         this.props.updateStatus(this.state.status)
     }
 
+    componentDidUpdate(prevProps: Readonly<ProfileType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+        let a = this.state
+        let b = this.props
+        console.log('updated')
+    }
+
+
     render() {
         if (!this.props.profile) {
             return <Preloader/>
@@ -56,7 +66,7 @@ class ProfileStatus extends Component<ProfileType> {
                 ?
                 <input onChange={this.onStatusChange} autoFocus value={this.state.status}
                        onBlur={this.deactivateEditMode}/>
-                : <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                : <span onDoubleClick={this.activateEditMode}>{this.props.status || `No status`}</span>
 
             }
         </div>;

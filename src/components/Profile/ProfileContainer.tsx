@@ -15,6 +15,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) userId = '26933';
+        console.log(userId)
         this.props.setProfile(userId)
         this.props.setStatus(+userId)
         // https://social-network.samuraijs.com/api/1.0/profile/2

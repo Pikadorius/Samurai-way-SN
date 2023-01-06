@@ -1,14 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
-import axios from 'axios';
-import {useDispatch, useSelector} from 'react-redux';
-import {StateType} from '../../redux/redux-store';
-import {InititalStateType, setAuthUserData} from '../../redux/auth-reducer';
-import {MapStateToPropsType} from './HeaderContainer';
+import {HeaderContainerType} from './HeaderContainer';
 
 
-const Header = (props: MapStateToPropsType) => {
+const Header = (props: HeaderContainerType) => {
 
     // const dispatch=useDispatch()
     //
@@ -26,7 +22,9 @@ const Header = (props: MapStateToPropsType) => {
             <img width={'200px'} src="https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png"
                  alt=""/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ?
+                    <>{props.login}<button onClick={()=>props.logoutTC()}>Logout</button></>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

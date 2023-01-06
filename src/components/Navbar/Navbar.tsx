@@ -3,15 +3,19 @@ import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {NavbarType} from './NavbarContainer';
 
-const Navbar: React.FC<NavbarType> = ({friends, setProfile}) => {
+const Navbar: React.FC<NavbarType> = ({isAuth,friends, setProfile, setStatus}) => {
     const myProfileId = '26933';
+    const setMyProfile = () => {
+        setProfile(myProfileId)
+        setStatus(+myProfileId)
+    }
 
     return (
         <nav className={s.sidebar}>
-            <div className={s.item}>
+            {!isAuth && <div className={s.item}>
                 <NavLink to={'/login'} activeClassName={s.activeLink}>Login</NavLink>
-            </div>
-            <div className={s.item} onClick={() => setProfile(myProfileId)}>
+            </div>}
+            <div className={s.item} onClick={setMyProfile}>
                 <NavLink to={'/profile/26933'} activeClassName={s.activeLink}>My profile</NavLink>
             </div>
             <div className={s.item}>

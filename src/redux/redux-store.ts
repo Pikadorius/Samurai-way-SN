@@ -6,6 +6,8 @@ import usersReducer from "./users-reducer";
 import {musicReducer} from './music_reducer';
 import {authReducer} from './auth-reducer';
 import thunkMIddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form'
+
 
 // combine all reducers
 export let reducer = combineReducers({
@@ -14,7 +16,8 @@ export let reducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     musicPage: musicReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export type StateType = ReturnType<typeof reducer>

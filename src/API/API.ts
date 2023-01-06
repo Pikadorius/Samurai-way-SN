@@ -16,8 +16,17 @@ export const usersAPI = {
     unfollowUser: (id: number) => instance.delete(`follow/${id}`).then(responce => responce.data),
 }
 
+export type LoginFormType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+
 export const authAPI = {
-    authMe: () => instance.get(`auth/me`).then(responce => responce.data)
+    authMe: () => instance.get(`auth/me`).then(responce => responce.data),
+    login: (loginData: LoginFormType)=>instance.post(`auth/login`, loginData),
+    logout: ()=>instance.delete('auth/login')
 }
 
 export const profileAPI = {

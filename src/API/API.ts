@@ -1,6 +1,17 @@
 import axios from 'axios';
 
+type AuthMeResponseDataType = {
+    id: number
+    login: string
+    email: string
+}
 
+type ResponseType<D={}> = {
+    data: D
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
 // use instead of axios => default configuration for API requests
 const instance = axios.create({
     withCredentials: true,
@@ -24,8 +35,8 @@ export type LoginFormType = {
 }
 
 export const authAPI = {
-    authMe: () => instance.get(`auth/me`).then(responce => responce.data),
-    login: (loginData: LoginFormType)=>instance.post(`auth/login`, loginData),
+    authMe: () => instance.get<ResponseType<AuthMeResponseDataType>>(`auth/me`).then(responce => responce.data),
+    login: (loginData: LoginFormType)=>instance.post<ResponseType<{item:number}>>(`auth/login`, loginData),
     logout: ()=>instance.delete('auth/login')
 }
 

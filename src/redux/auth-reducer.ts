@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux';
 import {authAPI, LoginFormType} from '../API/API';
+import {AppDispatch} from './redux-store';
 
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',
@@ -10,7 +11,6 @@ export type InititalStateType = {
     id: number | null
     login: string | null
     email: string | null
-    photo: string | undefined
     isAuth: boolean
 }
 
@@ -18,7 +18,6 @@ const initailState: InititalStateType = {
     id: null,
     login: null,
     email: null,
-    photo: undefined,
     isAuth: false
 }
 
@@ -29,10 +28,10 @@ type ActionType =
 export const authReducer = (state: InititalStateType = initailState, action: ActionType): InititalStateType => {
     switch (action.type) {
         case ACTIONS_TYPE.SET_USER_DATA: {
-            return {...state, ...action.payload.data, isAuth: true}
+            return {...state, ...action.payload.data}
         }
         case ACTIONS_TYPE.LOG_OUT: {
-            return initailState;
+            return {...initailState};
         }
         default:
             return state
@@ -56,25 +55,24 @@ export const logOutUser = () => {
     } as const
 }
 
+
+
 export type AuthUserTCType = () => void
 export const authUser = () => (dispatch: Dispatch) => {
     authAPI.authMe().then((result) => {
         if (result.resultCode === 0) {
-            dispatch(setAuthUserData(result.data))
+            dispatch(setAuthUserData({...result.data, isAuth: true}))
         }
     })
 }
 
 export type AuthFromLogin = (loginData: LoginFormType) => void
-export const authFromLogin: AuthFromLogin = (loginData) => (dispatch: Dispatch) => {
+export const authFromLogin: AuthFromLogin = (loginData) => (dispatch: AppDispatch) => {
     authAPI.login(loginData).then(res => {
         if (res.data.resultCode === 0) {
-            authAPI.authMe().then(res => {
-                console.log('authorize me!!!!')
-                dispatch(setAuthUserData(res.data))
-            })
+            dispatch(authUser())
         }
-        else alert('Something wrong')
+        else alert(res.data.messages[0])
     })
 }
 

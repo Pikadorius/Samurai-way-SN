@@ -9,7 +9,7 @@ import {LoginFormType} from '../../API/API';
 import {Input} from '../common/FormControls/FormControls';
 import {minLength, required} from '../../utils/validators/validators';
 
-const minLength5 = minLength(5)
+
 
 const LoginForm:FC<InjectedFormProps<LoginFormType>> = (props) => {
     console.log('FORM RERENDERED')
@@ -21,7 +21,7 @@ const LoginForm:FC<InjectedFormProps<LoginFormType>> = (props) => {
                 <Field  placeholder={'email'} name={'email'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field  placeholder={'Password'} name={'password'} component={Input} validate={[required]}/>
+                <Field  placeholder={'Password'} name={'password'} component={Input} type={'password'}  validate={[required]}/>
             </div>
             <div>
                 <Field  name={'rememberMe'} component={'input'} type={'checkbox'}/>Remember me
@@ -45,6 +45,7 @@ const Login = (props:MapDispatchType & MapStateToProps)=> {
         console.log(formData)
         props.authFromLogin(formData)
     }
+
     if (props.isAuth) {
         return <Redirect to={'/profile/26933'}/>
     }

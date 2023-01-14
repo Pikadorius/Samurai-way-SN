@@ -19,14 +19,12 @@ class HeaderContainer extends Component<HeaderContainerType> {
 type MapStateToPropsType = {
     isAuth: boolean
     login: string | null
-    photo: string | undefined
     id: number | null
 }
 const mapStateToProps = (state: StateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login,
-        photo: state.auth.photo,
         id: state.auth.id
     }
 }

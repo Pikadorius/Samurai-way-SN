@@ -16,12 +16,13 @@ export const FormComponent = ({input, meta, placeholder, children, ...props}:any
 }
 
 export const Textarea = (props: any): JSX.Element => {
-    const {input,meta,placeholder, ...restProps}=props
-    return <FormComponent {...props}><textarea {...input}/></FormComponent>
+    const {input,meta, ...restProps}=props
+    return <FormComponent {...props}><textarea {...input} {...restProps}/></FormComponent>
 };
 
 
 export const Input = (props: any): JSX.Element => {
-    const {input,meta,placeholder, ...restProps}=props
-    return <FormComponent {...props}><input {...input}/></FormComponent>
+    debugger
+    const {input,meta, ...restProps}=props
+    return <FormComponent {...props}><input {...input} {...restProps}/></FormComponent>
 };

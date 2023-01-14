@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {MyPostsType} from "./MyPostsContainer";
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import PostFormRedux, {PostFormType} from './AddPostForm/AddPostForm';
 
 /*type PostType = {
     id: number
@@ -46,19 +46,3 @@ const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, addLike}) => {
 };
 
 export default MyPosts;
-
-
-type PostFormType = {
-    newPost: string
-}
-
-const PostForm: FC<InjectedFormProps<PostFormType>> = (props) => {
-    return <form onSubmit={props.handleSubmit}>
-        <Field component={'textarea'} name={'newPost'} cols={30} rows={5}></Field>
-        <button>Add post</button>
-    </form>
-}
-
-const PostFormRedux = reduxForm<PostFormType>({
-    form: 'profileAddPostForm'
-})(PostForm)

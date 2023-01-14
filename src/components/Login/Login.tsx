@@ -6,19 +6,25 @@ import {authFromLogin} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
 import {Redirect} from 'react-router-dom';
 import {LoginFormType} from '../../API/API';
+import {Input} from '../common/FormControls/FormControls';
+import {minLength, required} from '../../utils/validators/validators';
+
+const minLength5 = minLength(5)
 
 const LoginForm:FC<InjectedFormProps<LoginFormType>> = (props) => {
     console.log('FORM RERENDERED')
+
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  placeholder={'email'} name={'email'} component={'input'}/>
+                <Field  placeholder={'email'} name={'email'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field  placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field  placeholder={'Password'} name={'password'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field  type={'checkbox'} name={'rememberMe'} component={'input'}/>Remember me
+                <Field  name={'rememberMe'} component={'input'} type={'checkbox'}/>Remember me
             </div>
             <div>
                 <button>Login</button>

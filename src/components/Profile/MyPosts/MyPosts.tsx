@@ -36,9 +36,7 @@ const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, addLike}) => {
         <div className={s.content}>
             <div className={s.postsBlock}>
                 <h3>Posts</h3>
-                <div>
-                    <PostFormRedux onSubmit={onAddNewPost}/>
-                </div>
+                <PostFormRedux onSubmit={onAddNewPost}/>
                 <div>
                     {allPosts}
                 </div>
@@ -58,7 +56,6 @@ const PostForm: FC<InjectedFormProps<PostFormType>> = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <Field component={'textarea'} name={'newPost'} cols={30} rows={5}></Field>
         <button>Add post</button>
-        <button onClick={props.reset}>Reset</button>
     </form>
 }
 

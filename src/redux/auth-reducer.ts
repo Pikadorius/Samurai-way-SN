@@ -1,6 +1,7 @@
 import {Dispatch} from 'redux';
 import {authAPI, LoginFormType} from '../API/API';
 import {AppDispatch} from './redux-store';
+import {stopSubmit} from 'redux-form';
 
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',
@@ -72,7 +73,11 @@ export const authFromLogin: AuthFromLogin = (loginData) => (dispatch: AppDispatc
         if (res.data.resultCode === 0) {
             dispatch(authUser())
         }
-        else alert(res.data.messages[0])
+        else {
+            // alert(res.data.messages[0])
+            let action = stopSubmit('login', {_error: 'Wrong email or password'});
+            dispatch(action)
+        }
     })
 }
 

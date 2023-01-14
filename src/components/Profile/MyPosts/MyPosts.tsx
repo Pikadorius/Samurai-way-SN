@@ -1,7 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React, {FC} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {MyPostsType} from "./MyPostsContainer";
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 /*type PostType = {
     id: number
@@ -18,7 +19,7 @@ type MyPostsType = {
     addLike: (id:number)=>void
 }*/
 
-const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,addLike}) => {
+const MyPosts: React.FC<MyPostsType> = ({posts, addNewPost, addLike}) => {
 
     const allPosts = posts.map(p => <Post name={p.title}
                                           description={p.description}
@@ -27,12 +28,8 @@ const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,a
                                           key={p.id}
                                           addLike={addLike}/>)
 
-    const onSetPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       setPost(e.currentTarget.value)
-    }
-
-    const onAddNewPost = () => {
-        addNewPost()
+    const onAddNewPost = (formData: PostFormType) => {
+        addNewPost(formData.newPost)
     }
 
     return (
@@ -40,8 +37,7 @@ const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,a
             <div className={s.postsBlock}>
                 <h3>Posts</h3>
                 <div>
-                    <textarea cols={30} rows={5} value={newPostText} onChange={onSetPost}></textarea>
-                    <button onClick={onAddNewPost}>Add post</button>
+                    <PostFormRedux onSubmit={onAddNewPost}/>
                 </div>
                 <div>
                     {allPosts}
@@ -52,3 +48,20 @@ const MyPosts: React.FC<MyPostsType> = ({newPostText,posts,setPost, addNewPost,a
 };
 
 export default MyPosts;
+
+
+type PostFormType = {
+    newPost: string
+}
+
+const PostForm: FC<InjectedFormProps<PostFormType>> = (props) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field component={'textarea'} name={'newPost'} cols={30} rows={5}></Field>
+        <button>Add post</button>
+        <button onClick={props.reset}>Reset</button>
+    </form>
+}
+
+const PostFormRedux = reduxForm<PostFormType>({
+    form: 'profileAddPostForm'
+})(PostForm)

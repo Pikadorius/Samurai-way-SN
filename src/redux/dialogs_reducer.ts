@@ -1,6 +1,5 @@
 export type DialogsActionsType =
     ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof setMessageActionCreator> |
     DeleteMessageType
 
 export type MessageType = {
@@ -52,7 +51,6 @@ const initialState = {
             avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt3jk5t5kR_i3IeLL1UosSLZmblcK4AhE1kQ&usqp=CAU"
         },
     ] as DialogType[],
-    newMessageText: '',
     messages: [
         {id: 1, message: 'Hi!'},
         {id: 2, message: 'How are you!'},
@@ -69,16 +67,13 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
 
     switch (action.type) {
         case 'ADD-NEW-MESSAGE':
-            if (state.newMessageText.trim() !== '') {
+            if (action.payload.newMessage.trim() !== '') {
                 let newMessage: MessageType = {
                     id: state.messages.length + 1,
-                    message: state.newMessageText
+                    message: action.payload.newMessage
                 }
-                return {...state, newMessageText: '', messages: [...state.messages, newMessage]}
-            }
-            else return state
-        case 'SET-MESSAGE-TEXT':
-            return {...state, newMessageText: action.newMessageText}
+                return {...state, messages: [...state.messages, newMessage]}
+            } else return state
         case 'DELETE_MESSAGE': {
             return {...state, messages: state.messages.filter(m => m.id !== action.payload.id)}
         }
@@ -87,12 +82,8 @@ const dialogsReducer = (state: InitialStateType = initialState, action: DialogsA
     }
 }
 
-export const addMessageActionCreator = () => {
-    return {type: 'ADD-NEW-MESSAGE'} as const
-}
-
-export const setMessageActionCreator = (newMessageText: string) => {
-    return {type: 'SET-MESSAGE-TEXT', newMessageText: newMessageText} as const
+export const addMessageActionCreator = (newMessage: string) => {
+    return {type: 'ADD-NEW-MESSAGE', payload: {newMessage}} as const
 }
 
 type DeleteMessageType = ReturnType<typeof deleteMessageAC>

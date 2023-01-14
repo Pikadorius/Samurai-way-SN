@@ -1,10 +1,8 @@
 import {Dispatch} from 'redux';
-import {profileAPI, usersAPI} from '../API/API';
-import news from '../components/News/News';
+import {profileAPI} from '../API/API';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost> |
-    ReturnType<typeof setPost> |
     ReturnType<typeof addLike> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setUserStatus>
@@ -40,7 +38,6 @@ export type ServerProfileType = {
 }
 
 const initialState:InitialStateType = {
-    newPostText: '',
     posts: [
         {id: 1, title: "My  first post", description: "I try to set props to my first post...", likesCount: 0},
         {
@@ -56,7 +53,6 @@ const initialState:InitialStateType = {
 }
 
 export type InitialStateType = {
-    newPostText: string
     posts: PostType[]
     profile: ServerProfileType | null
     profileStatus: string
@@ -66,7 +62,6 @@ export type InitialStateType = {
 
 const enum ACTION_TYPES  {
     ADD_POST='ADD-NEW-POST',
-    SET_POST='SET-POST-TEXT',
     ADD_LIKE='ADD-LIKE',
     SET_USER_PROFILE='SET_USER_PROFILE',
     SET_USER_STATUS='SET_USER_STATUS'
@@ -80,12 +75,10 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
             let newPost: PostType = {
                 id: state.posts.length + 1,
                 title: `Post ${state.posts.length + 1}`,
-                description: state.newPostText,
+                description: action.payload.newPost,
                 likesCount: 0
             };
-            return {...state, newPostText: '', posts: [...state.posts, newPost]};
-        case 'SET-POST-TEXT':
-            return {...state, newPostText: action.newPostText}
+            return {...state, posts: [...state.posts, newPost]};
         case 'ADD-LIKE':
             return {
                 ...state,
@@ -102,12 +95,8 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileA
     }
 }
 
-export const addPost = () => {
-    return {type: ACTION_TYPES.ADD_POST} as const
-}
-
-export const setPost = (newPostText: string) => {
-    return {type: ACTION_TYPES.SET_POST, newPostText: newPostText} as const
+export const addPost = (newPost: string) => {
+    return {type: ACTION_TYPES.ADD_POST, payload:{newPost}} as const
 }
 export const addLike = (postId: number) => {
     return {type: ACTION_TYPES.ADD_LIKE, postId} as const

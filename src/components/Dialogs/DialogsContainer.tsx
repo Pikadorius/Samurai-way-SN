@@ -3,7 +3,6 @@ import {
     addMessageActionCreator,
     deleteMessageAC,
     InitialStateType,
-    setMessageActionCreator
 } from "../../redux/dialogs_reducer";
 import Dialogs from './Dialogs';
 import {StateType} from '../../redux/redux-store';
@@ -42,18 +41,14 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
 }
 
 type MapDispatchPropsType = {
-    addMessage: () => void
-    setMessage: (message: string) => void
+    addMessage: (newMessage: string) => void
     deleteMessage: (id: number) => void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addMessage: () => {
-            dispatch(addMessageActionCreator())
-        },
-        setMessage: (message: string) => {
-            dispatch(setMessageActionCreator(message))
+        addMessage: (newMessage) => {
+            dispatch(addMessageActionCreator(newMessage))
         },
         deleteMessage: (id: number) => {
             dispatch(deleteMessageAC(id))

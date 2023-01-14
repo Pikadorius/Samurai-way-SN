@@ -1,5 +1,5 @@
-import {addLike, addPost, setPost} from "./profile_reducer";
-import  {addMessageActionCreator, setMessageActionCreator} from "./dialogs_reducer";
+import {addLike, addPost} from "./profile_reducer";
+import  {addMessageActionCreator} from "./dialogs_reducer";
 
 type PostType = {
     id: number
@@ -43,9 +43,7 @@ type SidebarType = {
 
 type ActionsType =
     ReturnType<typeof addPost>
-    | ReturnType<typeof setPost>
     | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof setMessageActionCreator>
     | ReturnType<typeof addLike>
 
 type StateType = {

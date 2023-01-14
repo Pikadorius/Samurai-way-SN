@@ -2,7 +2,6 @@ import React from 'react';
 import {
     addLike,
     addPost, PostType,
-    setPost
 } from "../../../redux/profile_reducer";
 import MyPosts from './MyPosts';
 import {StateType} from '../../../redux/redux-store';
@@ -36,31 +35,25 @@ const superMyPostsContainer: React.FC<MyPostsType> = (props) => {
 */
 
 type MapStatePropsType = {
-    newPostText: string
     posts: PostType[]
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts,
     }
 }
 
 type MapDispatchPropsType = {
-    setPost: (post: string) => void
-    addNewPost: () => void
+    addNewPost: (post: string) => void
     addLike: (id: number) => void
 }
 
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        setPost: (post: string) => {
-            dispatch(setPost(post))
-        },
-        addNewPost: () => {
-            dispatch(addPost())
+        addNewPost: (newPost) => {
+            dispatch(addPost(newPost))
         },
         addLike: (id: number) => {
             dispatch(addLike(id))

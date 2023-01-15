@@ -74,8 +74,7 @@ export const authFromLogin: AuthFromLogin = (loginData) => (dispatch: AppDispatc
             dispatch(authUser())
         }
         else {
-            // alert(res.data.messages[0])
-            let action = stopSubmit('login', {_error: 'Wrong email or password'});
+            let action = stopSubmit('login', {_error: res.data.messages.length>0? res.data.messages[0] : 'Something wrong'});
             dispatch(action)
         }
     })

@@ -14,7 +14,7 @@ import {compose} from 'redux';
 class ProfileContainer extends Component<ProfileContainerType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId = '26933';
+        if (!userId) userId = '' + this.props.authUserId;
         console.log(userId)
         this.props.setProfile(userId)
         this.props.setStatus(+userId)
@@ -40,11 +40,13 @@ type PathParamsType = {
 type MapStateType = {
     profile: ServerProfileType | null
     status: string
+    authUserId: number | null
 }
 const mapStateToProps = (state: StateType): MapStateType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.profileStatus
+        status: state.profilePage.profileStatus,
+        authUserId: state.auth.id
     }
 }
 

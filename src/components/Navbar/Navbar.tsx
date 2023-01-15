@@ -3,8 +3,8 @@ import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {NavbarType} from './NavbarContainer';
 
-const Navbar: React.FC<NavbarType> = ({isAuth,friends, setProfile, setStatus}) => {
-    const myProfileId = '26933';
+const Navbar: React.FC<NavbarType> = ({authUserId,isAuth,friends, setProfile, setStatus}) => {
+    const myProfileId = ''+ authUserId;
     const setMyProfile = () => {
         setProfile(myProfileId)
         setStatus(+myProfileId)

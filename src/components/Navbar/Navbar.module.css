@@ -31,11 +31,16 @@
 
 .friend {
     text-align: center;
+    font-size: 12px;
+    width: 70px;
+
 }
 
 .friend img {
     border-radius: 50%;
+    border: 1px solid;
     width: 70px;
+    height: 70px;
     display: block;
 }
 

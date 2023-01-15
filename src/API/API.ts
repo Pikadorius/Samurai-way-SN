@@ -6,6 +6,24 @@ type AuthMeResponseDataType = {
     email: string
 }
 
+export type FriendsServerType = {
+    name: string
+    id: number
+    uniqueUrlName: string | null,
+    photos: {
+        small: string | undefined,
+        large: string | undefined,
+    },
+    status: string | null
+    followed: boolean
+}
+
+type FriendsResponseType = {
+    items: FriendsServerType[]
+    totalCount: number
+    error: string | null
+}
+
 type ResponseType<D={}> = {
     data: D
     messages: string[]
@@ -23,6 +41,7 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers: (currentPage: number, pageSize: number) => instance.get(`users?page=${currentPage}&count={${pageSize}`).then(responce => responce.data),
+    getFriends: ()=>instance.get<FriendsResponseType>(`users?friend=true`),
     followUser: (id: number) => instance.post(`follow/${id}`).then(responce => responce.data),
     unfollowUser: (id: number) => instance.delete(`follow/${id}`).then(responce => responce.data),
 }

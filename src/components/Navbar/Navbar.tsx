@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {NavbarType} from './NavbarContainer';
+import {FriendsServerType, usersAPI} from '../../API/API';
+import dafaultAvatar from '../../assets/images/defaultUsersAvatar.jpg'
 
-const Navbar: React.FC<NavbarType> = ({authUserId,isAuth,friends, setProfile, setStatus}) => {
-    const myProfileId = ''+ authUserId;
+const Navbar: React.FC<NavbarType> = ({authUserId, isAuth, setProfile, setStatus}) => {
+    const myProfileId = '' + authUserId;
     const setMyProfile = () => {
         setProfile(myProfileId)
         setStatus(+myProfileId)
     }
+
+    const [friends, setFriends] = useState<FriendsServerType[]>([])
+
+
+    useEffect(() => {
+        usersAPI.getFriends().then(res => {
+            debugger
+            setFriends(res.data.items)
+        })
+    }, [])
 
     return (
         <nav className={s.sidebar}>
@@ -35,12 +47,12 @@ const Navbar: React.FC<NavbarType> = ({authUserId,isAuth,friends, setProfile, se
             </div>
 
             <div className={s.friends}>
-                <h2>My best friends:</h2>
+                <h2>My friends:</h2>
                 <div className={s.friendsList}>
                     {friends.map(f => {
                         return (
-                            <div key={f.id} className={s.friend}>
-                                <img src={f.avatar} alt={"Friends avatar"}/>
+                            <div key={f.id} className={s.friend} onClick={() => setProfile("" + f.id)}>
+                                <img src={f.photos.small ? f.photos.small : dafaultAvatar} alt={"Friends avatar"}/>
                                 {f.name}
                             </div>
                         )

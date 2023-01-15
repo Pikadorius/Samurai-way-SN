@@ -42,14 +42,14 @@ import {setProfile, SetProfileStatusTCType, SetProfileTCType, setStatus} from '.
 };*/
 
 export type MapStateType = {
-    friends: FriendType[]
+    // friends: FriendType[]
     isAuth: boolean
     authUserId: number | null
 }
 
 const mapStateToProps = (state: StateType): MapStateType => {
     return {
-        friends: state.sidebar.friends,
+        // friends: state.sidebar.friends,
         isAuth: state.auth.isAuth,
         authUserId: state.auth.id
     }

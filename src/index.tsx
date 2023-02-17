@@ -5,9 +5,6 @@ import App from './app/App';
 import store, {reducer} from "./redux/redux-store";
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
-import {loadState, saveState} from './localStorage/localStorage';
-import {createStore} from 'redux';
-import throttle from 'lodash/throttle';
 
 /*
 const localState = loadState()

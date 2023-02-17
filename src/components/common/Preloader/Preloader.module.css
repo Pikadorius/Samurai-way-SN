@@ -1,3 +1,13 @@
+.container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
 .preloader {
     display: block;
     width: 300px;

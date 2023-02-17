@@ -7,9 +7,6 @@ import {authUserTC, AuthUserTCType, logoutTC, LogoutTCType} from '../../redux/au
 
 
 class HeaderContainer extends Component<HeaderContainerType> {
-    componentDidMount() {
-        this.props.authUser()
-    }
 
     render() {
         return <Header {...this.props}/>
@@ -30,11 +27,9 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 }
 
 type MapDispatchToPropsType = {
-    authUser:AuthUserTCType
-    logoutTC:LogoutTCType
+    logoutTC: LogoutTCType
 }
-const mapDispatchToProps:MapDispatchToPropsType = {
-    authUser: authUserTC,
+const mapDispatchToProps: MapDispatchToPropsType = {
     logoutTC
 }
 

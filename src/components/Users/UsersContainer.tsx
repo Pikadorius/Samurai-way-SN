@@ -9,7 +9,7 @@ import {
 } from "./users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
+import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
 import {compose} from 'redux';
 
 type MapStateType = {

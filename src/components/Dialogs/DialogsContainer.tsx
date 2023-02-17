@@ -8,7 +8,7 @@ import Dialogs from './Dialogs';
 import {StateType} from '../../bll/redux-store';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
+import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
 
 /*
 type DialogsType = {

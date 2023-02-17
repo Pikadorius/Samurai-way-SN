@@ -7,7 +7,7 @@ import {
 } from "./profile_reducer";
 import {StateType} from "../../bll/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
+import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
 import {compose} from 'redux';
 
 

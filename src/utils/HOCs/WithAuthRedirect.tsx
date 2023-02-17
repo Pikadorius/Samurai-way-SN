@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {StateType} from '../bll/redux-store';
+import {StateType} from '../../bll/redux-store';
 
 export function withAuthRedirect<T>(Component: ComponentType<T>) {
 

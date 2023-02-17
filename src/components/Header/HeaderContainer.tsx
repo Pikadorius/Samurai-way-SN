@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import Header from './Header';
 import {StateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
-import {authUser, AuthUserTCType, logoutTC, LogoutTCType} from '../../redux/auth-reducer';
+import {authUserTC, AuthUserTCType, logoutTC, LogoutTCType} from '../../redux/auth-reducer';
 
 
 class HeaderContainer extends Component<HeaderContainerType> {
@@ -34,7 +34,7 @@ type MapDispatchToPropsType = {
     logoutTC:LogoutTCType
 }
 const mapDispatchToProps:MapDispatchToPropsType = {
-    authUser,
+    authUser: authUserTC,
     logoutTC
 }
 

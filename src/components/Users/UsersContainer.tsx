@@ -64,7 +64,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         console.log('Users are inside DOM')
         this.props.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
         /*this.props.setIsFetching(true)
-        API.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
+        api.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
             this.props.setTotalUsersCount(data.totalCount)
@@ -84,7 +84,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
-        API.getUsers(p, this.props.usersPage.pageSize).then((data) => {
+        api.getUsers(p, this.props.usersPage.pageSize).then((data) => {
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
         })
@@ -95,7 +95,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
             this.props.setFollowingInProgress(true, u.id)
             // u.followed ? props.unfollow(u.id) : props.follow(u.id)
             if (!u.followed) {
-                API.followUser(u.id).then((data) => {
+                api.followUser(u.id).then((data) => {
                     if (data.resultCode === 0) {
                         this.props.follow(u.id)
                     }
@@ -103,7 +103,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
                 })
             } else {
                 this.props.setFollowingInProgress(true, u.id)
-                API.unfollowUser(u.id).then((data) => {
+                api.unfollowUser(u.id).then((data) => {
                     if (data.resultCode === 0) {
                         this.props.unfollow(u.id)
                     }

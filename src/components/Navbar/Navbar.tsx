@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
 import {NavbarType} from './NavbarContainer';
-import {FriendsServerType, usersAPI} from '../../API/API';
+import {FriendsServerType, usersAPI} from '../../api/API';
 import dafaultAvatar from '../../assets/images/defaultUsersAvatar.jpg'
 
 const Navbar: React.FC<NavbarType> = ({authUserId, isAuth, setProfile, setStatus}) => {

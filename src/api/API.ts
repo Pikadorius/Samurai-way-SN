@@ -30,7 +30,7 @@ type ResponseType<D={}> = {
     fieldsErrors: string[]
     resultCode: number
 }
-// use instead of axios => default configuration for API requests
+// use instead of axios => default configuration for api requests
 const instance = axios.create({
     withCredentials: true,
     headers: {

@@ -1,21 +1,22 @@
 import {Dispatch} from 'redux';
-import {authAPI, LoginFormType} from '../API/API';
+import {authAPI, LoginFormType} from '../api/API';
 import {AppDispatch} from './redux-store';
 import {stopSubmit} from 'redux-form';
+import {setAppInitializedAC} from "./appReducer";
 
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',
     LOG_OUT = 'LOG_OUT'
 }
 
-export type InititalStateType = {
+export type InitialStateType = {
     id: number | null
     login: string | null
     email: string | null
     isAuth: boolean
 }
 
-const initailState: InititalStateType = {
+const initialState: InitialStateType = {
     id: null,
     login: null,
     email: null,
@@ -24,15 +25,15 @@ const initailState: InititalStateType = {
 
 type ActionType =
     SetUserDataACType |
-    LogOutUserACType
+    LogoutACType
 
-export const authReducer = (state: InititalStateType = initailState, action: ActionType): InititalStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case ACTIONS_TYPE.SET_USER_DATA: {
             return {...state, ...action.payload.data}
         }
         case ACTIONS_TYPE.LOG_OUT: {
-            return {...initailState};
+            return {...initialState};
         }
         default:
             return state
@@ -40,7 +41,7 @@ export const authReducer = (state: InititalStateType = initailState, action: Act
 }
 
 export type SetUserDataACType = ReturnType<typeof setAuthUserData>
-export const setAuthUserData = (data: InititalStateType) => {
+export const setAuthUserData = (data: InitialStateType) => {
     return {
         type: ACTIONS_TYPE.SET_USER_DATA,
         payload: {
@@ -49,40 +50,37 @@ export const setAuthUserData = (data: InititalStateType) => {
     } as const
 }
 
-export type LogOutUserACType = ReturnType<typeof logOutUser>
-export const logOutUser = () => {
-    return {
-        type: ACTIONS_TYPE.LOG_OUT
-    } as const
-}
+export type LogoutACType = ReturnType<typeof logoutAC>
+export const logoutAC = () => ({type: ACTIONS_TYPE.LOG_OUT} as const)
 
 
 
 export type AuthUserTCType = () => void
-export const authUser = () => (dispatch: Dispatch) => {
+export const authUserTC = () => (dispatch: Dispatch) => {
     authAPI.authMe().then((result) => {
         if (result.resultCode === 0) {
             dispatch(setAuthUserData({...result.data, isAuth: true}))
         }
+    }).finally(()=>{
+        dispatch(setAppInitializedAC(true))
     })
 }
 
 export type AuthFromLogin = (loginData: LoginFormType) => void
-export const authFromLogin: AuthFromLogin = (loginData) => (dispatch: AppDispatch) => {
-    authAPI.login(loginData).then(res => {
-        if (res.data.resultCode === 0) {
-            dispatch(authUser())
-        }
-        else {
-            let action = stopSubmit('login', {_error: res.data.messages.length>0? res.data.messages[0] : 'Something wrong'});
-            dispatch(action)
-        }
-    })
+export const authFromLoginTC: AuthFromLogin = (loginData) => async (dispatch: AppDispatch) => {
+    const res = await authAPI.login(loginData)
+    if (res.data.resultCode === 0) {
+        dispatch(authUserTC())
+    } else {
+        let action = stopSubmit('login', {_error: res.data.messages.length > 0 ? res.data.messages[0] : 'Something wrong'});
+        dispatch(action)
+    }
+
 }
 
 export type LogoutTCType = () => void
 export const logoutTC = () => (dispatch: Dispatch) => {
-    authAPI.logout().then(()=>{
-        dispatch(logOutUser())
+    authAPI.logout().then(() => {
+        dispatch(logoutAC())
     })
 }

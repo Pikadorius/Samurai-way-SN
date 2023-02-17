@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import s from './Login.module.css'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {authFromLogin} from '../../redux/auth-reducer';
+import {authFromLoginTC} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
 import {Redirect} from 'react-router-dom';
-import {LoginFormType} from '../../API/API';
+import {LoginFormType} from '../../api/API';
 import {Input} from '../common/FormControls/FormControls';
 import {required} from '../../utils/validators/validators';
 import formStyles from '../common/FormControls/FormControls.module.css'
@@ -22,7 +22,7 @@ const LoginForm:FC<InjectedFormProps<LoginFormType>> = (props) => {
                 <Field  placeholder={'email'} name={'email'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field  placeholder={'Password'} name={'password'} component={Input} type={'password'}  validate={[required]}/>
+                <Field  placeholder={'password'} name={'password'} component={Input} type={'password'}  validate={[required]}/>
             </div>
             <div>
                 <Field  name={'rememberMe'} component={'input'} type={'checkbox'}/>Remember me
@@ -47,12 +47,11 @@ const LoginReduxForm = reduxForm<LoginFormType>({
 const Login = (props:MapDispatchType & MapStateToProps)=> {
 
     const onSubmit = (formData: LoginFormType) => {
-        console.log(formData)
         props.authFromLogin(formData)
     }
 
     if (props.isAuth) {
-        return <Redirect to={'/profile/26933'}/>
+        return <Redirect to={`/profile/${props.userId}`}/>
     }
 
     return (
@@ -66,13 +65,14 @@ const Login = (props:MapDispatchType & MapStateToProps)=> {
 
 const mapStateToProps = (state:StateType) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        userId: state.auth.id
     }
 }
 type MapStateToProps = ReturnType<typeof mapStateToProps>
 
 const action = {
-    authFromLogin
+    authFromLogin: authFromLoginTC
 }
 type MapDispatchType = typeof action
 

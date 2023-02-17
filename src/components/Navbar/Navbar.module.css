@@ -1,6 +1,6 @@
 .sidebar {
     grid-area: nav;
-    background-color: cornflowerblue;
+    background-color: #2f2f31;
     padding: 10px;
     border-radius: 20px;
     width: 230px;

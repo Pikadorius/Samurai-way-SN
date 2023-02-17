@@ -1,13 +1,13 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
-import profileReducer from './profile_reducer';
-import dialogsReducer from './dialogs_reducer';
-import sidebarReducer from './sidebar_reducer';
-import usersReducer from "./users-reducer";
-import {musicReducer} from './music_reducer';
-import {authReducer} from './auth-reducer';
+import profileReducer from '../components/Profile/profile_reducer';
+import dialogsReducer from '../components/Dialogs/dialogs_reducer';
+import sidebarReducer from '../components/Navbar/sidebar_reducer';
+import usersReducer from "../components/Users/users-reducer";
+import {musicReducer} from '../components/Music/music_reducer';
+import {authReducer} from '../components/Login/auth-reducer';
 import thunkMIddleware, {ThunkDispatch} from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
-import {appReducer} from "./appReducer";
+import {appReducer} from "../app/appReducer";
 
 
 // combine all reducers

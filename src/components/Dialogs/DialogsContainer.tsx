@@ -3,9 +3,9 @@ import {
     addMessageActionCreator,
     deleteMessageAC,
     InitialStateType,
-} from "../../redux/dialogs_reducer";
+} from "./dialogs_reducer";
 import Dialogs from './Dialogs';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../bll/redux-store';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';

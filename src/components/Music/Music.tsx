@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './Music.module.css'
 import {useDispatch, useSelector} from 'react-redux';
-import {StateType} from '../../redux/redux-store';
+import {StateType} from '../../bll/redux-store';
 import {
     addTrackAC,
     deleteTrackAC,
     InitialStateType,
     setTrackNameAC,
     setTrackPerformerAC
-} from '../../redux/music_reducer';
+} from './music_reducer';
 
 const Music = () => {
     const dispatch = useDispatch()

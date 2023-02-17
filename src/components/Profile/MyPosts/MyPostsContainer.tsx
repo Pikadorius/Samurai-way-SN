@@ -2,9 +2,9 @@ import React from 'react';
 import {
     addLike,
     addPost, PostType,
-} from "../../../redux/profile_reducer";
+} from "../profile_reducer";
 import MyPosts from './MyPosts';
-import {StateType} from '../../../redux/redux-store';
+import {StateType} from '../../../bll/redux-store';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 

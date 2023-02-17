@@ -4,8 +4,8 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
     ServerProfileType, setProfile, setStatus, updateStatus
-} from "../../redux/profile_reducer";
-import {StateType} from "../../redux/redux-store";
+} from "./profile_reducer";
+import {StateType} from "../../bll/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';
 import {compose} from 'redux';

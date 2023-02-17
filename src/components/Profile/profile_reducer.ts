@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {profileAPI} from '../api/API';
+import {profileAPI} from '../../api/API';
 
 export type ProfileActionsType =
     ReturnType<typeof addPost> |

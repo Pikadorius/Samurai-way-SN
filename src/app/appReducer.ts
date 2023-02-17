@@ -1,5 +1,5 @@
-import {AppDispatch} from "./redux-store";
-import {authUserTC} from "./auth-reducer";
+import {AppDispatch} from "../bll/redux-store";
+import {authUserTC} from "../components/Login/auth-reducer";
 
 export type StatusType = 'idle' | 'success' | 'loading' | 'failed'
 

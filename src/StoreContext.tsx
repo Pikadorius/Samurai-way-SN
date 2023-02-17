@@ -1,5 +1,5 @@
 import React from 'react';
-import store, {StoreType} from './redux/redux-store';
+import store, {StoreType} from './bll/redux-store';
 
 
 // оставил пример как создавать Context

@@ -1,9 +1,9 @@
 import React from 'react';
-import {FriendType} from '../../redux/sidebar_reducer';
+import {FriendType} from './sidebar_reducer';
 import {connect} from "react-redux";
 import Navbar from "./Navbar";
-import {StateType} from "../../redux/redux-store";
-import {setProfile, SetProfileStatusTCType, SetProfileTCType, setStatus} from '../../redux/profile_reducer';
+import {StateType} from "../../bll/redux-store";
+import {setProfile, SetProfileStatusTCType, SetProfileTCType, setStatus} from '../Profile/profile_reducer';
 
 /*const Navbar: React.FC<SidebarType> = ({friends}) => {
     return (

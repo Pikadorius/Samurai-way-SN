@@ -1,12 +1,12 @@
 import React, {Component, ComponentType} from 'react';
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
+import {StateType} from "../../bll/redux-store";
 import {
     deleteUser,
     InitialStateType,
     GetUsersTCType,
     FollowTCType, OnPageChangedTCType, onPageChanged, getUsers, followSuccess, unfollowSuccess
-} from "../../redux/users-reducer";
+} from "./users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from '../../HOCs/WithAuthRedirect';

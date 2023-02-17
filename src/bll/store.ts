@@ -1,5 +1,5 @@
-import {addLike, addPost} from "./profile_reducer";
-import  {addMessageActionCreator} from "./dialogs_reducer";
+import {addLike, addPost} from "../components/Profile/profile_reducer";
+import  {addMessageActionCreator} from "../components/Dialogs/dialogs_reducer";
 
 type PostType = {
     id: number

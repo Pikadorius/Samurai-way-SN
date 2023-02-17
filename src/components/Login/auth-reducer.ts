@@ -1,8 +1,8 @@
 import {Dispatch} from 'redux';
-import {authAPI, LoginFormType} from '../api/API';
-import {AppDispatch} from './redux-store';
+import {authAPI, LoginFormType} from '../../api/API';
+import {AppDispatch} from '../../bll/redux-store';
 import {stopSubmit} from 'redux-form';
-import {setAppInitializedAC, setAppStatusAC} from "./appReducer";
+import {setAppInitializedAC, setAppStatusAC} from "../../app/appReducer";
 
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',

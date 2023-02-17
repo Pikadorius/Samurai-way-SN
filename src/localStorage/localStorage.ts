@@ -1,4 +1,4 @@
-import {StateType} from '../redux/redux-store';
+import {StateType} from '../bll/redux-store';
 
 export const loadState = () => {
     try {

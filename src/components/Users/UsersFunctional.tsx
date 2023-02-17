@@ -3,8 +3,8 @@ import s from './Users.module.css'
 import axios from 'axios';
 import avatar from '../../assets/images/defaultUsersAvatar.jpg';
 import {useDispatch, useSelector} from 'react-redux';
-import {StateType} from '../../redux/redux-store';
-import {deleteUser, follow, InitialStateType, setUsers, unfollow} from '../../redux/users-reducer';
+import {StateType} from '../../bll/redux-store';
+import {deleteUser, follow, InitialStateType, setUsers, unfollow} from './users-reducer';
 
 const UsersFunctional: React.FC = () => {
 

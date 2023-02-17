@@ -1,3 +1,6 @@
+import {AppDispatch} from "./redux-store";
+import {authUserTC} from "./auth-reducer";
+
 export type StatusType = 'idle' | 'success' | 'loading' | 'failed'
 
 const initialState = {
@@ -37,3 +40,9 @@ export const setAppInitializedAC = (isInitialized: boolean) => ({
     type: 'SET_APP_INITIALIZED',
     payload: isInitialized
 } as const)
+
+export const initializeTC = () => (dispatch: AppDispatch) => {
+    dispatch(authUserTC()).then(() => {
+        dispatch(setAppInitializedAC(true))
+    })
+}

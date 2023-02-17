@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {authAPI, LoginFormType} from '../api/API';
 import {AppDispatch} from './redux-store';
 import {stopSubmit} from 'redux-form';
-import {setAppInitializedAC} from "./appReducer";
+import {setAppInitializedAC, setAppStatusAC} from "./appReducer";
 
 const enum ACTIONS_TYPE {
     SET_USER_DATA = 'SET_USER_DATA',
@@ -54,26 +54,26 @@ export type LogoutACType = ReturnType<typeof logoutAC>
 export const logoutAC = () => ({type: ACTIONS_TYPE.LOG_OUT} as const)
 
 
-
 export type AuthUserTCType = () => void
 export const authUserTC = () => (dispatch: Dispatch) => {
-    authAPI.authMe().then((result) => {
+    return authAPI.authMe().then((result) => {
         if (result.resultCode === 0) {
             dispatch(setAuthUserData({...result.data, isAuth: true}))
         }
-    }).finally(()=>{
-        dispatch(setAppInitializedAC(true))
     })
 }
 
 export type AuthFromLogin = (loginData: LoginFormType) => void
 export const authFromLoginTC: AuthFromLogin = (loginData) => async (dispatch: AppDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     const res = await authAPI.login(loginData)
     if (res.data.resultCode === 0) {
         dispatch(authUserTC())
+        dispatch(setAppStatusAC('success'))
     } else {
         let action = stopSubmit('login', {_error: res.data.messages.length > 0 ? res.data.messages[0] : 'Something wrong'});
         dispatch(action)
+        dispatch(setAppStatusAC('failed'))
     }
 
 }

@@ -9,6 +9,7 @@ import {StateType} from '../../bll/redux-store';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
+import {getDialogsPage} from "./dialogs-selectors";
 
 /*
 type DialogsType = {
@@ -36,7 +37,7 @@ type MapStatePropsType = {
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        dialogsState: state.dialogsPage
+        dialogsState: getDialogsPage(state)
     }
 }
 

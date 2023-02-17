@@ -6,7 +6,8 @@ export type StatusType = 'idle' | 'success' | 'loading' | 'failed'
 const initialState = {
     status: 'idle' as StatusType,
     error: null as null | string,
-    isInitialized: false
+    isInitialized: false,
+    fake: 0
 }
 
 type InitialStateType = typeof initialState
@@ -19,6 +20,7 @@ export const appReducer = (state = initialState, action: AppActionsType): Initia
             return {...state, error: action.payload}
         case "SET_APP_INITIALIZED":
             return {...state, isInitialized: action.payload}
+        case "SET_APP_FAKE": return {...state, fake: state.fake+1}
         default:
             return state
     }
@@ -27,7 +29,11 @@ export const appReducer = (state = initialState, action: AppActionsType): Initia
 export type AppActionsType =
     SetAppStatusACType |
     SetAppErrorACType |
-    SetAppInitializedACType
+    SetAppInitializedACType |
+    SetAppFakeACType
+
+type SetAppFakeACType = ReturnType<typeof setAppFakeAC>
+export const setAppFakeAC = () => ({type: 'SET_APP_FAKE'} as const)
 
 type SetAppStatusACType = ReturnType<typeof setAppStatusAC>
 export const setAppStatusAC = (status: StatusType) => ({type: 'SET_APP_STATUS', payload: status} as const)

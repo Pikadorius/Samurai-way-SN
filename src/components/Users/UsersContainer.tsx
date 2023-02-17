@@ -11,13 +11,15 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
 import {compose} from 'redux';
+import {getUsersPageInfo} from "./user-selectors";
 
 type MapStateType = {
     usersPage: InitialStateType
 }
 const mapStateToProps = (state: StateType): MapStateType => {
+    console.log('users MSTP')
     return {
-        usersPage: state.usersPage
+        usersPage: getUsersPageInfo(state)
     }
 }
 

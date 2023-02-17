@@ -5,6 +5,7 @@ import App from './app/App';
 import store, {reducer} from "./bll/redux-store";
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
+import {setAppFakeAC} from "./app/appReducer";
 
 /*
 const localState = loadState()
@@ -15,6 +16,9 @@ store.subscribe(throttle(()=>{
     saveState(store.getState())
 },1000))
 */
+setInterval(()=>{
+    store.dispatch(setAppFakeAC())
+},1000)
 
 ReactDOM.render(
     <BrowserRouter>

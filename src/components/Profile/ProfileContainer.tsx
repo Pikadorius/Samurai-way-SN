@@ -22,6 +22,7 @@ class ProfileContainer extends Component<ProfileContainerType> {
     }
 
     render = () => {
+        console.log('Profile rendering')
         return (
             <div>
                 <Profile {...this.props}/>
@@ -31,7 +32,6 @@ class ProfileContainer extends Component<ProfileContainerType> {
 }
 
 // const AuthProfileContainer = withAuthRedirect(ProfileContainer)
-
 
 type PathParamsType = {
     userId: string
@@ -43,6 +43,7 @@ type MapStateType = {
     authUserId: number | null
 }
 const mapStateToProps = (state: StateType): MapStateType => {
+    console.log('MSTP Profile')
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.profileStatus,

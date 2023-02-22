@@ -63,11 +63,9 @@ export const profileAPI = {
     getUserProfile: (userId: string) => instance.get(`profile/${userId}`).then(response => response.data),
 
     updateMyStatus: (status: string) => instance.put(`profile/status`, {status}).then(response => {
-        debugger
         return response.data
     }),
     getUsersStatus: (userId: number) => instance.get(`/profile/status/${userId}`).then(response => {
-        debugger
         return response.data
     })
 }

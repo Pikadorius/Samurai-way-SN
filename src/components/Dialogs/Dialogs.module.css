@@ -6,7 +6,7 @@
 }
 
 .dialogList {
-    background-color: green;
+    background-color: #2a2a2a;
     display: flex;
     gap: 5px;
     flex-direction: column;

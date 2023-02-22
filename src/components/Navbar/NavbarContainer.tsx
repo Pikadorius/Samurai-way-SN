@@ -1,5 +1,4 @@
 import React from 'react';
-import {FriendType} from './sidebar_reducer';
 import {connect} from "react-redux";
 import Navbar from "./Navbar";
 import {StateType} from "../../bll/redux-store";

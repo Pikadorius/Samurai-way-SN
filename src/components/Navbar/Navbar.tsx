@@ -17,7 +17,6 @@ const Navbar: React.FC<NavbarType> = ({authUserId, isAuth, setProfile, setStatus
 
     useEffect(() => {
         usersAPI.getFriends().then(res => {
-            debugger
             setFriends(res.data.items)
         })
     }, [])

@@ -17,7 +17,7 @@ type MapStateType = {
     usersPage: InitialStateType
 }
 const mapStateToProps = (state: StateType): MapStateType => {
-    console.log('users MSTP')
+    console.log('MSTP users')
     return {
         usersPage: getUsersPageInfo(state)
     }

@@ -3,23 +3,45 @@ import {connect} from "react-redux";
 import {StateType} from "../../bll/redux-store";
 import {
     deleteUser,
-    InitialStateType,
+    followSuccess,
+    FollowTCType,
+    getUsers,
     GetUsersTCType,
-    FollowTCType, OnPageChangedTCType, onPageChanged, getUsers, followSuccess, unfollowSuccess
+    onPageChanged,
+    OnPageChangedTCType,
+    unfollowSuccess,
+    UserType
 } from "./users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from '../../utils/HOCs/WithAuthRedirect';
 import {compose} from 'redux';
-import {getUsersPageInfo} from "./user-selectors";
+import {
+    currentPageSelector,
+    followingInProgressSelector,
+    isFetchingSelector,
+    pageSizeSelector,
+    totalUsersCountSelector,
+    usersSelector
+} from './user-selectors';
 
 type MapStateType = {
-    usersPage: InitialStateType
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: number[]
 }
 const mapStateToProps = (state: StateType): MapStateType => {
     console.log('MSTP users')
     return {
-        usersPage: getUsersPageInfo(state)
+        users: usersSelector(state),
+        followingInProgress: followingInProgressSelector(state),
+        currentPage: currentPageSelector(state),
+        isFetching: isFetchingSelector(state),
+        totalUsersCount: totalUsersCountSelector(state),
+        pageSize: pageSizeSelector(state)
     }
 }
 
@@ -64,7 +86,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
 
     componentDidMount() {
         console.log('Users are inside DOM')
-        this.props.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
         /*this.props.setIsFetching(true)
         api.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then((data) => {
             this.props.setIsFetching(false)
@@ -119,7 +141,7 @@ class UsersAPIComponent extends Component<UsersPropsType> {
         console.log('Users rendering')
 
         return (
-            this.props.usersPage.isFetching ?
+            this.props.isFetching ?
                 <Preloader/> :
                 <Users {...this.props}/>
         )

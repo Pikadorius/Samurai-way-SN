@@ -3,12 +3,10 @@ import s from "./Users.module.css";
 import avatar from "../../assets/images/defaultUsersAvatar.jpg";
 import {NavLink, Redirect} from "react-router-dom";
 import {UsersPropsType} from './UsersContainer';
-import {Provider} from 'react-redux';
 
-const Users:FC<UsersPropsType> = (props) => {
+const Users:FC<UsersPropsType> = ({users,totalUsersCount,currentPage,pageSize, followingInProgress,...props}) => {
 
-    // destructuring usersPage
-    const {users, totalUsersCount, currentPage, pageSize} = props.usersPage
+
     // calculate pages count
     let pagesCount: number = Math.ceil(totalUsersCount / pageSize)
     // create pages array
@@ -67,12 +65,12 @@ const Users:FC<UsersPropsType> = (props) => {
                             </div>
                             <div>{u.name}</div>
                             <button className={s.btn} onClick={() => props.deleteUser(u.id)}
-                                    disabled={props.usersPage.followingInProgress.includes(u.id)}>x
+                                    disabled={followingInProgress.includes(u.id)}>x
                             </button>
                         </div>
                         <div className={s.statusBar}>{u.status}</div>
                         <button onClick={u.followed ? unfollowUser : followUser}
-                                disabled={props.usersPage.followingInProgress.some(id => id === u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
+                                disabled={followingInProgress.some(id => id === u.id)}>{u.followed ? 'Unfollow' : 'Follow'}</button>
                     </div>
                 })}
             </div>
